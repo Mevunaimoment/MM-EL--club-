@@ -1,1166 +1,844 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#2b050d" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <title>Mevunai Moment™ Country Club, Inc. ® | RA 109 Portal</title>
-  <link rel="manifest" href="./manifest.json" />
-  <link rel="icon" type="image/png" href="./emblem.png" />
-  <link rel="apple-touch-icon" href="./emblem.png" />
-  <style>
-    :root {
-      --bg-primary: #1a0308;
-      --bg-secondary: #2d0610;
-      --bg-card: rgba(45, 6, 16, 0.85);
-      --gold: #d4af37;
-      --gold-light: #f3e5ab;
-      --gold-dark: #997a15;
-      --emerald: #0a5c36;
-      --emerald-bright: #10b981;
-      --text-main: #fdf8ee;
-      --text-muted: #d1bfa7;
-      --border-gold: rgba(212, 175, 55, 0.45);
-      --shadow-gold: 0 8px 32px rgba(0, 0, 0, 0.65);
-    }
-
-    body.emerald-theme {
-      --bg-primary: #041c13;
-      --bg-secondary: #082e20;
-      --bg-card: rgba(8, 46, 32, 0.88);
-      --border-gold: rgba(212, 175, 55, 0.55);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      background: radial-gradient(circle at top, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-      color: var(--text-main);
-      min-height: 100vh;
-      padding-bottom: 92px;
-      overflow-x: hidden;
-      transition: background 0.4s ease;
-    }
-
-    /* Cinematic Splash Intro */
-    #splash-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: radial-gradient(circle at center, #380713 0%, #120105 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      text-align: center;
-      transition: opacity 0.7s ease, visibility 0.7s ease;
-    }
-
-    #splash-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .splash-halo {
-      position: relative;
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      padding: 6px;
-      background: conic-gradient(from 0deg, var(--gold-dark), var(--gold-light), var(--emerald-bright), var(--gold), var(--gold-dark));
-      box-shadow: 0 0 45px rgba(212, 175, 55, 0.55), 0 0 80px rgba(16, 185, 129, 0.2);
-      animation: pulseGlow 2.4s infinite alternate ease-in-out;
-      margin-bottom: 24px;
-    }
-
-    .splash-halo img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-
-    @keyframes pulseGlow {
-      0% { transform: scale(0.96); box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
-      100% { transform: scale(1.03); box-shadow: 0 0 55px rgba(212, 175, 55, 0.8), 0 0 90px rgba(16, 185, 129, 0.3); }
-    }
-
-    .splash-kicker {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 11px;
-      letter-spacing: 3.5px;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .splash-title {
-      font-size: 26px;
-      letter-spacing: 1px;
-      background: linear-gradient(180deg, #fff6d6 0%, #d4af37 55%, #997a15 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 6px;
-    }
-
-    .splash-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-      letter-spacing: 1.5px;
-      margin-bottom: 24px;
-    }
-
-    .splash-bar-wrap {
-      width: 220px;
-      height: 3px;
-      background: rgba(212, 175, 55, 0.2);
-      border-radius: 3px;
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-
-    .splash-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--gold-dark), var(--gold-light), var(--emerald-bright));
-      animation: fillSweep 3.2s forwards ease-out;
-    }
-
-    @keyframes fillSweep {
-      to { width: 100%; }
-    }
-
-    #custom-intro-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      display: none;
-      opacity: 0.85;
-    }
-
-    /* 4-Digit Sovereign Vault Padlock Screen */
-    #vault-lock-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9500;
-      background: radial-gradient(circle at top, #2e0610 0%, #110104 100%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      text-align: center;
-      transition: opacity 0.4s ease, visibility 0.4s ease;
-    }
-
-    body.emerald-theme #vault-lock-screen {
-      background: radial-gradient(circle at top, #082e20 0%, #02120c 100%);
-    }
-
-    #vault-lock-screen.unlocked {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .lock-crest {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      box-shadow: 0 0 28px rgba(212, 175, 55, 0.45);
-      margin-bottom: 14px;
-      object-fit: cover;
-    }
-
-    .lock-badge {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      color: var(--gold);
-      border: 1px solid var(--border-gold);
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: rgba(212, 175, 55, 0.08);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .lock-title {
-      font-size: 21px;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
-
-    .lock-subtitle {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
-      max-width: 280px;
-      line-height: 1.4;
-    }
-
-    .pin-dots {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    .pin-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      background: transparent;
-      transition: all 0.2s ease;
-    }
-
-    .pin-dot.filled {
-      background: var(--gold);
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.85);
-      transform: scale(1.12);
-    }
-
-    .pin-dot.error {
-      border-color: #ff4d4d;
-      background: #ff4d4d;
-      box-shadow: 0 0 12px rgba(255, 77, 77, 0.8);
-    }
-
-    .pin-status {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 12px;
-      min-height: 18px;
-      color: var(--gold);
-      margin-bottom: 18px;
-      letter-spacing: 0.5px;
-    }
-
-    .keypad {
-      display: grid;
-      grid-template-columns: repeat(3, 74px);
-      gap: 14px;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-
-    .key-btn {
-      width: 74px;
-      height: 74px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border-gold);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--gold-light);
-      font-family: 'Georgia', serif;
-      font-size: 24px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
-
-    .key-btn span.sub-letters {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 8px;
-      letter-spacing: 1.5px;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .key-btn:active {
-      background: rgba(212, 175, 55, 0.28);
-      border-color: var(--gold);
-      transform: scale(0.94);
-    }
-
-    .key-btn.action-key {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: var(--gold);
-      background: rgba(212, 175, 55, 0.08);
-    }
-
-    /* Top Header */
-    .top-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(20, 2, 7, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-gold);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    body.emerald-theme .top-bar {
-      background: rgba(4, 24, 16, 0.92);
-    }
-
-    .brand-mini {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-mini img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1.5px solid var(--gold);
-      object-fit: cover;
-    }
-
-    .brand-mini-text {
-      line-height: 1.15;
-    }
-
-    .brand-mini-text .ra-tag {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: var(--gold);
-    }
-
-    .brand-mini-text .club-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--gold-light);
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .pill-btn {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 10px;
-      border-radius: 20px;
-      border: 1px solid var(--border-gold);
-      background: rgba(212, 175, 55, 0.12);
-      color: var(--gold-light);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: all 0.2s ease;
-    }
-
-    .pill-btn:active {
-      transform: scale(0.95);
-      background: rgba(212, 175, 55, 0.28);
-    }
-
-    .pill-btn.gold-solid {
-      background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #997a15 100%);
-      color: #1a0308;
-      border: none;
-      font-weight: 700;
-    }
-
-    /* Main Container */
-    .container {
-      max-width: 540px;
-      margin: 0 auto;
-      padding: 18px 16px;
-    }
-
-    .section {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Hero Crest & VIP Card */
-    .hero-emblem-wrap {
-      text-align: center;
-      margin-bottom: 18px;
-    }
-
-    .hero-emblem-wrap img {
-      width: 116px;
-      height: 116px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      box-shadow: 0 0 30px rgba(212, 175, 55, 0.35);
-      margin-bottom: 10px;
-      object-fit: cover;
-    }
-
-    .ra-badge {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 11px;
-      letter-spacing: 3px;
-      color: var(--gold);
-      font-weight: 700;
-    }
-
-    .hero-title {
-      font-size: 26px;
-      color: var(--gold-light);
-      margin: 2px 0;
-    }
-
-    .hero-sub {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    .vip-card {
-      background: linear-gradient(145deg, rgba(64, 9, 23, 0.95) 0%, rgba(26, 3, 8, 0.98) 100%);
-      border: 1.5px solid var(--gold);
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: var(--shadow-gold), inset 0 0 24px rgba(212, 175, 55, 0.14);
-      margin-bottom: 22px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    body.emerald-theme .vip-card {
-      background: linear-gradient(145deg, rgba(10, 62, 43, 0.95) 0%, rgba(4, 24, 16, 0.98) 100%);
-    }
-
-    .vip-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 16px;
-    }
-
-    .vip-tier {
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--gold-light);
-    }
-
-    .vip-id {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 11px;
-      letter-spacing: 1.2px;
-      color: var(--gold);
-      margin-top: 4px;
-    }
-
-    .status-active {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      color: #34d399;
-      background: rgba(16, 185, 129, 0.14);
-      border: 1px solid rgba(52, 211, 153, 0.45);
-      padding: 4px 10px;
-      border-radius: 20px;
-    }
-
-    .vip-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid rgba(212, 175, 55, 0.25);
-      padding-top: 12px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-    }
-
-    /* Section Headings & Cards */
-    .sec-heading {
-      font-size: 18px;
-      color: var(--gold-light);
-      margin-bottom: 12px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border-gold);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-gold);
-      border-radius: 14px;
-      padding: 15px 16px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-    }
-
-    .card-info h4 {
-      font-size: 15px;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
-
-    .card-info p {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .action-btn {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 8px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--gold);
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.22) 0%, rgba(153, 122, 21, 0.32) 100%);
-      color: var(--gold-light);
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-    }
-
-    .action-btn:active {
-      transform: scale(0.95);
-    }
-
-    .action-btn.confirmed {
-      background: rgba(16, 185, 129, 0.25);
-      border-color: #34d399;
-      color: #6ee7b7;
-    }
-
-    /* Slot Selector */
-    .slot-bar {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      margin-bottom: 12px;
-    }
-
-    .slot-chip {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 1px solid var(--border-gold);
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-muted);
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .slot-chip.active {
-      background: var(--gold);
-      color: #1a0308;
-      border-color: var(--gold);
-    }
-
-    /* Privacy Security Settings Card */
-    .security-box {
-      background: rgba(212, 175, 55, 0.07);
-      border: 1px solid var(--border-gold);
-      border-radius: 14px;
-      padding: 15px 16px;
-      margin-top: 18px;
-    }
-
-    .security-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 10px;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    /* Bottom Navigation */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(18, 2, 6, 0.96);
-      backdrop-filter: blur(14px);
-      border-top: 1px solid var(--border-gold);
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      padding: 8px 4px 12px;
-    }
-
-    body.emerald-theme .bottom-nav {
-      background: rgba(3, 20, 14, 0.96);
-    }
-
-    .nav-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      padding: 4px 0;
-    }
-
-    .nav-btn.active {
-      color: var(--gold);
-    }
-
-    .nav-icon {
-      font-size: 18px;
-    }
-
-    /* Toast Notification */
-    #toast {
-      position: fixed;
-      bottom: 84px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: rgba(26, 3, 8, 0.96);
-      border: 1px solid var(--gold);
-      color: var(--gold-light);
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 12px;
-      padding: 10px 18px;
-      border-radius: 24px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
-      z-index: 9800;
-      white-space: nowrap;
-    }
-
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Mevunai Moment™ Country Club, Inc. ® | RA 109 Portal</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="emblem.png">
+<meta name="theme-color" content="#2b040c">
+<style>
+  :root {
+    --bg-deep: #24030a;
+    --bg-silk: #3b0712;
+    --bg-card: rgba(48, 8, 17, 0.88);
+    --gold: #e5c158;
+    --gold-bright: #f7df8b;
+    --gold-dim: rgba(229, 193, 88, 0.35);
+    --emerald: #10b981;
+    --text-main: #fdf8ee;
+    --text-muted: #d4bfa0;
+    --accent-btn: linear-gradient(135deg, #f3d474 0%, #c6972c 100%);
+    --accent-btn-text: #22040a;
+  }
+  body.theme-emerald {
+    --bg-deep: #041d15;
+    --bg-silk: #083325;
+    --bg-card: rgba(7, 41, 30, 0.9);
+    --gold: #e5c158;
+    --gold-bright: #f8e294;
+    --gold-dim: rgba(229, 193, 88, 0.38);
+    --emerald: #34d399;
+    --text-main: #f4fbf8;
+    --text-muted: #b6d8cb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: radial-gradient(circle at top, var(--bg-silk) 0%, var(--bg-deep) 78%);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding-bottom: 86px;
+    overflow-x: hidden;
+  }
+  .sans { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+
+  /* SPLASH INTRO */
+  #splash-screen {
+    position: fixed; inset: 0; z-index: 9999;
+    background: radial-gradient(circle at center, #460815 0%, #170105 85%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 24px; text-align: center; transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #splash-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  #intro-video-el {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.45; display: none; z-index: 0;
+  }
+  .splash-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+  .halo-wrap {
+    position: relative; width: 170px; height: 170px; margin-bottom: 22px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .halo-ring {
+    position: absolute; inset: -10px; border-radius: 50%;
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 35px rgba(229, 193, 88, 0.55), inset 0 0 25px rgba(16, 185, 129, 0.35);
+    animation: pulseHalo 2.6s infinite ease-in-out;
+  }
+  @keyframes pulseHalo {
+    0%, 100% { transform: scale(0.97); opacity: 0.75; }
+    50% { transform: scale(1.04); opacity: 1; }
+  }
+  .splash-emblem {
+    width: 158px; height: 158px; border-radius: 50%; object-fit: cover;
+    border: 2px solid var(--gold-bright); box-shadow: 0 12px 32px rgba(0,0,0,0.75);
+  }
+  .splash-kicker { letter-spacing: 4px; font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
+  .splash-title { font-size: 26px; color: var(--gold-bright); letter-spacing: 1px; margin-bottom: 4px; }
+  .splash-sub { font-size: 12px; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 22px; }
+  .progress-bar {
+    width: 210px; height: 3px; background: rgba(255,255,255,0.12); border-radius: 99px; overflow: hidden; margin-bottom: 20px;
+  }
+  .progress-fill {
+    height: 100%; width: 0%; background: linear-gradient(90deg, var(--emerald), var(--gold-bright));
+    animation: loadBar 2.8s forwards ease-out;
+  }
+  @keyframes loadBar { to { width: 100%; } }
+  .btn-gold {
+    background: var(--accent-btn); color: var(--accent-btn-text);
+    border: none; border-radius: 99px; padding: 10px 22px;
+    font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+    cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  }
+  .btn-outline {
+    background: rgba(229, 193, 88, 0.1); color: var(--gold-bright);
+    border: 1px solid var(--gold-dim); border-radius: 99px; padding: 8px 14px;
+    font-size: 11px; font-weight: 600; letter-spacing: 1px; cursor: pointer;
+  }
+
+  /* 4-DIGIT PADLOCK */
+  #lock-screen {
+    position: fixed; inset: 0; z-index: 9000;
+    background: radial-gradient(circle at top, var(--bg-silk) 0%, #140105 90%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px; text-align: center; transition: opacity 0.35s ease;
+  }
+  #lock-screen.unlocked { opacity: 0; pointer-events: none; visibility: hidden; }
+  .lock-emblem { width: 86px; height: 86px; border-radius: 50%; border: 2px solid var(--gold); margin-bottom: 12px; object-fit: cover; }
+  .pin-dots { display: flex; gap: 14px; margin: 16px 0 22px; }
+  .pin-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.5px solid var(--gold); background: transparent; transition: all 0.2s;
+  }
+  .pin-dot.filled { background: var(--gold-bright); box-shadow: 0 0 12px var(--gold); }
+  .keypad { display: grid; grid-template-columns: repeat(3, 68px); gap: 12px; }
+  .key-btn {
+    height: 62px; border-radius: 50%; border: 1px solid var(--gold-dim);
+    background: rgba(255,255,255,0.04); color: var(--gold-bright);
+    font-size: 20px; font-weight: 600; cursor: pointer;
+  }
+  .key-btn:active { background: rgba(229, 193, 88, 0.25); transform: scale(0.95); }
+
+  /* HEADER */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(26, 3, 8, 0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gold-dim);
+    padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+  }
+  body.theme-emerald header { background: rgba(4, 24, 17, 0.92); }
+  .brand-row { display: flex; align-items: center; gap: 10px; }
+  .header-emblem { width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); object-fit: cover; }
+  .header-actions { display: flex; gap: 6px; }
+
+  /* CONTAINER & CARDS */
+  main { max-width: 540px; margin: 0 auto; padding: 16px; }
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card {
+    background: var(--bg-card); border: 1px solid var(--gold-dim);
+    border-radius: 18px; padding: 16px; margin-bottom: 14px;
+    box-shadow: 0 10px 26px rgba(0,0,0,0.4);
+  }
+  .vip-hero {
+    background: linear-gradient(145deg, rgba(72, 11, 24, 0.95) 0%, rgba(28, 4, 10, 0.98) 100%);
+    border: 1.5px solid var(--gold); position: relative; overflow: hidden;
+  }
+  body.theme-emerald .vip-hero {
+    background: linear-gradient(145deg, rgba(10, 56, 41, 0.95) 0%, rgba(4, 24, 18, 0.98) 100%);
+  }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #6ee7b7; padding: 4px 10px; border-radius: 99px; font-size: 11px; font-weight: 700;
+  }
+  .dot-live { width: 7px; height: 7px; border-radius: 50%; background: #10b981; box-shadow: 0 0 8px #10b981; }
+
+  .row-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 12px 0; border-bottom: 1px solid rgba(229, 193, 88, 0.16);
+  }
+  .row-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .item-title { font-size: 15px; font-weight: 700; color: var(--gold-bright); margin-bottom: 3px; }
+  .item-sub { font-size: 12px; color: var(--text-muted); }
+
+  /* EVENTS SCREEN & STAGE MONITOR */
+  .event-stage-screen {
+    position: relative; border-radius: 16px; overflow: hidden;
+    border: 1.5px solid var(--gold); background: #120105;
+    margin-bottom: 16px; box-shadow: 0 12px 30px rgba(0,0,0,0.65);
+  }
+  .stage-viewport {
+    position: relative; width: 100%; height: 225px; overflow: hidden;
+    background: radial-gradient(circle at center, #4c0918 0%, #140105 90%);
+  }
+  #stage-canvas { width: 100%; height: 100%; display: block; }
+  #stage-video { width: 100%; height: 100%; object-fit: cover; display: none; }
+  #stage-img {
+    width: 100%; height: 100%; object-fit: cover; display: none;
+    animation: kenBurns 12s ease-in-out infinite alternate;
+  }
+  @keyframes kenBurns { from { transform: scale(1); } to { transform: scale(1.08); } }
+  .stage-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(16, 2, 5, 0.94) 0%, rgba(16, 2, 5, 0.25) 55%, rgba(16, 2, 5, 0.55) 100%);
+    padding: 14px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none;
+  }
+  .stage-top-bar { display: flex; justify-content: space-between; align-items: center; }
+  .live-badge {
+    background: rgba(185, 28, 28, 0.88); border: 1px solid var(--gold);
+    color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+    padding: 4px 10px; border-radius: 99px; display: inline-flex; align-items: center; gap: 5px;
+  }
+  .stage-controls {
+    background: rgba(24, 3, 8, 0.95); padding: 10px 12px;
+    border-top: 1px solid var(--gold-dim);
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between;
+  }
+  .chip-row { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 10px; }
+  .chip {
+    white-space: nowrap; padding: 6px 12px; border-radius: 99px;
+    border: 1px solid var(--gold-dim); background: rgba(255,255,255,0.04);
+    color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer;
+  }
+  .chip.active { background: var(--accent-btn); color: var(--accent-btn-text); border-color: var(--gold-bright); }
+
+  /* SLOT PILLS */
+  .slot-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .slot-btn {
+    padding: 6px 12px; border-radius: 10px; border: 1px solid var(--gold-dim);
+    background: rgba(255,255,255,0.04); color: var(--text-main); font-size: 12px; cursor: pointer;
+  }
+  .slot-btn.selected { background: var(--gold); color: #22040a; font-weight: 700; }
+
+  /* BOTTOM NAV */
+  nav.bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(22, 2, 7, 0.96); backdrop-filter: blur(14px);
+    border-top: 1px solid var(--gold-dim);
+    display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px 4px 12px;
+  }
+  body.theme-emerald nav.bottom-nav { background: rgba(3, 21, 15, 0.96); }
+  .nav-btn {
+    background: none; border: none; color: var(--text-muted);
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1px; cursor: pointer;
+  }
+  .nav-btn.active { color: var(--gold-bright); }
+  .nav-icon { font-size: 18px; }
+
+  /* TOAST */
+  #toast {
+    position: fixed; bottom: 82px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: #1b0308; border: 1px solid var(--gold); color: var(--gold-bright);
+    padding: 10px 18px; border-radius: 99px; font-size: 12px; font-weight: 600;
+    opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.65); white-space: nowrap;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
 </head>
 <body>
 
-  <!-- Cinematic Splash Intro -->
-  <div id="splash-screen">
-    <video id="custom-intro-video" playsinline muted></video>
-    <div class="splash-halo">
-      <img src="./emblem.png" alt="Mevunai Moment Emblem" />
+<!-- CINEMATIC SPLASH INTRO -->
+<div id="splash-screen">
+  <video id="intro-video-el" playsinline muted></video>
+  <div class="splash-inner">
+    <div class="halo-wrap">
+      <div class="halo-ring"></div>
+      <img src="emblem.png" alt="Mevunai Moment RA 109 Emblem" class="splash-emblem">
     </div>
-    <div class="splash-kicker">RA 109 • SOVEREIGN ACCESS</div>
-    <h1 class="splash-title">Mevunai Moment™</h1>
-    <div class="splash-sub">Country Club, Inc. ®</div>
-    <div class="splash-bar-wrap"><div class="splash-bar"></div></div>
-    <button class="pill-btn gold-solid" onclick="dismissSplash()">Enter Portal</button>
+    <div class="splash-kicker sans">RA 109 • SOVEREIGN ACCESS</div>
+    <div class="splash-title">Mevunai Moment™</div>
+    <div class="splash-sub sans">COUNTRY CLUB, INC. ®</div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <button class="btn-gold sans" onclick="closeSplash()">Enter Portal</button>
   </div>
+</div>
 
-  <!-- 4-Digit Sovereign Vault Padlock Screen -->
-  <div id="vault-lock-screen">
-    <img src="./emblem.png" alt="RA 109 Crest" class="lock-crest" />
-    <div class="lock-badge">🔐 SOVEREIGN VAULT LOCK</div>
-    <h2 class="lock-title" id="lock-heading">Enter 4-Digit Member PIN</h2>
-    <p class="lock-subtitle" id="lock-desc">Your RA 109 membership credentials, reservations, and private lounge passes are encrypted.</p>
+<!-- 4-DIGIT SOVEREIGN PADLOCK -->
+<div id="lock-screen">
+  <img src="emblem.png" alt="RA 109 Lock" class="lock-emblem">
+  <div class="sans" style="font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:700;">RA 109 VAULT PADLOCK</div>
+  <h2 style="font-size:20px; color:var(--gold-bright); margin-top:4px;">Enter 4-Digit Sovereign PIN</h2>
+  <div class="sans" id="lock-hint" style="font-size:11px; color:var(--text-muted); margin-top:4px;">Default PIN: 1325</div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="dot-0"></div>
+    <div class="pin-dot" id="dot-1"></div>
+    <div class="pin-dot" id="dot-2"></div>
+    <div class="pin-dot" id="dot-3"></div>
+  </div>
+  <div class="keypad sans">
+    <button class="key-btn" onclick="pressKey('1')">1</button>
+    <button class="key-btn" onclick="pressKey('2')">2</button>
+    <button class="key-btn" onclick="pressKey('3')">3</button>
+    <button class="key-btn" onclick="pressKey('4')">4</button>
+    <button class="key-btn" onclick="pressKey('5')">5</button>
+    <button class="key-btn" onclick="pressKey('6')">6</button>
+    <button class="key-btn" onclick="pressKey('7')">7</button>
+    <button class="key-btn" onclick="pressKey('8')">8</button>
+    <button class="key-btn" onclick="pressKey('9')">9</button>
+    <button class="key-btn" style="font-size:13px;" onclick="clearPin()">CLR</button>
+    <button class="key-btn" onclick="pressKey('0')">0</button>
+    <button class="key-btn" style="font-size:13px;" onclick="replayIntro()">▶</button>
+  </div>
+</div>
 
-    <div class="pin-dots" id="pin-dots">
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
-      <div class="pin-dot"></div>
-    </div>
-
-    <div class="pin-status" id="pin-status">Default PIN: 1325 (Changeable inside Pass)</div>
-
-    <div class="keypad">
-      <button class="key-btn" onclick="pressDigit('1')">1<span class="sub-letters">&nbsp;</span></button>
-      <button class="key-btn" onclick="pressDigit('2')">2<span class="sub-letters">ABC</span></button>
-      <button class="key-btn" onclick="pressDigit('3')">3<span class="sub-letters">DEF</span></button>
-      <button class="key-btn" onclick="pressDigit('4')">4<span class="sub-letters">GHI</span></button>
-      <button class="key-btn" onclick="pressDigit('5')">5<span class="sub-letters">JKL</span></button>
-      <button class="key-btn" onclick="pressDigit('6')">6<span class="sub-letters">MNO</span></button>
-      <button class="key-btn" onclick="pressDigit('7')">7<span class="sub-letters">PQRS</span></button>
-      <button class="key-btn" onclick="pressDigit('8')">8<span class="sub-letters">TUV</span></button>
-      <button class="key-btn" onclick="pressDigit('9')">9<span class="sub-letters">WXYZ</span></button>
-      <button class="key-btn action-key" onclick="clearPin()">CLEAR</button>
-      <button class="key-btn" onclick="pressDigit('0')">0<span class="sub-letters">+</span></button>
-      <button class="key-btn action-key" onclick="backspacePin()">⌫</button>
+<!-- TOP HEADER -->
+<header>
+  <div class="brand-row">
+    <img src="emblem.png" alt="RA 109" class="header-emblem">
+    <div>
+      <div class="sans" style="font-size:10px; letter-spacing:2px; color:var(--gold); font-weight:700;">RA 109 PORTAL</div>
+      <div style="font-size:15px; font-weight:700; color:var(--gold-bright);">Mevunai Moment™</div>
     </div>
   </div>
+  <div class="header-actions sans">
+    <button class="btn-outline" onclick="toggleTheme()">Emerald</button>
+    <button class="btn-outline" onclick="replayIntro()">▶ Intro</button>
+    <button class="btn-outline" onclick="lockApp()">🔒 Lock</button>
+  </div>
+</header>
 
-  <!-- Top Bar -->
-  <header class="top-bar">
-    <div class="brand-mini">
-      <img src="./emblem.png" alt="Mevunai Moment Emblem" />
-      <div class="brand-mini-text">
-        <div class="ra-tag">RA 109</div>
-        <div class="club-name">Mevunai Moment™</div>
+<main>
+  <!-- TAB 1: PASS -->
+  <section id="sec-pass" class="section active">
+    <div class="card vip-hero">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <div>
+          <div class="sans" style="font-size:11px; letter-spacing:3px; color:var(--gold); font-weight:800;">RA 109</div>
+          <h1 style="font-size:24px; color:var(--gold-bright); line-height:1.15;">Mevunai Moment™</h1>
+          <div class="sans" style="font-size:12px; color:var(--text-muted); margin-top:2px;">Country Club, Inc. ®</div>
+        </div>
+        <img src="emblem.png" alt="Crest" style="width:62px; height:62px; border-radius:50%; border:1.5px solid var(--gold);">
+      </div>
+      <div style="border-top:1px solid var(--gold-dim); padding-top:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <div style="font-size:14px; font-weight:700; color:var(--gold-bright);">Founding Sovereign Member</div>
+          <div class="sans" style="font-size:11px; color:var(--text-muted); margin-top:2px;">ID: MMCC-RA109-001 • ALL-ACCESS</div>
+          <div class="sans" style="font-size:10px; color:var(--gold); margin-top:2px;">VALID THROUGH 2027</div>
+        </div>
+        <div class="status-pill sans"><span class="dot-live"></span> ACTIVE</div>
       </div>
     </div>
-    <div class="top-actions">
-      <button class="pill-btn" onclick="lockVaultNow()" title="Lock App Immediately">🔒 Lock</button>
-      <button class="pill-btn" onclick="replayIntro()">▶ Intro</button>
-      <button class="pill-btn" onclick="toggleTheme()" id="theme-btn">Emerald</button>
-    </div>
-  </header>
 
-  <main class="container">
-    <!-- SECTION 1: PASS & PRIVILEGES -->
-    <section id="sec-pass" class="section active">
-      <div class="hero-emblem-wrap">
-        <img src="./emblem.png" alt="Mevunai Moment Emblem" />
-        <div class="ra-badge">RA 109</div>
-        <h1 class="hero-title">Mevunai Moment™</h1>
-        <p class="hero-sub">Country Club, Inc. ®</p>
+    <div class="card">
+      <div class="sans" style="font-size:11px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:6px;">CLUBHOUSE PRIVILEGES</div>
+      <div class="row-item">
+        <div>
+          <div class="item-title">Emerald Sanctuary Spa</div>
+          <div class="item-sub sans">Complimentary thermal suite access</div>
+        </div>
+        <button class="btn-gold sans" onclick="showToast('Checked in at Emerald Sanctuary Spa')">Check In</button>
       </div>
+      <div class="row-item">
+        <div>
+          <div class="item-title">RA 109 Private Lounge</div>
+          <div class="item-sub sans">Evening dress code • Valet ready</div>
+        </div>
+        <button class="btn-gold sans" onclick="showToast('RA 109 Private Lounge & Valet notified')">Notify</button>
+      </div>
+    </div>
 
-      <div class="vip-card">
-        <div class="vip-top">
+    <div class="card sans">
+      <div style="font-size:11px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:10px;">SECURITY & INTRO SETTINGS</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <button class="btn-outline" onclick="changePinPrompt()">🔑 Change 4-Digit PIN</button>
+        <label class="btn-outline" style="cursor:pointer;">
+          🎬 Set Custom MP4 Intro
+          <input type="file" accept="video/*" style="display:none;" onchange="saveCustomIntro(event)">
+        </label>
+        <button class="btn-outline" onclick="clearCustomIntro()">↺ Reset Intro</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: BOOK -->
+  <section id="sec-book" class="section">
+    <div class="card">
+      <div class="sans" style="font-size:11px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:4px;">RESERVE TEE TIME OR COURT</div>
+      <h2 style="font-size:20px; color:var(--gold-bright); margin-bottom:12px;">Championship Grounds</h2>
+
+      <div class="row-item" style="flex-direction:column; align-items:stretch;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
           <div>
-            <div class="vip-tier">Founding Sovereign Member</div>
-            <div class="vip-id">ID: MMCC-RA109-001 • ALL-ACCESS</div>
+            <div class="item-title">Championship Golf — 18 Holes</div>
+            <div class="item-sub sans">Sovereign Links • Private Caddie Included</div>
           </div>
-          <span class="status-active">● ACTIVE</span>
+          <button class="btn-gold sans" onclick="reserveCourt('Championship Golf — 18 Holes')">Reserve</button>
         </div>
-        <div class="vip-footer">
-          <span>VALID THROUGH 2027</span>
-          <span>RA 109 VERIFIED</span>
+        <div class="slot-grid sans" data-group="golf">
+          <button class="slot-btn selected" onclick="selectSlot(this)">08:30 AM</button>
+          <button class="slot-btn" onclick="selectSlot(this)">11:00 AM</button>
+          <button class="slot-btn" onclick="selectSlot(this)">02:30 PM</button>
+          <button class="slot-btn" onclick="selectSlot(this)">04:45 PM</button>
         </div>
       </div>
 
-      <h3 class="sec-heading">Clubhouse Privileges</h3>
-
-      <div class="card">
-        <div class="card-info">
-          <h4>Emerald Sanctuary Spa</h4>
-          <p>Complimentary thermal suite access</p>
+      <div class="row-item" style="flex-direction:column; align-items:stretch;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div class="item-title">Royal Clay Tennis — Court 1</div>
+            <div class="item-sub sans">Center Stadium Court • Ball Boy Service</div>
+          </div>
+          <button class="btn-gold sans" onclick="reserveCourt('Royal Clay Tennis — Court 1')">Reserve</button>
         </div>
-        <button class="action-btn" onclick="triggerAction(this, 'Checked In', 'Emerald Sanctuary Spa check-in confirmed')">Check In</button>
+        <div class="slot-grid sans" data-group="tennis">
+          <button class="slot-btn selected" onclick="selectSlot(this)">09:00 AM</button>
+          <button class="slot-btn" onclick="selectSlot(this)">01:00 PM</button>
+          <button class="slot-btn" onclick="selectSlot(this)">05:30 PM</button>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="card-info">
-          <h4>RA 109 Private Lounge</h4>
-          <p>Evening dress code • Valet ready</p>
+      <div class="row-item" style="flex-direction:column; align-items:stretch;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div class="item-title">Emerald Padel Pavilion</div>
+            <div class="item-sub sans">Panoramic Glass Arena • Climate Controlled</div>
+          </div>
+          <button class="btn-gold sans" onclick="reserveCourt('Emerald Padel Pavilion')">Reserve</button>
         </div>
-        <button class="action-btn" onclick="triggerAction(this, 'Notified', 'RA 109 Lounge & Valet desk alerted')">Notify</button>
+        <div class="slot-grid sans" data-group="padel">
+          <button class="slot-btn selected" onclick="selectSlot(this)">10:30 AM</button>
+          <button class="slot-btn" onclick="selectSlot(this)">04:00 PM</button>
+          <button class="slot-btn" onclick="selectSlot(this)">07:30 PM</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: DINING -->
+  <section id="sec-dining" class="section">
+    <div class="card">
+      <div class="sans" style="font-size:11px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:4px;">PRIVATE TABLE SERVICE</div>
+      <h2 style="font-size:20px; color:var(--gold-bright); margin-bottom:10px;">The Crimson Silk Dining Room</h2>
+
+      <div class="row-item">
+        <div>
+          <div class="item-title">Gold-Leaf Wagyu Ribeye</div>
+          <div class="item-sub sans">Truffle reduction, roasted marrow • $95</div>
+        </div>
+        <button class="btn-gold sans" onclick="showToast('Ordered: Gold-Leaf Wagyu Ribeye ($95)')">Order</button>
       </div>
 
-      <!-- Sovereign Privacy & Intro Settings -->
-      <div class="security-box">
-        <h4 style="color: var(--gold-light); font-size: 14px; margin-bottom: 4px;">🔐 Sovereign Privacy & Cinema Settings</h4>
-        <p style="font-family: -apple-system, sans-serif; font-size: 12px; color: var(--text-muted);">
-          Protect your pass with a custom 4-digit PIN or upload a custom MP4 splash video.
-        </p>
-        <div class="security-row">
-          <button class="pill-btn gold-solid" onclick="startSetNewPin()">🔑 Change 4-Digit PIN</button>
-          <button class="pill-btn" onclick="lockVaultNow()">🔒 Lock Portal Now</button>
-          <label class="pill-btn" style="cursor:pointer;">
-            🎬 Custom MP4 Intro
-            <input type="file" accept="video/mp4,video/quicktime,video/webm" style="display:none;" onchange="saveCustomIntroVideo(event)" />
+      <div class="row-item">
+        <div>
+          <div class="item-title">Emerald Reserve Martini</div>
+          <div class="item-sub sans">Botanical gin, dry vermouth, olive oil • $24</div>
+        </div>
+        <button class="btn-gold sans" onclick="showToast('Ordered: Emerald Reserve Martini ($24)')">Order</button>
+      </div>
+
+      <div class="row-item">
+        <div>
+          <div class="item-title">Saffron & Pistachio Baklava</div>
+          <div class="item-sub sans">24k gold dust, wildflower honey • $19</div>
+        </div>
+        <button class="btn-gold sans" onclick="showToast('Ordered: Saffron & Pistachio Baklava ($19)')">Order</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: EVENTS (WITH DEDICATED LIVE EVENT SCREEN) -->
+  <section id="sec-events" class="section">
+    <!-- DEDICATED EVENTS CATEGORY SCREEN -->
+    <div class="event-stage-screen">
+      <div class="stage-viewport">
+        <canvas id="stage-canvas"></canvas>
+        <video id="stage-video" playsinline loop muted></video>
+        <img id="stage-img" src="emblem.png" alt="Event Screen Preview">
+        <div class="stage-overlay">
+          <div class="stage-top-bar sans">
+            <span class="live-badge"><span class="dot-live"></span> <span id="stage-badge-text">STAGE BROADCAST</span></span>
+            <span style="font-size:10px; color:var(--gold-bright); background:rgba(0,0,0,0.6); padding:3px 9px; border-radius:99px; border:1px solid var(--gold-dim);" id="stage-date-pill">DEC 18 • GRAND BALLROOM</span>
+          </div>
+          <div>
+            <div class="sans" style="font-size:10px; letter-spacing:2px; color:var(--gold); font-weight:700;" id="stage-kicker">MEVUNAI MOMENT™ EXCLUSIVE</div>
+            <div style="font-size:19px; font-weight:700; color:var(--gold-bright);" id="stage-title">RA 109 Annual Gala — Black Tie</div>
+            <div class="sans" style="font-size:11px; color:var(--text-muted);" id="stage-desc">Live orchestra, 24K champagne tower & private vault preview</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN CONTROLS & MEDIA UPLOADER -->
+      <div class="stage-controls sans">
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button class="btn-outline" id="btn-stage-play" onclick="toggleStagePlay()">⏸ Pause</button>
+          <button class="btn-outline" id="btn-stage-mute" onclick="toggleStageMute()">🔇 Muted</button>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <label class="btn-outline" style="cursor:pointer;">
+            🎬 Load Event Video/Photo
+            <input type="file" accept="video/*,image/*" style="display:none;" onchange="loadStageMedia(event)">
           </label>
+          <button class="btn-outline" onclick="resetStageDefault()">✦ Crest Stage</button>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- SECTION 2: RESERVE TEE TIME OR COURT -->
-    <section id="sec-book" class="section">
-      <h3 class="sec-heading">Reserve Tee Time or Court</h3>
-      <div class="slot-bar" id="slot-bar">
-        <button class="slot-chip active" onclick="selectSlot(this, 'Today • 09:30 AM')">Today • 09:30 AM</button>
-        <button class="slot-chip" onclick="selectSlot(this, 'Today • 02:00 PM')">Today • 02:00 PM</button>
-        <button class="slot-chip" onclick="selectSlot(this, 'Tomorrow • 08:00 AM')">Tomorrow • 08:00 AM</button>
-        <button class="slot-chip" onclick="selectSlot(this, 'Tomorrow • 04:30 PM')">Tomorrow • 04:30 PM</button>
-      </div>
+    <!-- CHANNEL SWITCHER CHIPS -->
+    <div class="chip-row sans">
+      <button class="chip active" onclick="selectEventChannel(0, this)">✦ RA 109 Annual Gala</button>
+      <button class="chip" onclick="selectEventChannel(1, this)">🎷 Midnight Cigar & Jazz</button>
+      <button class="chip" onclick="selectEventChannel(2, this)">🥂 New Year Sovereign Ball</button>
+      <button class="chip" id="chip-custom-stage" style="display:none;" onclick="selectEventChannel(3, this)">📹 Uploaded Event Reel</button>
+    </div>
 
-      <div class="card">
-        <div class="card-info">
-          <h4>Championship Golf — 18 Holes</h4>
-          <p>Private caddie &amp; TrackMan warm-up bay</p>
+    <!-- EXCLUSIVE GATHERINGS LIST -->
+    <div class="card">
+      <div class="sans" style="font-size:11px; letter-spacing:2px; color:var(--gold); font-weight:700; margin-bottom:4px;">EXCLUSIVE GATHERINGS</div>
+      <h2 style="font-size:20px; color:var(--gold-bright); margin-bottom:10px;">Private Member Calendar</h2>
+
+      <div class="row-item">
+        <div onclick="selectEventChannel(0)" style="cursor:pointer;">
+          <div class="item-title">RA 109 Annual Gala</div>
+          <div class="item-sub sans">Dec 18 • Grand Ballroom • Black Tie</div>
         </div>
-        <button class="action-btn" onclick="bookCourt(this, 'Championship Golf — 18 Holes')">Reserve</button>
+        <button class="btn-gold sans" id="rsvp-0" onclick="toggleRsvp(this, 'RA 109 Annual Gala')">RSVP</button>
       </div>
 
-      <div class="card">
-        <div class="card-info">
-          <h4>Royal Clay Tennis — Court 1</h4>
-          <p>Championship red clay • Ball machine ready</p>
+      <div class="row-item">
+        <div onclick="selectEventChannel(1)" style="cursor:pointer;">
+          <div class="item-title">Midnight Emerald Cigar & Jazz</div>
+          <div class="item-sub sans">Dec 24 • Rooftop Terrace</div>
         </div>
-        <button class="action-btn" onclick="bookCourt(this, 'Royal Clay Tennis — Court 1')">Reserve</button>
+        <button class="btn-gold sans" id="rsvp-1" onclick="toggleRsvp(this, 'Midnight Emerald Cigar & Jazz')">RSVP</button>
       </div>
 
-      <div class="card">
-        <div class="card-info">
-          <h4>Emerald Padel Pavilion</h4>
-          <p>Panoramic glass stadium court • Private lighting</p>
+      <div class="row-item">
+        <div onclick="selectEventChannel(2)" style="cursor:pointer;">
+          <div class="item-title">Sovereign New Year Yacht Gala</div>
+          <div class="item-sub sans">Dec 31 • Private Marina Berth 01</div>
         </div>
-        <button class="action-btn" onclick="bookCourt(this, 'Emerald Padel Pavilion')">Reserve</button>
+        <button class="btn-gold sans" id="rsvp-2" onclick="toggleRsvp(this, 'Sovereign New Year Yacht Gala')">RSVP</button>
       </div>
-    </section>
+    </div>
+  </section>
+</main>
 
-    <!-- SECTION 3: THE CRIMSON SILK DINING ROOM -->
-    <section id="sec-dining" class="section">
-      <h3 class="sec-heading">The Crimson Silk Dining Room</h3>
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav sans">
+  <button class="nav-btn active" onclick="switchTab('pass', this)"><span class="nav-icon">👑</span>PASS</button>
+  <button class="nav-btn" onclick="switchTab('book', this)"><span class="nav-icon">⛳</span>BOOK</button>
+  <button class="nav-btn" onclick="switchTab('dining', this)"><span class="nav-icon">🍷</span>DINING</button>
+  <button class="nav-btn" onclick="switchTab('events', this)"><span class="nav-icon">📺</span>EVENTS</button>
+</nav>
 
-      <div class="card">
-        <div class="card-info">
-          <h4>Gold-Leaf Wagyu Ribeye</h4>
-          <p>Truffle reduction, roasted marrow • $95</p>
-        </div>
-        <button class="action-btn" onclick="triggerAction(this, 'Ordered', 'Gold-Leaf Wagyu Ribeye sent to Chef’s Table')">Order</button>
-      </div>
+<div id="toast" class="sans"></div>
 
-      <div class="card">
-        <div class="card-info">
-          <h4>Emerald Reserve Martini</h4>
-          <p>Botanical gin, dry vermouth, olive oil • $24</p>
-        </div>
-        <button class="action-btn" onclick="triggerAction(this, 'Ordered', 'Emerald Reserve Martini dispatched from bar')">Order</button>
-      </div>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
 
-      <div class="card">
-        <div class="card-info">
-          <h4>Saffron &amp; Pistachio Baklava</h4>
-          <p>24k gold dust, wildflower honey • $19</p>
-        </div>
-        <button class="action-btn" onclick="triggerAction(this, 'Ordered', 'Saffron & Pistachio Baklava prepared')">Order</button>
-      </div>
-    </section>
+  // SPLASH & CUSTOM INTRO
+  let splashTimer = setTimeout(closeSplash, 3000);
+  function closeSplash() {
+    clearTimeout(splashTimer);
+    document.getElementById('splash-screen').classList.add('hidden');
+    const v = document.getElementById('intro-video-el');
+    v.pause();
+  }
+  function replayIntro() {
+    const sp = document.getElementById('splash-screen');
+    sp.classList.remove('hidden');
+    const fill = sp.querySelector('.progress-fill');
+    fill.style.animation = 'none';
+    fill.offsetHeight;
+    fill.style.animation = 'loadBar 2.8s forwards ease-out';
+    const v = document.getElementById('intro-video-el');
+    if (v.src) { v.currentTime = 0; v.play().catch(()=>{}); }
+    clearTimeout(splashTimer);
+    splashTimer = setTimeout(closeSplash, 3000);
+  }
+  function saveCustomIntro(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const v = document.getElementById('intro-video-el');
+    v.src = url;
+    v.style.display = 'block';
+    showToast('Custom MP4 Intro loaded');
+    replayIntro();
+  }
+  function clearCustomIntro() {
+    const v = document.getElementById('intro-video-el');
+    v.pause(); v.removeAttribute('src'); v.style.display = 'none';
+    showToast('Restored RA 109 Crest Intro');
+  }
 
-    <!-- SECTION 4: EXCLUSIVE GATHERINGS -->
-    <section id="sec-events" class="section">
-      <h3 class="sec-heading">Exclusive Gatherings</h3>
-
-      <div class="card">
-        <div class="card-info">
-          <h4>RA 109 Annual Gala</h4>
-          <p>Dec 18 • Grand Ballroom • Black Tie</p>
-        </div>
-        <button class="action-btn" onclick="triggerAction(this, 'RSVP Confirmed', 'VIP Table reserved for RA 109 Annual Gala')">RSVP</button>
-      </div>
-
-      <div class="card">
-        <div class="card-info">
-          <h4>Midnight Emerald Cigar &amp; Jazz</h4>
-          <p>Dec 24 • Rooftop Terrace</p>
-        </div>
-        <button class="action-btn" onclick="triggerAction(this, 'RSVP Confirmed', 'Private humidor seat reserved for Dec 24')">RSVP</button>
-      </div>
-    </section>
-  </main>
-
-  <!-- Bottom Navigation -->
-  <nav class="bottom-nav">
-    <button class="nav-btn active" onclick="switchTab('pass', this)">
-      <span class="nav-icon">👑</span>
-      <span>PASS</span>
-    </button>
-    <button class="nav-btn" onclick="switchTab('book', this)">
-      <span class="nav-icon">⛳</span>
-      <span>BOOK</span>
-    </button>
-    <button class="nav-btn" onclick="switchTab('dining', this)">
-      <span class="nav-icon">🍷</span>
-      <span>DINING</span>
-    </button>
-    <button class="nav-btn" onclick="switchTab('events', this)">
-      <span class="nav-icon">✨</span>
-      <span>EVENTS</span>
-    </button>
-  </nav>
-
-  <div id="toast"></div>
-
-  <script>
-    // Service Worker Registration
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js').catch(() => {});
-      });
+  // 4-DIGIT PADLOCK
+  let savedPin = localStorage.getItem('mmcc_ra109_pin') || '1325';
+  let currentEntry = '';
+  function updateDots() {
+    for (let i = 0; i < 4; i++) {
+      document.getElementById('dot-' + i).classList.toggle('filled', i < currentEntry.length);
     }
-
-    // --- 4-DIGIT SOVEREIGN VAULT PADLOCK LOGIC ---
-    const PIN_STORAGE_KEY = 'mmcc_ra109_vault_pin';
-    let enteredPin = '';
-    let lockMode = 'unlock'; // 'unlock' or 'set_new'
-    let tempNewPin = '';
-
-    function getSavedPin() {
-      return localStorage.getItem(PIN_STORAGE_KEY) || '1325';
-    }
-
-    function updatePinDots(isError = false) {
-      const dots = document.querySelectorAll('#pin-dots .pin-dot');
-      dots.forEach((dot, i) => {
-        dot.classList.remove('filled', 'error');
-        if (isError) {
-          dot.classList.add('error');
-        } else if (i < enteredPin.length) {
-          dot.classList.add('filled');
-        }
-      });
-    }
-
-    function pressDigit(digit) {
-      if (enteredPin.length >= 4) return;
-      enteredPin += digit;
-      updatePinDots(false);
-
-      if (enteredPin.length === 4) {
-        setTimeout(() => handleFourDigitsComplete(), 160);
-      }
-    }
-
-    function clearPin() {
-      enteredPin = '';
-      updatePinDots(false);
-    }
-
-    function backspacePin() {
-      enteredPin = enteredPin.slice(0, -1);
-      updatePinDots(false);
-    }
-
-    function handleFourDigitsComplete() {
-      const statusEl = document.getElementById('pin-status');
-      if (lockMode === 'unlock') {
-        if (enteredPin === getSavedPin()) {
-          statusEl.style.color = '#34d399';
-          statusEl.textContent = '✓ Sovereign Access Granted';
-          playChime(660, 0.25);
-          setTimeout(() => {
-            document.getElementById('vault-lock-screen').classList.add('unlocked');
-            enteredPin = '';
-            updatePinDots(false);
-          }, 260);
+  }
+  function pressKey(num) {
+    if (currentEntry.length >= 4) return;
+    currentEntry += num;
+    updateDots();
+    if (currentEntry.length === 4) {
+      setTimeout(() => {
+        if (currentEntry === savedPin) {
+          document.getElementById('lock-screen').classList.add('unlocked');
+          currentEntry = '';
+          updateDots();
+          showToast('RA 109 Sovereign Vault Unlocked');
         } else {
-          statusEl.style.color = '#ff6b6b';
-          statusEl.textContent = '✕ Incorrect PIN — Try Again';
-          updatePinDots(true);
-          playChime(220, 0.25);
-          setTimeout(() => {
-            enteredPin = '';
-            updatePinDots(false);
-            statusEl.style.color = 'var(--gold)';
-            statusEl.textContent = localStorage.getItem(PIN_STORAGE_KEY) ? 'Enter your 4-digit Member PIN' : 'Default PIN: 1325 (Changeable inside Pass)';
-          }, 900);
+          showToast('Incorrect PIN — Try Again');
+          currentEntry = '';
+          updateDots();
         }
-      } else if (lockMode === 'set_new') {
-        if (!tempNewPin) {
-          tempNewPin = enteredPin;
-          enteredPin = '';
-          updatePinDots(false);
-          document.getElementById('lock-heading').textContent = 'Confirm New 4-Digit PIN';
-          statusEl.style.color = 'var(--gold)';
-          statusEl.textContent = 'Re-enter your new PIN to confirm';
-        } else {
-          if (enteredPin === tempNewPin) {
-            localStorage.setItem(PIN_STORAGE_KEY, enteredPin);
-            statusEl.style.color = '#34d399';
-            statusEl.textContent = '✓ New Sovereign PIN Saved';
-            playChime(784, 0.3);
-            setTimeout(() => {
-              lockMode = 'unlock';
-              tempNewPin = '';
-              enteredPin = '';
-              updatePinDots(false);
-              document.getElementById('vault-lock-screen').classList.add('unlocked');
-              showToast('4-Digit Sovereign PIN updated');
-            }, 400);
-          } else {
-            statusEl.style.color = '#ff6b6b';
-            statusEl.textContent = '✕ PINs did not match — Start over';
-            updatePinDots(true);
-            setTimeout(() => {
-              tempNewPin = '';
-              enteredPin = '';
-              updatePinDots(false);
-              document.getElementById('lock-heading').textContent = 'Set New 4-Digit PIN';
-              statusEl.style.color = 'var(--gold)';
-              statusEl.textContent = 'Enter 4 digits for your private lock';
-            }, 950);
-          }
+      }, 150);
+    }
+  }
+  function clearPin() { currentEntry = ''; updateDots(); }
+  function lockApp() {
+    currentEntry = '';
+    updateDots();
+    document.getElementById('lock-screen').classList.remove('unlocked');
+  }
+  function changePinPrompt() {
+    const next = prompt('Enter a new 4-digit numeric PIN:');
+    if (next && /^\d{4}$/.test(next)) {
+      savedPin = next;
+      localStorage.setItem('mmcc_ra109_pin', next);
+      document.getElementById('lock-hint').textContent = 'Custom 4-Digit PIN Active';
+      showToast('4-Digit Vault PIN Updated');
+    } else if (next !== null) {
+      showToast('Please enter exactly 4 digits');
+    }
+  }
+
+  // NAVIGATION & THEME
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + tab).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (tab === 'events') resizeStageCanvas();
+  }
+  function toggleTheme() {
+    document.body.classList.toggle('theme-emerald');
+    showToast(document.body.classList.contains('theme-emerald') ? 'Emerald Velvet Theme' : 'Royal Crimson Silk Theme');
+  }
+
+  // BOOKING & RSVP
+  function selectSlot(el) {
+    el.parentElement.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+  function reserveCourt(name) {
+    const card = event.target.closest('.row-item');
+    const slot = card.querySelector('.slot-btn.selected')?.textContent || 'Next Available';
+    showToast('Reserved: ' + name + ' at ' + slot);
+  }
+  function toggleRsvp(btn, title) {
+    if (btn.textContent === 'RSVP') {
+      btn.textContent = '✓ CONFIRMED';
+      showToast('VIP RSVP Confirmed: ' + title);
+    } else {
+      btn.textContent = 'RSVP';
+      showToast('RSVP Cancelled: ' + title);
+    }
+  }
+
+  // EVENTS CATEGORY STAGE SCREEN
+  const eventChannels = [
+    {
+      badge: 'GALA PREVIEW • LIVE',
+      date: 'DEC 18 • GRAND BALLROOM',
+      kicker: 'MEVUNAI MOMENT™ EXCLUSIVE',
+      title: 'RA 109 Annual Gala — Black Tie',
+      desc: 'Live symphony orchestra, 24K champagne tower & private vault preview',
+      primary: '#e5c158', secondary: '#8b1528'
+    },
+    {
+      badge: 'ROOFTOP LOUNGE • LIVE',
+      date: 'DEC 24 • ROOFTOP TERRACE',
+      kicker: 'LATE NIGHT SESSIONS',
+      title: 'Midnight Emerald Cigar & Jazz',
+      desc: 'Vintage reserve humidors, live saxophone quartet & emerald cocktails',
+      primary: '#10b981', secondary: '#064e3b'
+    },
+    {
+      badge: 'MARINA BERTH 01',
+      date: 'DEC 31 • SOVEREIGN YACHT',
+      kicker: 'NEW YEAR COUNTDOWN',
+      title: 'Sovereign New Year Yacht Gala',
+      desc: 'Midnight fireworks over the water, private helipad & Michelin tasting',
+      primary: '#f7df8b', secondary: '#4c0918'
+    }
+  ];
+
+  let activeChannel = 0;
+  let stagePlaying = true;
+  let customMediaUrl = null;
+  let customMediaType = null;
+
+  function selectEventChannel(idx, chipEl) {
+    activeChannel = idx;
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    if (chipEl) chipEl.classList.add('active');
+    else {
+      const chips = document.querySelectorAll('.chip');
+      if (chips[idx]) chips[idx].classList.add('active');
+    }
+
+    const canvas = document.getElementById('stage-canvas');
+    const video = document.getElementById('stage-video');
+    const img = document.getElementById('stage-img');
+
+    if (idx === 3 && customMediaUrl) {
+      canvas.style.display = 'none';
+      document.getElementById('stage-badge-text').textContent = 'CUSTOM EVENT REEL';
+      document.getElementById('stage-date-pill').textContent = 'MEMBER UPLOAD';
+      document.getElementById('stage-kicker').textContent = 'RA 109 STAGE BROADCAST';
+      document.getElementById('stage-title').textContent = 'Featured Event Showcase';
+      document.getElementById('stage-desc').textContent = 'Playing uploaded event promo on the main category screen';
+      if (customMediaType === 'video') {
+        img.style.display = 'none';
+        video.style.display = 'block';
+        video.src = customMediaUrl;
+        video.play().catch(()=>{});
+      } else {
+        video.pause();
+        video.style.display = 'none';
+        img.style.display = 'block';
+        img.src = customMediaUrl;
+      }
+      return;
+    }
+
+    video.pause();
+    video.style.display = 'none';
+    img.style.display = 'none';
+    canvas.style.display = 'block';
+
+    const ch = eventChannels[idx] || eventChannels[0];
+    document.getElementById('stage-badge-text').textContent = ch.badge;
+    document.getElementById('stage-date-pill').textContent = ch.date;
+    document.getElementById('stage-kicker').textContent = ch.kicker;
+    document.getElementById('stage-title').textContent = ch.title;
+    document.getElementById('stage-desc').textContent = ch.desc;
+  }
+
+  function loadStageMedia(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    customMediaUrl = URL.createObjectURL(file);
+    customMediaType = file.type.startsWith('video') ? 'video' : 'image';
+    const chip = document.getElementById('chip-custom-stage');
+    chip.style.display = 'inline-block';
+    selectEventChannel(3, chip);
+    showToast('Loaded onto Events Category Screen');
+  }
+
+  function resetStageDefault() {
+    selectEventChannel(0);
+    showToast('Switched to RA 109 Crest Stage');
+  }
+
+  function toggleStagePlay() {
+    stagePlaying = !stagePlaying;
+    const video = document.getElementById('stage-video');
+    if (video.style.display === 'block') {
+      stagePlaying ? video.play() : video.pause();
+    }
+    document.getElementById('btn-stage-play').textContent = stagePlaying ? '⏸ Pause' : '▶ Play';
+  }
+
+  function toggleStageMute() {
+    const video = document.getElementById('stage-video');
+    video.muted = !video.muted;
+    document.getElementById('btn-stage-mute').textContent = video.muted ? '🔇 Muted' : '🔊 Sound ON';
+  }
+
+  // ANIMATED GOLD PYRAMID & SILK EVENT STAGE CANVAS
+  const canvas = document.getElementById('stage-canvas');
+  const ctx = canvas.getContext('2d');
+  const crestImg = new Image();
+  crestImg.src = 'emblem.png';
+  let tick = 0;
+
+  function resizeStageCanvas() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    if (rect.width > 0) {
+      canvas.width = rect.width * 2;
+      canvas.height = rect.height * 2;
+    }
+  }
+  window.addEventListener('resize', resizeStageCanvas);
+
+  function renderStage() {
+    if (stagePlaying && canvas.style.display !== 'none') {
+      if (canvas.width === 0) resizeStageCanvas();
+      const w = canvas.width, h = canvas.height;
+      if (w > 0 && h > 0) {
+        tick += 0.025;
+        const ch = eventChannels[activeChannel] || eventChannels[0];
+        const grad = ctx.createRadialGradient(w * 0.5, h * 0.42, 10, w * 0.5, h * 0.5, w * 0.65);
+        grad.addColorStop(0, ch.secondary);
+        grad.addColorStop(1, '#120105');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, w, h);
+
+        // Animated gold circuit rings
+        ctx.save();
+        ctx.translate(w * 0.5, h * 0.4);
+        for (let i = 1; i <= 3; i++) {
+          ctx.beginPath();
+          const r = 65 + i * 36 + Math.sin(tick + i) * 6;
+          ctx.arc(0, 0, r, 0, Math.PI * 2);
+          ctx.strokeStyle = i % 2 === 0 ? 'rgba(16, 185, 129, 0.28)' : 'rgba(229, 193, 88, 0.32)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
         }
+
+        // Floating gold particles
+        for (let p = 0; p < 18; p++) {
+          const ang = (p / 18) * Math.PI * 2 + tick * 0.4;
+          const dist = 110 + Math.sin(tick * 1.5 + p) * 28;
+          ctx.beginPath();
+          ctx.arc(Math.cos(ang) * dist, Math.sin(ang) * dist * 0.6, 3, 0, Math.PI * 2);
+          ctx.fillStyle = ch.primary;
+          ctx.fill();
+        }
+
+        // Center RA 109 Crest
+        if (crestImg.complete && crestImg.naturalWidth > 0) {
+          const size = 128 + Math.sin(tick * 1.4) * 4;
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(0, 0, size / 2, 0, Math.PI * 2);
+          ctx.clip();
+          ctx.drawImage(crestImg, -size / 2, -size / 2, size, size);
+          ctx.restore();
+          ctx.beginPath();
+          ctx.arc(0, 0, size / 2 + 2, 0, Math.PI * 2);
+          ctx.strokeStyle = '#f7df8b';
+          ctx.lineWidth = 3;
+          ctx.stroke();
+        }
+        ctx.restore();
       }
     }
+    requestAnimationFrame(renderStage);
+  }
+  renderStage();
 
-    function lockVaultNow() {
-      lockMode = 'unlock';
-      tempNewPin = '';
-      enteredPin = '';
-      updatePinDots(false);
-      document.getElementById('lock-heading').textContent = 'Enter 4-Digit Member PIN';
-      document.getElementById('lock-desc').textContent = 'Your RA 109 membership credentials, reservations, and private lounge passes are encrypted.';
-      const statusEl = document.getElementById('pin-status');
-      statusEl.style.color = 'var(--gold)';
-      statusEl.textContent = localStorage.getItem(PIN_STORAGE_KEY) ? 'Vault Locked • Enter PIN' : 'Default PIN: 1325 (Changeable inside Pass)';
-      document.getElementById('vault-lock-screen').classList.remove('unlocked');
-    }
-
-    function startSetNewPin() {
-      lockMode = 'set_new';
-      tempNewPin = '';
-      enteredPin = '';
-      updatePinDots(false);
-      document.getElementById('lock-heading').textContent = 'Set New 4-Digit PIN';
-      document.getElementById('lock-desc').textContent = 'Choose a private 4-digit code to lock your RA 109 portal whenever handing over your device.';
-      const statusEl = document.getElementById('pin-status');
-      statusEl.style.color = 'var(--gold)';
-      statusEl.textContent = 'Enter 4 digits for your new PIN';
-      document.getElementById('vault-lock-screen').classList.remove('unlocked');
-    }
-
-    // Auto-lock when app goes to background for privacy
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
-        lockVaultNow();
-      }
-    });
-
-    // --- CINEMATIC SPLASH INTRO & CUSTOM VIDEO ---
-    let splashTimer = null;
-
-    function playChime(freq = 528, dur = 0.6) {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        gain.gain.setValueAtTime(0.08, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + dur);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + dur);
-      } catch (e) {}
-    }
-
-    function dismissSplash() {
-      clearTimeout(splashTimer);
-      const splash = document.getElementById('splash-screen');
-      splash.classList.add('hidden');
-      const vid = document.getElementById('custom-intro-video');
-      if (vid) vid.pause();
-    }
-
-    function replayIntro() {
-      const splash = document.getElementById('splash-screen');
-      const bar = splash.querySelector('.splash-bar');
-      bar.style.animation = 'none';
-      void bar.offsetWidth;
-      bar.style.animation = 'fillSweep 3.2s forwards ease-out';
-      splash.classList.remove('hidden');
-      const vid = document.getElementById('custom-intro-video');
-      if (vid && vid.src) {
-        vid.currentTime = 0;
-        vid.play().catch(() => {});
-      }
-      playChime(528, 0.8);
-      clearTimeout(splashTimer);
-      splashTimer = setTimeout(dismissSplash, 3400);
-    }
-
-    function saveCustomIntroVideo(e) {
-      const file = e.target.files[0];
-      if (!file) return;
-      const url = URL.createObjectURL(file);
-      const vid = document.getElementById('custom-intro-video');
-      vid.src = url;
-      vid.style.display = 'block';
-      showToast('Custom MP4 Intro loaded — Playing preview');
-      replayIntro();
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      if (localStorage.getItem(PIN_STORAGE_KEY)) {
-        document.getElementById('pin-status').textContent = 'Enter your 4-digit Member PIN';
-      }
-      splashTimer = setTimeout(dismissSplash, 3400);
-    });
-
-    // --- NAVIGATION, THEME & PORTAL ACTIONS ---
-    let selectedSlot = 'Today • 09:30 AM';
-
-    function switchTab(tabId, btn) {
-      document.querySelectorAll('.section').forEach((s) => s.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
-      document.getElementById('sec-' + tabId).classList.add('active');
-      btn.classList.add('active');
-    }
-
-    function toggleTheme() {
-      const isEmerald = document.body.classList.toggle('emerald-theme');
-      document.getElementById('theme-btn').textContent = isEmerald ? 'Crimson' : 'Emerald';
-      showToast(isEmerald ? 'Emerald Velvet ambiance active' : 'Royal Crimson Silk ambiance active');
-    }
-
-    function selectSlot(chip, slotText) {
-      selectedSlot = slotText;
-      document.querySelectorAll('.slot-chip').forEach((c) => c.classList.remove('active'));
-      chip.classList.add('active');
-    }
-
-    function bookCourt(btn, venueName) {
-      btn.textContent = 'Reserved';
-      btn.classList.add('confirmed');
-      showToast(`${venueName} reserved for ${selectedSlot}`);
-    }
-
-    function triggerAction(btn, label, message) {
-      btn.textContent = label;
-      btn.classList.add('confirmed');
-      showToast(message);
-    }
-
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.classList.add('show');
-      clearTimeout(t._timer);
-      t._timer = setTimeout(() => t.classList.remove('show'), 2800);
-    }
-  </script>
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2600);
+  }
+</script>
 </body>
 </html>

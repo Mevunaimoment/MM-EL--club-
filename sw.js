@@ -1,35 +1,22 @@
-const CACHE_NAME = 'mmcc-ra109-vault-lock-v2-network-first';
-const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './emblem.png'
-];
-
-self.addEventListener('install', (event) => {
+const CACHE_NAME = 'mmcc-ra109-events-screen-v3';
+self.addEventListener('install', (e) => {
   self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS).catch(() => {}))
-  );
 });
-
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(keys.filter((k) => k !== CACHE_NAME).map((k) => caches.delete(k)))
     ).then(() => self.clients.claim())
   );
 });
-
-self.addEventListener('fetch', (event) => {
-  if (event.request.method !== 'GET') return;
-  event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        const clone = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-        return response;
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    fetch(e.request)
+      .then((res) => {
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then((c) => c.put(e.request, clone));
+        return res;
       })
-      .catch(() => caches.match(event.request))
+      .catch(() => caches.match(e.request))
   );
 });
