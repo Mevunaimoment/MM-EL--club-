@@ -1,10 +1,10 @@
 {
-  "name": "Mevunai Moment™ Country Club, Inc. ® | RA 109 Portal",
-  "short_name": "RA 109 Club",
+  "name": "Mevunai Moment™ — RA 109 Portal",
+  "short_name": "RA 109 Portal",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#24010a",
-  "theme_color": "#3a0312",
+  "background_color": "#2b060d",
+  "theme_color": "#2b060d",
   "icons": [
     {
       "src": "emblem.png",
