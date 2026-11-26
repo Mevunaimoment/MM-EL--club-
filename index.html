@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#3a0612">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="mmel-icon.png" type="image/png">
+<link rel="apple-touch-icon" href="mmel-icon.png">
+<title>Mevunai Moment™ Country Club — MMEL Music & Sound Lounge</title>
+<style>
+  :root {
+    --bg: #26030b;
+    --bg-grad: radial-gradient(circle at top, #52091b 0%, #26030b 65%, #140105 100%);
+    --card: rgba(45, 6, 16, 0.88);
+    --border: #d4af37;
+    --border-soft: rgba(212, 175, 55, 0.35);
+    --gold: #f3d266;
+    --gold-dim: #b8942e;
+    --text: #fdf6e3;
+    --muted: #d6c3a5;
+  }
+  body.emerald {
+    --bg: #041f17;
+    --bg-grad: radial-gradient(circle at top, #0a4231 0%, #041f17 65%, #02110c 100%);
+    --card: rgba(7, 41, 31, 0.88);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    background-image: var(--bg-grad);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 84px;
+    transition: background 0.3s ease;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border-soft);
+    background: rgba(15, 2, 5, 0.72);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand img {
+    width: 42px; height: 42px; border-radius: 10px;
+    border: 1.5px solid var(--border);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+  }
+  .brand h1 { font-size: 14px; letter-spacing: 1.2px; color: var(--gold); text-transform: uppercase; }
+  .brand p { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); }
+  .theme-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .container { max-width: 520px; margin: 0 auto; padding: 16px; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  }
+  .turntable-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .vinyl {
+    width: 196px; height: 196px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(#111 0, #111 3px, #1e1a14 4px, #111 6px);
+    border: 3px solid var(--border);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3), inset 0 0 20px #000;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    margin: 8px 0 16px;
+    animation: spin 14s linear infinite;
+    animation-play-state: paused;
+  }
+  .vinyl.playing { animation-play-state: running; }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+  .vinyl img {
+    width: 92px; height: 92px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    object-fit: cover;
+  }
+  .eq {
+    display: flex; align-items: flex-end; justify-content: center;
+    gap: 4px; height: 22px; margin-bottom: 10px;
+  }
+  .eq span {
+    width: 4px; height: 6px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: height 0.15s ease;
+  }
+  .eq.playing span { animation: bounce 0.7s ease-in-out infinite alternate; }
+  .eq.playing span:nth-child(2) { animation-delay: 0.15s; }
+  .eq.playing span:nth-child(3) { animation-delay: 0.3s; }
+  .eq.playing span:nth-child(4) { animation-delay: 0.1s; }
+  .eq.playing span:nth-child(5) { animation-delay: 0.25s; }
+  @keyframes bounce { 0% { height: 5px; } 100% { height: 22px; } }
+
+  .track-title { font-size: 18px; color: var(--gold); margin-bottom: 4px; }
+  .track-sub { font-size: 12px; color: var(--muted); letter-spacing: 0.8px; margin-bottom: 14px; }
+
+  .progress-row {
+    width: 100%; display: flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--muted); margin-bottom: 14px;
+  }
+  input[type="range"] {
+    flex: 1; accent-color: var(--gold); cursor: pointer;
+  }
+  .controls {
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    margin-bottom: 14px;
+  }
+  .ctrl-btn {
+    background: rgba(212, 175, 55, 0.12);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .play-btn {
+    width: 58px; height: 58px;
+    background: linear-gradient(135deg, #f3d266, #b8942e);
+    color: #1f0409;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 0 18px rgba(243, 210, 102, 0.45);
+  }
+  .vol-row {
+    width: 80%; display: flex; align-items: center; gap: 8px;
+    font-size: 12px; color: var(--gold);
+  }
+
+  .section-label {
+    font-size: 11px; letter-spacing: 1.6px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px;
+  }
+  .track-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 12px;
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    background: rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+  .track-item.active {
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.16);
+  }
+  .track-item h4 { font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .track-item span { font-size: 11px; color: var(--muted); }
+  .badge {
+    font-size: 10px; padding: 3px 8px; border-radius: 10px;
+    border: 1px solid var(--border); color: var(--gold);
+  }
+
+  .upload-row {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;
+  }
+  .gold-btn {
+    background: linear-gradient(135deg, #f3d266, #b8942e);
+    color: #1f0409;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    letter-spacing: 0.6px;
+  }
+  .outline-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .url-input {
+    flex: 1; min-width: 180px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-soft);
+    color: var(--text);
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 12px;
+  }
+
+  .video-box {
+    width: 100%; aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #000;
+    margin-bottom: 12px;
+  }
+  .video-box iframe { width: 100%; height: 100%; border: 0; }
+
+  .pass-card {
+    background: linear-gradient(145deg, #4a0919, #1d0208);
+    border: 2px solid var(--gold);
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+  }
+  body.emerald .pass-card {
+    background: linear-gradient(145deg, #0b4735, #031711);
+  }
+  .pass-card img {
+    width: 88px; height: 88px; border-radius: 18px;
+    border: 2px solid var(--gold); margin-bottom: 12px;
+  }
+
+  nav.bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(15, 2, 5, 0.94);
+    border-top: 1px solid var(--border-soft);
+    display: flex; justify-content: space-around;
+    padding: 10px 6px;
+    z-index: 30;
+  }
+  nav.bottom-nav button {
+    background: none; border: none; color: var(--muted);
+    font-family: inherit; font-size: 11px; letter-spacing: 0.6px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    cursor: pointer;
+  }
+  nav.bottom-nav button.active { color: var(--gold); font-weight: bold; }
+  .stamp {
+    text-align: center; font-size: 10px; letter-spacing: 1.4px;
+    color: var(--gold-dim); margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="mmel-icon.png" alt="MMEL Crest">
+    <div>
+      <h1>MMEL Sound &amp; TV</h1>
+      <p>MEVUNAI MOMENT™ COUNTRY CLUB</p>
+    </div>
+  </div>
+  <button class="theme-btn" id="themeToggle">EMERALD SILK</button>
+</header>
+
+<div class="container">
+  <!-- TAB 1: MUSIC PLAYER -->
+  <section id="tab-music" class="tab-panel active">
+    <div class="card turntable-wrap">
+      <div class="vinyl" id="vinylDisc">
+        <img src="mmel-icon.png" alt="MMEL Vinyl Center">
+      </div>
+      <div class="eq" id="eqBars">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="track-title" id="nowTitle">Crimson Silk Atrium Lounge</div>
+      <div class="track-sub" id="nowArtist">MMEL Resident DJ · 24/7 Club Stream</div>
+
+      <div class="progress-row">
+        <span id="curTime">0:00</span>
+        <input type="range" id="seekBar" min="0" max="100" value="0">
+        <span id="durTime">LIVE</span>
+      </div>
+
+      <div class="controls">
+        <button class="ctrl-btn" id="prevBtn" title="Previous">⏮</button>
+        <button class="ctrl-btn play-btn" id="playPauseBtn" title="Play / Pause">▶</button>
+        <button class="ctrl-btn" id="nextBtn" title="Next">⏭</button>
+      </div>
+
+      <div class="vol-row">
+        <span>🔈</span>
+        <input type="range" id="volBar" min="0" max="1" step="0.05" value="0.85">
+        <span>🔊</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-label">Sovereign Playlist &amp; Channels</div>
+      <div id="playlistBox"></div>
+
+      <div class="section-label" style="margin-top:14px;">Add Your Own MP3 / Audio or Stream URL</div>
+      <div class="upload-row">
+        <input type="file" id="filePicker" accept="audio/*" multiple style="display:none;">
+        <button class="gold-btn" id="uploadTrigger">+ Load MP3 / WAV Files</button>
+      </div>
+      <div class="upload-row">
+        <input type="text" class="url-input" id="customStreamUrl" placeholder="Paste direct .mp3 or radio stream URL...">
+        <button class="outline-btn" id="loadUrlBtn">Play URL</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: MMTV VIDEO -->
+  <section id="tab-tv" class="tab-panel">
+    <div class="card">
+      <div class="section-label">Mevunai Moment TV (MMTV) Broadcast</div>
+      <div class="video-box">
+        <iframe id="tvFrame" src="https://www.youtube.com/embed/jfKfPfyJRdk?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="upload-row" style="margin-bottom:12px;">
+        <button class="outline-btn tv-preset" data-id="jfKfPfyJRdk">Atrium Lounge Live</button>
+        <button class="outline-btn tv-preset" data-id="4xDzrJKXOOY">Midnight Synthwave</button>
+        <button class="outline-btn tv-preset" data-id="5qap5aO4i9A">Sovereign Chill</button>
+      </div>
+      <div class="upload-row">
+        <input type="text" class="url-input" id="customYtUrl" placeholder="Paste any YouTube link...">
+        <button class="gold-btn" id="loadYtBtn">Watch on MMTV</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: VIP PASS -->
+  <section id="tab-pass" class="tab-panel">
+    <div class="pass-card">
+      <img src="mmel-icon.png" alt="MMEL Crest">
+      <div class="section-label">Sovereign Broadcast &amp; Sound Pass</div>
+      <h2 style="color:var(--gold); font-size:20px; margin-bottom:6px;">FOUNDER ALL-ACCESS</h2>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:14px;">PASS ID: MMEL-SOUND-1325-001 · TIER: SOVEREIGN</p>
+      <p style="font-size:12px; line-height:1.6; color:var(--text);">
+        Grants unlimited 24/7 access to MMEL Sound Lounge, private booth DJ booth requests, and Mevunai Moment TV live broadcasts across all club properties.
+      </p>
+    </div>
+  </section>
+
+  <div class="stamp">mevunai Moment™ Country Club, Inc ®</div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="active" data-tab="tab-music">🎵<span>MMEL Music</span></button>
+  <button data-tab="tab-tv">📺<span>MMTV Live</span></button>
+  <button data-tab="tab-pass">👑<span>VIP Pass</span></button>
+</nav>
+
+<audio id="audioPlayer" crossorigin="anonymous"></audio>
+
+<script>
+(function() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(regs) {
+      regs.forEach(function(r) { r.unregister(); });
+    });
+    navigator.serviceWorker.register('sw.js').catch(function() {});
+  }
+
+  var tracks = [
+    { title: "RA 109 Golden Pyramid Synth", artist: "Offline Sovereign Ambient Engine", url: "synth", badge: "OFFLINE READY" },
+    { title: "Crimson Silk Atrium Lounge", artist: "MMEL Radio · Deep Lounge", url: "https://ice1.somafm.com/groovesalad-128-mp3", badge: "LIVE 24/7" },
+    { title: "Private Jet Midnight Flight", artist: "MMEL Radio · Downtempo", url: "https://ice1.somafm.com/dronezone-128-mp3", badge: "LIVE 24/7" },
+    { title: "Superbike & Night Drive", artist: "MMEL Radio · Electro Luxe", url: "https://ice1.somafm.com/defcon-128-mp3", badge: "LIVE 24/7" },
+    { title: "Pharaoh's Velvet Gala", artist: "MMEL Radio · Lush Velvet", url: "https://ice1.somafm.com/lush-128-mp3", badge: "LIVE 24/7" }
+  ];
+
+  var currentIndex = 0;
+  var isPlaying = false;
+  var audio = document.getElementById("audioPlayer");
+  var vinyl = document.getElementById("vinylDisc");
+  var eq = document.getElementById("eqBars");
+  var playBtn = document.getElementById("playPauseBtn");
+  var nowTitle = document.getElementById("nowTitle");
+  var nowArtist = document.getElementById("nowArtist");
+  var playlistBox = document.getElementById("playlistBox");
+  var seekBar = document.getElementById("seekBar");
+  var curTime = document.getElementById("curTime");
+  var durTime = document.getElementById("durTime");
+
+  var audioCtx = null;
+  var synthNodes = null;
+
+  function startSynth() {
+    stopSynth();
+    var Ctx = window.AudioContext || window.webkitAudioContext;
+    if (!Ctx) return;
+    audioCtx = new Ctx();
+    var master = audioCtx.createGain();
+    master.gain.value = parseFloat(document.getElementById("volBar").value) * 0.18;
+    master.connect(audioCtx.destination);
+    var freqs = [110, 164.81, 220, 261.63];
+    var oscs = freqs.map(function(f) {
+      var o = audioCtx.createOscillator();
+      o.type = "sine";
+      o.frequency.value = f;
+      o.connect(master);
+      o.start();
+      return o;
+    });
+    synthNodes = { oscs: oscs, master: master };
+  }
+
+  function stopSynth() {
+    if (synthNodes) {
+      synthNodes.oscs.forEach(function(o) { try { o.stop(); } catch (e) {} });
+      synthNodes = null;
+    }
+    if (audioCtx) {
+      try { audioCtx.close(); } catch (e) {}
+      audioCtx = null;
+    }
+  }
+
+  function setVisualState(playing) {
+    isPlaying = playing;
+    playBtn.textContent = playing ? "⏸" : "▶";
+    if (playing) {
+      vinyl.classList.add("playing");
+      eq.classList.add("playing");
+    } else {
+      vinyl.classList.remove("playing");
+      eq.classList.remove("playing");
+    }
+  }
+
+  function renderPlaylist() {
+    playlistBox.innerHTML = "";
+    tracks.forEach(function(t, idx) {
+      var div = document.createElement("div");
+      div.className = "track-item" + (idx === currentIndex ? " active" : "");
+      div.innerHTML = '<div><h4>' + t.title + '</h4><span>' + t.artist + '</span></div><span class="badge">' + t.badge + '</span>';
+      div.addEventListener("click", function() {
+        loadTrack(idx, true);
+      });
+      playlistBox.appendChild(div);
+    });
+  }
+
+  function loadTrack(idx, autoPlay) {
+    currentIndex = idx;
+    var t = tracks[idx];
+    nowTitle.textContent = t.title;
+    nowArtist.textContent = t.artist;
+    renderPlaylist();
+    stopSynth();
+    audio.pause();
+
+    if (t.url === "synth") {
+      audio.removeAttribute("src");
+      durTime.textContent = "AMBIENT";
+      curTime.textContent = "LIVE";
+      if (autoPlay) {
+        startSynth();
+        setVisualState(true);
+      } else {
+        setVisualState(false);
+      }
+      return;
+    }
+
+    audio.src = t.url;
+    audio.volume = parseFloat(document.getElementById("volBar").value);
+    if (autoPlay) {
+      audio.play().then(function() {
+        setVisualState(true);
+      }).catch(function() {
+        startSynth();
+        setVisualState(true);
+      });
+    } else {
+      setVisualState(false);
+    }
+  }
+
+  playBtn.addEventListener("click", function() {
+    var t = tracks[currentIndex];
+    if (isPlaying) {
+      audio.pause();
+      stopSynth();
+      setVisualState(false);
+    } else {
+      if (t.url === "synth") {
+        startSynth();
+        setVisualState(true);
+      } else {
+        if (!audio.src) audio.src = t.url;
+        audio.play().then(function() {
+          setVisualState(true);
+        }).catch(function() {
+          startSynth();
+          setVisualState(true);
+        });
+      }
+    }
+  });
+
+  document.getElementById("prevBtn").addEventListener("click", function() {
+    var next = (currentIndex - 1 + tracks.length) % tracks.length;
+    loadTrack(next, true);
+  });
+
+  document.getElementById("nextBtn").addEventListener("click", function() {
+    var next = (currentIndex + 1) % tracks.length;
+    loadTrack(next, true);
+  });
+
+  document.getElementById("volBar").addEventListener("input", function(e) {
+    var v = parseFloat(e.target.value);
+    audio.volume = v;
+    if (synthNodes && synthNodes.master) {
+      synthNodes.master.gain.value = v * 0.18;
+    }
+  });
+
+  function fmt(sec) {
+    if (!isFinite(sec)) return "LIVE";
+    var m = Math.floor(sec / 60);
+    var s = Math.floor(sec % 60);
+    return m + ":" + (s < 10 ? "0" + s : s);
+  }
+
+  audio.addEventListener("timeupdate", function() {
+    if (isFinite(audio.duration) && audio.duration > 0) {
+      seekBar.value = (audio.currentTime / audio.duration) * 100;
+      curTime.textContent = fmt(audio.currentTime);
+      durTime.textContent = fmt(audio.duration);
+    } else {
+      curTime.textContent = fmt(audio.currentTime);
+      durTime.textContent = "LIVE";
+    }
+  });
+
+  seekBar.addEventListener("input", function(e) {
+    if (isFinite(audio.duration) && audio.duration > 0) {
+      audio.currentTime = (parseFloat(e.target.value) / 100) * audio.duration;
+    }
+  });
+
+  audio.addEventListener("ended", function() {
+    var next = (currentIndex + 1) % tracks.length;
+    loadTrack(next, true);
+  });
+
+  document.getElementById("uploadTrigger").addEventListener("click", function() {
+    document.getElementById("filePicker").click();
+  });
+
+  document.getElementById("filePicker").addEventListener("change", function(e) {
+    var files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    var firstNewIdx = tracks.length;
+    files.forEach(function(f) {
+      var blobUrl = URL.createObjectURL(f);
+      tracks.push({
+        title: f.name.replace(/\.[^/.]+$/, ""),
+        artist: "Local Device Audio",
+        url: blobUrl,
+        badge: "LOCAL FILE"
+      });
+    });
+    loadTrack(firstNewIdx, true);
+  });
+
+  document.getElementById("loadUrlBtn").addEventListener("click", function() {
+    var val = document.getElementById("customStreamUrl").value.trim();
+    if (!val) return;
+    tracks.push({
+      title: "Custom Sovereign Stream",
+      artist: val,
+      url: val,
+      badge: "CUSTOM"
+    });
+    loadTrack(tracks.length - 1, true);
+  });
+
+  document.querySelectorAll(".tv-preset").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      var id = btn.getAttribute("data-id");
+      document.getElementById("tvFrame").src = "https://www.youtube.com/embed/" + id + "?rel=0";
+    });
+  });
+
+  document.getElementById("loadYtBtn").addEventListener("click", function() {
+    var raw = document.getElementById("customYtUrl").value.trim();
+    if (!raw) return;
+    var match = raw.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
+    var id = match ? match[1] : raw;
+    document.getElementById("tvFrame").src = "https://www.youtube.com/embed/" + id + "?rel=0";
+  });
+
+  document.getElementById("themeToggle").addEventListener("click", function() {
+    document.body.classList.toggle("emerald");
+    this.textContent = document.body.classList.contains("emerald") ? "CRIMSON SILK" : "EMERALD SILK";
+  });
+
+  document.querySelectorAll("nav.bottom-nav button").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      document.querySelectorAll("nav.bottom-nav button").forEach(function(b) { b.classList.remove("active"); });
+      document.querySelectorAll(".tab-panel").forEach(function(p) { p.classList.remove("active"); });
+      btn.classList.add("active");
+      document.getElementById(btn.getAttribute("data-tab")).classList.add("active");
+    });
+  });
+
+  renderPlaylist();
+})();
+</script>
+</body>
+</html>

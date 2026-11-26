@@ -1,0 +1,16 @@
+{
+  "name": "Mevunai Moment™ Country Club — MMEL",
+  "short_name": "MMEL Club",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#26030b",
+  "theme_color": "#3a0612",
+  "icons": [
+    {
+      "src": "mmel-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
