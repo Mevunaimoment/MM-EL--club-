@@ -1,446 +1,816 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mevunai Moment™ Country Club, Inc. | RA 109 Portal</title>
-  <style>
-    :root {
-      --burgundy-deep: #24030c;
-      --burgundy-silk: #4a081b;
-      --burgundy-card: rgba(45, 5, 16, 0.88);
-      --gold-light: #f3d479;
-      --gold-mid: #d4af37;
-      --gold-dark: #99741a;
-      --emerald: #0fa968;
-      --emerald-glow: rgba(15, 169, 104, 0.45);
-      --text-cream: #f8f1e5;
-      --text-muted: #c8b29b;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Mevunai Moment™ Country Club, Inc. | RA 109 Portal</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" type="image/png" href="./emblem.png" />
+<link rel="apple-touch-icon" href="./emblem.png" />
+<meta name="theme-color" content="#2b0711" />
+<style>
+  :root {
+    --bg-deep: #180309;
+    --bg-silk: #2b0711;
+    --card-bg: rgba(46, 10, 21, 0.88);
+    --card-border: rgba(212, 175, 55, 0.42);
+    --gold: #d4af37;
+    --gold-bright: #f5d77f;
+    --gold-dim: #9e7e24;
+    --emerald: #10b981;
+    --emerald-deep: #064e3b;
+    --text-main: #fdf6e7;
+    --text-muted: #d6c39c;
+  }
+  body.emerald-mode {
+    --bg-deep: #031711;
+    --bg-silk: #062b20;
+    --card-bg: rgba(8, 46, 35, 0.9);
+    --card-border: rgba(212, 175, 55, 0.5);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    padding: 0 0 88px 0;
+    font-family: Georgia, "Times New Roman", serif;
+    background: radial-gradient(circle at 50% 0%, var(--bg-silk) 0%, var(--bg-deep) 78%);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  /* Cinematic Splash Intro */
+  #splash-intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: radial-gradient(circle at center, #380917 0%, #120206 85%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+  }
+  #splash-intro.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .intro-ring {
+    position: relative;
+    width: 196px;
+    height: 196px;
+    border-radius: 50%;
+    padding: 6px;
+    background: conic-gradient(from 0deg, #9e7e24, #f7df8b, #d4af37, #10b981, #d4af37, #9e7e24);
+    box-shadow: 0 0 45px rgba(212, 175, 55, 0.45), inset 0 0 20px rgba(0,0,0,0.8);
+    animation: pulseGlow 2.6s ease-in-out infinite;
+  }
+  .intro-ring img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    animation: slowZoom 4.2s ease-out forwards;
+  }
+  #intro-video-el {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    z-index: 1;
+  }
+  .intro-overlay-ui {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .intro-tag {
+    margin-top: 20px;
+    letter-spacing: 5px;
+    font-size: 13px;
+    color: var(--gold-bright);
+    text-transform: uppercase;
+    animation: fadeUp 0.9s ease forwards;
+  }
+  .intro-title {
+    margin: 8px 0 4px;
+    font-size: 26px;
+    letter-spacing: 1.5px;
+    color: #fff;
+    text-shadow: 0 2px 14px rgba(212, 175, 55, 0.55);
+    animation: fadeUp 1.1s ease forwards;
+  }
+  .intro-sub {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    animation: fadeUp 1.3s ease forwards;
+  }
+  .intro-bar {
+    width: 210px;
+    height: 2px;
+    background: rgba(212, 175, 55, 0.22);
+    margin-top: 22px;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .intro-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--emerald), var(--gold-bright));
+    animation: loadProgress 3.6s linear forwards;
+  }
+  .skip-btn {
+    margin-top: 22px;
+    background: rgba(24, 3, 9, 0.72);
+    border: 1px solid var(--card-border);
+    color: var(--gold-bright);
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 32px rgba(212, 175, 55, 0.4); }
+    50% { box-shadow: 0 0 60px rgba(245, 215, 127, 0.75); }
+  }
+  @keyframes slowZoom {
+    from { transform: scale(0.92); }
+    to { transform: scale(1.03); }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes loadProgress {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at top right, #5e0b22, var(--burgundy-deep) 70%);
-      color: var(--text-cream);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 20px 12px 90px;
-    }
+  /* Top Header */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(24, 3, 9, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  body.emerald-mode .topbar { background: rgba(3, 23, 17, 0.92); }
+  .brand-mini {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .brand-mini img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+  }
+  .brand-mini span {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: var(--gold-bright);
+    font-weight: bold;
+  }
+  .top-actions { display: flex; gap: 8px; }
+  .pill-btn {
+    background: rgba(212, 175, 55, 0.14);
+    border: 1px solid var(--card-border);
+    color: var(--gold-bright);
+    padding: 6px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-family: inherit;
+  }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: 
-        radial-gradient(var(--gold-dark) 1px, transparent 1px),
-        linear-gradient(to right, rgba(212, 175, 55, 0.05) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
+  .container {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 18px 16px;
+  }
 
-    .app-shell {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 440px;
-      background: var(--burgundy-card);
-      border: 2px solid var(--gold-mid);
-      border-radius: 28px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), inset 0 0 24px rgba(212, 175, 55, 0.15);
-      overflow: hidden;
-    }
+  /* Section Views */
+  .view-section { display: none; }
+  .view-section.active { display: block; animation: fadeUp 0.35s ease; }
 
-    .header {
-      padding: 22px 20px 16px;
-      text-align: center;
-      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-      background: linear-gradient(180deg, rgba(212, 175, 55, 0.12), transparent);
-    }
+  /* Sovereign Pass Card */
+  .pass-card {
+    background: linear-gradient(145deg, rgba(64, 12, 27, 0.95), rgba(24, 3, 9, 0.98));
+    border: 1.5px solid var(--gold);
+    border-radius: 20px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.65), inset 0 0 24px rgba(212, 175, 55, 0.14);
+    position: relative;
+    overflow: hidden;
+  }
+  body.emerald-mode .pass-card {
+    background: linear-gradient(145deg, rgba(9, 62, 46, 0.95), rgba(3, 23, 17, 0.98));
+  }
+  .emblem-hero {
+    width: 148px;
+    height: 148px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-bright);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.38);
+    object-fit: cover;
+    margin: 0 auto 14px;
+    display: block;
+  }
+  .ra-badge {
+    display: inline-block;
+    letter-spacing: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    color: var(--gold-bright);
+    border: 1px solid var(--card-border);
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+    background: rgba(0,0,0,0.28);
+  }
+  .club-title {
+    margin: 4px 0 2px;
+    font-size: 27px;
+    color: #fff;
+    letter-spacing: 0.8px;
+  }
+  .club-sub {
+    margin: 0 0 14px;
+    font-size: 14px;
+    color: var(--gold-bright);
+    letter-spacing: 1px;
+  }
+  .member-tier {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .member-id {
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    color: var(--gold-bright);
+    background: rgba(0,0,0,0.35);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(212,175,55,0.28);
+  }
+  .pass-footer {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(212, 175, 55, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+  .status-active {
+    color: #34d399;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
 
-    .crest-avatar {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      border: 2px solid var(--gold-light);
-      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
+  /* Section Headings & Cards */
+  .section-heading {
+    margin: 24px 0 12px;
+    font-size: 14px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+    padding-bottom: 6px;
+  }
+  .item-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 15px 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .item-info h4 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    color: #fff;
+  }
+  .item-info p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+  .gold-btn {
+    background: linear-gradient(135deg, #f3d27a, #c89d2c);
+    color: #1d050b;
+    border: none;
+    border-radius: 10px;
+    padding: 9px 15px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    font-family: inherit;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+  }
+  .gold-btn.confirmed {
+    background: linear-gradient(135deg, #34d399, #059669);
+    color: #fff;
+  }
 
-    .ra-badge {
-      display: inline-block;
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 700;
-      font-size: 0.78rem;
-      letter-spacing: 3px;
-      color: var(--burgundy-deep);
-      background: linear-gradient(135deg, var(--gold-light), var(--gold-mid));
-      padding: 4px 14px;
-      border-radius: 20px;
-      margin-bottom: 8px;
-      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
-    }
+  /* Booking Controls */
+  .slot-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .slot-chip {
+    background: rgba(0,0,0,0.32);
+    border: 1px solid var(--card-border);
+    color: var(--text-main);
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .slot-chip.active {
+    background: var(--gold);
+    color: #1b040a;
+    font-weight: bold;
+  }
 
-    .brand-title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: var(--gold-light);
-    }
+  /* Log Banner */
+  .concierge-log {
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-top: 16px;
+    font-size: 12.5px;
+    color: #a7f3d0;
+    display: none;
+  }
+  .concierge-log.visible { display: block; }
 
-    .brand-sub {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
+  /* Intro Customizer Box */
+  .intro-custom-box {
+    margin-top: 18px;
+    background: rgba(0,0,0,0.28);
+    border: 1px dashed var(--card-border);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: center;
+  }
+  .intro-custom-box p {
+    margin: 0 0 10px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
 
-    .view { display: none; padding: 20px; animation: fadeIn 0.3s ease; }
-    .view.active { display: block; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .member-card {
-      position: relative;
-      border-radius: 20px;
-      padding: 22px;
-      background: linear-gradient(135deg, #3c0615 0%, #1d0209 100%);
-      border: 1.5px solid var(--gold-mid);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      margin-bottom: 20px;
-    }
-
-    .card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-    }
-
-    .crest-icon { width: 48px; height: 48px; }
-
-    .emerald-trio { display: flex; gap: 8px; }
-
-    .emerald-gem {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #5effb8, var(--emerald) 60%, #054d2e);
-      border: 1.5px solid var(--gold-light);
-      box-shadow: 0 0 10px var(--emerald-glow);
-    }
-
-    .member-name {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.15rem;
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
-
-    .member-tier {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-top: 20px;
-      padding-top: 12px;
-      border-top: 1px dashed rgba(212, 175, 55, 0.35);
-      font-size: 0.75rem;
-    }
-
-    .status-pill {
-      color: #5effb8;
-      background: rgba(15, 169, 104, 0.15);
-      border: 1px solid var(--emerald);
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-weight: 600;
-    }
-
-    .section-title {
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 0.95rem;
-      color: var(--gold-light);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-title::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(to right, var(--gold-mid), transparent);
-    }
-
-    .list-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: 14px;
-      padding: 14px;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .list-info h4 { font-size: 0.92rem; color: var(--text-cream); margin-bottom: 3px; }
-    .list-info p { font-size: 0.76rem; color: var(--text-muted); }
-
-    .btn-gold {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold-mid));
-      color: var(--burgundy-deep);
-      border: none;
-      padding: 8px 14px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.78rem;
-      cursor: pointer;
-    }
-
-    .btn-gold.reserved { background: var(--emerald); color: #fff; }
-
-    select, input {
-      width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      border-radius: 10px;
-      border: 1px solid var(--gold-mid);
-      background: rgba(24, 2, 8, 0.8);
-      color: var(--text-cream);
-      font-family: inherit;
-      font-size: 0.85rem;
-    }
-
-    .nav-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid rgba(212, 175, 55, 0.35);
-      background: #1c0209;
-    }
-
-    .nav-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      padding: 12px 4px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .nav-btn.active { color: var(--gold-light); background: rgba(212, 175, 55, 0.08); }
-    .nav-dot { width: 6px; height: 6px; border-radius: 50%; background: transparent; }
-    .nav-btn.active .nav-dot { background: var(--emerald); box-shadow: 0 0 8px var(--emerald); }
-
-    #toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: #170208;
-      border: 1px solid var(--emerald);
-      color: var(--text-cream);
-      padding: 10px 18px;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.8);
-      transition: transform 0.3s ease;
-      z-index: 99;
-    }
-    #toast.show { transform: translateX(-50%) translateY(0); }
-  </style>
+  /* Bottom Nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: rgba(20, 2, 7, 0.96);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--card-border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 6px 12px;
+  }
+  body.emerald-mode .bottom-nav { background: rgba(2, 18, 13, 0.96); }
+  .nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 10.5px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .nav-btn.active {
+    color: var(--gold-bright);
+    font-weight: bold;
+  }
+  .nav-icon { font-size: 18px; }
+</style>
 </head>
 <body>
-  <div class="app-shell">
-    <header class="header">
-      <img src="emblem.png" alt="Mevunai Moment Emblem" class="crest-avatar" />
-      <div><span class="ra-badge">RA 109</span></div>
-      <h1 class="brand-title">Mevunai Moment™</h1>
-      <p class="brand-sub">Country Club, Inc. ®</p>
-    </header>
 
-    <section id="view-pass" class="view active">
-      <div class="member-card">
-        <div class="card-top">
-          <svg class="crest-icon" viewBox="0 0 64 64" fill="none">
-            <circle cx="32" cy="32" r="30" stroke="#d4af37" stroke-width="2" stroke-dasharray="6 3"/>
-            <polygon points="32,12 16,42 48,42" stroke="#f3d479" stroke-width="2.2" fill="rgba(212,175,55,0.12)"/>
-            <line x1="22" y1="30" x2="42" y2="30" stroke="#d4af37" stroke-width="1.5"/>
-            <line x1="26" y1="22" x2="38" y2="22" stroke="#d4af37" stroke-width="1.5"/>
-            <path d="M26 42 V50 M32 42 V54 M38 42 V49" stroke="#d4af37" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-          <div class="emerald-trio">
-            <span class="emerald-gem"></span>
-            <span class="emerald-gem"></span>
-            <span class="emerald-gem"></span>
-          </div>
-        </div>
-        <div class="member-name">Founding Sovereign Member</div>
-        <div class="member-tier">ID: MMCC-RA109-001 • ALL-ACCESS</div>
-        <div class="card-footer">
-          <span>VALID THROUGH 2027</span>
-          <span class="status-pill">● ACTIVE</span>
-        </div>
-      </div>
-
-      <h3 class="section-title">Clubhouse Privileges</h3>
-      <div class="list-card">
-        <div class="list-info">
-          <h4>Emerald Sanctuary Spa</h4>
-          <p>Complimentary thermal suite access</p>
-        </div>
-        <button class="btn-gold" onclick="showToast('Digital Pass scanned for Sanctuary Spa')">Check In</button>
-      </div>
-      <div class="list-card">
-        <div class="list-info">
-          <h4>RA 109 Private Lounge</h4>
-          <p>Evening dress code • Valet ready</p>
-        </div>
-        <button class="btn-gold" onclick="showToast('Valet & Lounge notified of your arrival')">Notify</button>
-      </div>
-    </section>
-
-    <section id="view-book" class="view">
-      <h3 class="section-title">Reserve Tee Time or Court</h3>
-      <select id="amenitySelect">
-        <option value="Championship Golf - 18 Holes">Championship Golf — 18 Holes</option>
-        <option value="Royal Clay Tennis Court 1">Royal Clay Tennis — Court 1</option>
-        <option value="Emerald Padel Pavilion">Emerald Padel Pavilion</option>
-      </select>
-      <input type="date" id="bookingDate" />
-      <div id="slotsContainer"></div>
-    </section>
-
-    <section id="view-dining" class="view">
-      <h3 class="section-title">The Crimson Silk Dining Room</h3>
-      <div class="list-card">
-        <div class="list-info">
-          <h4>Gold-Leaf Wagyu Ribeye</h4>
-          <p>Truffle reduction, roasted marrow • $95</p>
-        </div>
-        <button class="btn-gold" onclick="showToast('Added Wagyu Ribeye to table pre-order')">Order</button>
-      </div>
-      <div class="list-card">
-        <div class="list-info">
-          <h4>Emerald Reserve Martini</h4>
-          <p>Botanical gin, dry vermouth, olive oil • $24</p>
-        </div>
-        <button class="btn-gold" onclick="showToast('Added Emerald Martini to table pre-order')">Order</button>
-      </div>
-      <div class="list-card">
-        <div class="list-info">
-          <h4>Saffron & Pistachio Baklava</h4>
-          <p>24k gold dust, wildflower honey • $19</p>
-        </div>
-        <button class="btn-gold" onclick="showToast('Added Baklava to table pre-order')">Order</button>
-      </div>
-    </section>
-
-    <section id="view-events" class="view">
-      <h3 class="section-title">Exclusive Gatherings</h3>
-      <div class="list-card">
-        <div class="list-info">
-          <h4>RA 109 Annual Gala</h4>
-          <p>Dec 18 • Grand Ballroom • Black Tie</p>
-        </div>
-        <button class="btn-gold" onclick="toggleRsvp(this, 'RA 109 Annual Gala')">RSVP</button>
-      </div>
-      <div class="list-card">
-        <div class="list-info">
-          <h4>Midnight Emerald Cigar & Jazz</h4>
-          <p>Dec 24 • Rooftop Terrace</p>
-        </div>
-        <button class="btn-gold" onclick="toggleRsvp(this, 'Midnight Emerald Jazz')">RSVP</button>
-      </div>
-    </section>
-
-    <nav class="nav-bar">
-      <button class="nav-btn active" onclick="switchTab('pass', this)"><span>PASS</span><span class="nav-dot"></span></button>
-      <button class="nav-btn" onclick="switchTab('book', this)"><span>BOOK</span><span class="nav-dot"></span></button>
-      <button class="nav-btn" onclick="switchTab('dining', this)"><span>DINING</span><span class="nav-dot"></span></button>
-      <button class="nav-btn" onclick="switchTab('events', this)"><span>EVENTS</span><span class="nav-dot"></span></button>
-    </nav>
+<!-- Cinematic Splash Intro -->
+<div id="splash-intro">
+  <video id="intro-video-el" playsinline muted></video>
+  <div class="intro-overlay-ui">
+    <div class="intro-ring">
+      <img src="./emblem.png" alt="Mevunai Moment RA 109 Emblem" />
+    </div>
+    <div class="intro-tag">RA 109 • SOVEREIGN ACCESS</div>
+    <h1 class="intro-title">Mevunai Moment™</h1>
+    <div class="intro-sub">Country Club, Inc. ®</div>
+    <div class="intro-bar"><div class="intro-bar-fill"></div></div>
+    <button class="skip-btn" onclick="dismissIntro()">Enter Portal</button>
   </div>
+</div>
 
-  <div id="toast"></div>
+<!-- Top Header -->
+<header class="topbar">
+  <div class="brand-mini">
+    <img src="./emblem.png" alt="RA 109" />
+    <span>RA 109 PORTAL</span>
+  </div>
+  <div class="top-actions">
+    <button class="pill-btn" onclick="replayIntro()">▶ Intro</button>
+    <button class="pill-btn" id="theme-toggle" onclick="toggleTheme()">Emerald</button>
+  </div>
+</header>
 
-  <script>
-    const dateInput = document.getElementById('bookingDate');
-    const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
-    dateInput.value = tomorrow;
+<main class="container">
 
-    const timeSlots = ['08:00 AM', '10:30 AM', '02:00 PM', '04:30 PM'];
+  <!-- TAB 1: PASS & PRIVILEGES -->
+  <section id="view-pass" class="view-section active">
+    <div class="pass-card">
+      <img class="emblem-hero" src="./emblem.png" alt="Mevunai Moment Emblem" />
+      <div class="ra-badge">RA 109</div>
+      <h1 class="club-title">Mevunai Moment™</h1>
+      <div class="club-sub">Country Club, Inc. ®</div>
+      <div class="member-tier">Founding Sovereign Member</div>
+      <div class="member-id">ID: MMCC-RA109-001 • ALL-ACCESS</div>
+      <div class="pass-footer">
+        <span>VALID THROUGH 2027</span>
+        <span class="status-active">● ACTIVE</span>
+      </div>
+    </div>
 
-    function renderSlots() {
-      const container = document.getElementById('slotsContainer');
-      const amenity = document.getElementById('amenitySelect').value;
-      container.innerHTML = timeSlots.map(time => `
-        <div class="list-card">
-          <div class="list-info">
-            <h4>${time}</h4>
-            <p>${amenity}</p>
-          </div>
-          <button class="btn-gold" onclick="bookSlot(this, '${time}')">Reserve</button>
-        </div>
-      `).join('');
+    <div id="concierge-banner" class="concierge-log"></div>
+
+    <h3 class="section-heading">Clubhouse Privileges</h3>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Emerald Sanctuary Spa</h4>
+        <p>Complimentary thermal suite access</p>
+      </div>
+      <button class="gold-btn" onclick="triggerAction(this, 'Emerald Sanctuary Spa — Thermal suite check-in registered for RA 109.')">Check In</button>
+    </div>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>RA 109 Private Lounge</h4>
+        <p>Evening dress code • Valet ready</p>
+      </div>
+      <button class="gold-btn" onclick="triggerAction(this, 'RA 109 Private Lounge & Valet notified of your arrival.')">Notify</button>
+    </div>
+
+    <div class="intro-custom-box">
+      <p><strong>Cinematic Intro Customizer:</strong> Play the built-in RA 109 gold chime intro or upload your own MP4 intro clip.</p>
+      <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+        <button class="pill-btn" onclick="replayIntro()">▶ Replay Cinematic Intro</button>
+        <label class="pill-btn" style="cursor:pointer;">
+          🎬 Set Custom MP4 Intro
+          <input type="file" accept="video/mp4,video/quicktime,video/webm" style="display:none;" onchange="saveCustomIntro(event)" />
+        </label>
+        <button class="pill-btn" id="clear-intro-btn" style="display:none;" onclick="clearCustomIntro()">↺ Default Crest Intro</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: BOOK TEE TIME OR COURT -->
+  <section id="view-book" class="view-section">
+    <h3 class="section-heading" style="margin-top:4px;">Reserve Tee Time or Court</h3>
+    <div class="slot-row" id="time-slots">
+      <button class="slot-chip active" onclick="selectSlot(this)">09:30 AM</button>
+      <button class="slot-chip" onclick="selectSlot(this)">11:15 AM</button>
+      <button class="slot-chip" onclick="selectSlot(this)">02:00 PM</button>
+      <button class="slot-chip" onclick="selectSlot(this)">04:45 PM</button>
+      <button class="slot-chip" onclick="selectSlot(this)">07:30 PM (Floodlit)</button>
+    </div>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Championship Golf — 18 Holes</h4>
+        <p>Private caddie &amp; gold-trimmed cart staged</p>
+      </div>
+      <button class="gold-btn" onclick="bookVenue(this, 'Championship Golf — 18 Holes')">Reserve</button>
+    </div>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Royal Clay Tennis — Court 1</h4>
+        <p>Center stadium court • Fresh balls &amp; chilled towels</p>
+      </div>
+      <button class="gold-btn" onclick="bookVenue(this, 'Royal Clay Tennis — Court 1')">Reserve</button>
+    </div>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Emerald Padel Pavilion</h4>
+        <p>Panoramic glass court • Private lounge terrace</p>
+      </div>
+      <button class="gold-btn" onclick="bookVenue(this, 'Emerald Padel Pavilion')">Reserve</button>
+    </div>
+
+    <div id="book-log" class="concierge-log"></div>
+  </section>
+
+  <!-- TAB 3: THE CRIMSON SILK DINING ROOM -->
+  <section id="view-dining" class="view-section">
+    <h3 class="section-heading" style="margin-top:4px;">The Crimson Silk Dining Room</h3>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Gold-Leaf Wagyu Ribeye</h4>
+        <p>Truffle reduction, roasted marrow • <strong>$95</strong></p>
+      </div>
+      <button class="gold-btn" onclick="orderItem(this, 'Gold-Leaf Wagyu Ribeye ($95)')">Order</button>
+    </div>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Emerald Reserve Martini</h4>
+        <p>Botanical gin, dry vermouth, olive oil • <strong>$24</strong></p>
+      </div>
+      <button class="gold-btn" onclick="orderItem(this, 'Emerald Reserve Martini ($24)')">Order</button>
+    </div>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Saffron &amp; Pistachio Baklava</h4>
+        <p>24k gold dust, wildflower honey • <strong>$19</strong></p>
+      </div>
+      <button class="gold-btn" onclick="orderItem(this, 'Saffron & Pistachio Baklava ($19)')">Order</button>
+    </div>
+
+    <div id="dining-log" class="concierge-log"></div>
+  </section>
+
+  <!-- TAB 4: EXCLUSIVE GATHERINGS -->
+  <section id="view-events" class="view-section">
+    <h3 class="section-heading" style="margin-top:4px;">Exclusive Gatherings</h3>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>RA 109 Annual Gala</h4>
+        <p>Dec 18 • Grand Ballroom • Black Tie</p>
+      </div>
+      <button class="gold-btn" onclick="rsvpEvent(this, 'RA 109 Annual Gala (Dec 18)')">RSVP</button>
+    </div>
+
+    <div class="item-card">
+      <div class="item-info">
+        <h4>Midnight Emerald Cigar &amp; Jazz</h4>
+        <p>Dec 24 • Rooftop Terrace</p>
+      </div>
+      <button class="gold-btn" onclick="rsvpEvent(this, 'Midnight Emerald Cigar & Jazz (Dec 24)')">RSVP</button>
+    </div>
+
+    <div id="events-log" class="concierge-log"></div>
+  </section>
+
+</main>
+
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <button class="nav-btn active" onclick="switchTab('pass', this)">
+    <span class="nav-icon">👑</span>
+    <span>PASS</span>
+  </button>
+  <button class="nav-btn" onclick="switchTab('book', this)">
+    <span class="nav-icon">⛳</span>
+    <span>BOOK</span>
+  </button>
+  <button class="nav-btn" onclick="switchTab('dining', this)">
+    <span class="nav-icon">🥂</span>
+    <span>DINING</span>
+  </button>
+  <button class="nav-btn" onclick="switchTab('events', this)">
+    <span class="nav-icon">✨</span>
+    <span>EVENTS</span>
+  </button>
+</nav>
+
+<script>
+  let selectedSlot = '09:30 AM';
+  let introTimer = null;
+  let customVideoBlobUrl = null;
+
+  // Subtle Sovereign Gold Chime using Web Audio API
+  function playSovereignChime() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const notes = [293.66, 440.00, 554.37, 659.25];
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.14);
+        gain.gain.setValueAtTime(0.001, ctx.currentTime + idx * 0.14);
+        gain.gain.exponentialRampToValueAtTime(0.06, ctx.currentTime + idx * 0.14 + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + idx * 0.14 + 1.8);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + idx * 0.14);
+        osc.stop(ctx.currentTime + idx * 0.14 + 1.9);
+      });
+    } catch (e) {}
+  }
+
+  function startIntroSequence() {
+    const splash = document.getElementById('splash-intro');
+    const vid = document.getElementById('intro-video-el');
+    const fill = splash.querySelector('.intro-bar-fill');
+    splash.classList.remove('hidden');
+
+    if (fill) {
+      fill.style.animation = 'none';
+      void fill.offsetWidth;
+      fill.style.animation = 'loadProgress 3.6s linear forwards';
     }
 
-    function bookSlot(btn, time) {
-      const amenity = document.getElementById('amenitySelect').value;
-      btn.textContent = 'Booked ✓';
-      btn.classList.add('reserved');
-      showToast(`Confirmed: ${amenity} at ${time}`);
+    if (customVideoBlobUrl) {
+      vid.src = customVideoBlobUrl;
+      vid.style.display = 'block';
+      vid.currentTime = 0;
+      vid.play().catch(() => {});
+      vid.onended = () => dismissIntro();
+      clearTimeout(introTimer);
+      introTimer = setTimeout(dismissIntro, 8000);
+    } else {
+      vid.style.display = 'none';
+      playSovereignChime();
+      clearTimeout(introTimer);
+      introTimer = setTimeout(dismissIntro, 3700);
     }
+  }
 
-    function toggleRsvp(btn, eventName) {
-      if (btn.classList.contains('reserved')) {
-        btn.classList.remove('reserved');
-        btn.textContent = 'RSVP';
-        showToast(`Cancelled RSVP for ${eventName}`);
-      } else {
-        btn.classList.add('reserved');
-        btn.textContent = 'Attending ✓';
-        showToast(`VIP Seat reserved for ${eventName}`);
-      }
+  function dismissIntro() {
+    clearTimeout(introTimer);
+    const splash = document.getElementById('splash-intro');
+    const vid = document.getElementById('intro-video-el');
+    if (vid) { vid.pause(); }
+    splash.classList.add('hidden');
+  }
+
+  function replayIntro() {
+    startIntroSequence();
+  }
+
+  // IndexedDB for Custom Intro Video
+  function openIntroDB() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open('MMCC_RA109_IntroDB', 1);
+      req.onupgradeneeded = (e) => {
+        e.target.result.createObjectStore('introStore');
+      };
+      req.onsuccess = (e) => resolve(e.target.result);
+      req.onerror = (e) => reject(e);
+    });
+  }
+
+  async function loadStoredIntroVideo() {
+    try {
+      const db = await openIntroDB();
+      const tx = db.transaction('introStore', 'readonly');
+      const req = tx.objectStore('introStore').get('customIntro');
+      req.onsuccess = () => {
+        if (req.result) {
+          customVideoBlobUrl = URL.createObjectURL(req.result);
+          document.getElementById('clear-intro-btn').style.display = 'inline-block';
+        }
+        startIntroSequence();
+      };
+      req.onerror = () => startIntroSequence();
+    } catch (e) {
+      startIntroSequence();
     }
+  }
 
-    function switchTab(viewId, el) {
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById('view-' + viewId).classList.add('active');
-      el.classList.add('active');
+  async function saveCustomIntro(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    try {
+      const db = await openIntroDB();
+      const tx = db.transaction('introStore', 'readwrite');
+      tx.objectStore('introStore').put(file, 'customIntro');
+      tx.oncomplete = () => {
+        if (customVideoBlobUrl) URL.revokeObjectURL(customVideoBlobUrl);
+        customVideoBlobUrl = URL.createObjectURL(file);
+        document.getElementById('clear-intro-btn').style.display = 'inline-block';
+        startIntroSequence();
+      };
+    } catch (e) {
+      customVideoBlobUrl = URL.createObjectURL(file);
+      startIntroSequence();
     }
+  }
 
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2800);
-    }
+  async function clearCustomIntro() {
+    try {
+      const db = await openIntroDB();
+      const tx = db.transaction('introStore', 'readwrite');
+      tx.objectStore('introStore').delete('customIntro');
+    } catch (e) {}
+    if (customVideoBlobUrl) URL.revokeObjectURL(customVideoBlobUrl);
+    customVideoBlobUrl = null;
+    document.getElementById('clear-intro-btn').style.display = 'none';
+    startIntroSequence();
+  }
 
-    document.getElementById('amenitySelect').addEventListener('change', renderSlots);
-    renderSlots();
-  </script>
+  function switchTab(tabName, btn) {
+    document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('view-' + tabName).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleTheme() {
+    const isEmerald = document.body.classList.toggle('emerald-mode');
+    document.getElementById('theme-toggle').textContent = isEmerald ? 'Crimson' : 'Emerald';
+  }
+
+  function showLog(id, message) {
+    const el = document.getElementById(id);
+    el.textContent = '✓ ' + message;
+    el.classList.add('visible');
+  }
+
+  function triggerAction(btn, msg) {
+    btn.textContent = 'Confirmed ✓';
+    btn.classList.add('confirmed');
+    showLog('concierge-banner', msg);
+  }
+
+  function selectSlot(chip) {
+    document.querySelectorAll('#time-slots .slot-chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    selectedSlot = chip.textContent;
+  }
+
+  function bookVenue(btn, venue) {
+    btn.textContent = 'Booked ✓';
+    btn.classList.add('confirmed');
+    showLog('book-log', venue + ' reserved for ' + selectedSlot + ' under Member MMCC-RA109-001.');
+  }
+
+  function orderItem(btn, item) {
+    btn.textContent = 'Ordered ✓';
+    btn.classList.add('confirmed');
+    showLog('dining-log', item + ' dispatched to The Crimson Silk Dining Room for RA 109.');
+  }
+
+  function rsvpEvent(btn, evName) {
+    btn.textContent = 'Confirmed ✓';
+    btn.classList.add('confirmed');
+    showLog('events-log', 'VIP Sovereign seating confirmed for ' + evName + '.');
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+
+  window.addEventListener('DOMContentLoaded', loadStoredIntroVideo);
+</script>
 </body>
 </html>
