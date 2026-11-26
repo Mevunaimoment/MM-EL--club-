@@ -3,1085 +3,1060 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Mevunai Moment™ Country Club, Inc ® — 13-Department Sovereign Portal</title>
-<link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#3a0710" />
-<link rel="apple-touch-icon" href="master-icon.png" />
+<title>Mevunai Moment™ Country Club, Inc. ® — RA 109</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" type="image/png" href="./emblem.png" />
+<meta name="theme-color" content="#4a0816" />
 <style>
   :root {
-    --bg-deep: #1e0308;
-    --bg-mid: #3a0710;
-    --card-bg: rgba(45, 7, 15, 0.88);
-    --card-border: rgba(212, 175, 55, 0.45);
+    --bg: #180308;
+    --bg2: #2d0610;
+    --card: rgba(42, 8, 17, 0.92);
     --gold: #d4af37;
-    --gold-bright: #f7df8b;
-    --gold-dim: #9e7d22;
-    --emerald: #0f5132;
-    --emerald-bright: #198754;
-    --text-main: #fdf8eb;
-    --text-muted: #d8c7a3;
+    --gold-light: #f6e299;
+    --emerald: #0f5c45;
+    --text: #fdf6e7;
+    --muted: #cbb799;
+    --border: rgba(212, 175, 55, 0.45);
   }
   body.emerald-theme {
-    --bg-deep: #041c12;
-    --bg-mid: #0a3624;
-    --card-bg: rgba(7, 39, 26, 0.9);
-    --card-border: rgba(212, 175, 55, 0.5);
+    --bg: #041711;
+    --bg2: #0a2e22;
+    --card: rgba(9, 41, 31, 0.92);
+    --border: rgba(212, 175, 55, 0.55);
   }
-  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Georgia, 'Times New Roman', serif; }
   body {
-    margin: 0;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    background: radial-gradient(circle at top, var(--bg-mid), var(--bg-deep) 78%);
-    color: var(--text-main);
+    background: radial-gradient(circle at top, var(--bg2), var(--bg) 75%);
+    color: var(--text);
     min-height: 100vh;
-    padding-bottom: 145px;
+    padding-bottom: 84px;
     overflow-x: hidden;
   }
-  /* Top Header */
-  .topbar {
+  .gold-btn {
+    background: linear-gradient(135deg, #b88a1e, #f2d479, #b88a1e);
+    color: #1c050a;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 16px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(212,175,55,0.3);
+  }
+  .ghost-btn {
+    background: rgba(255,255,255,0.06);
+    color: var(--gold-light);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  header {
     position: sticky;
     top: 0;
     z-index: 40;
-    background: linear-gradient(180deg, rgba(22, 2, 6, 0.96), rgba(38, 6, 12, 0.92));
-    border-bottom: 1px solid var(--card-border);
+    background: rgba(24, 3, 8, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
     padding: 10px 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    backdrop-filter: blur(10px);
   }
-  body.emerald-theme .topbar {
-    background: linear-gradient(180deg, rgba(3, 22, 14, 0.96), rgba(8, 42, 28, 0.92));
-  }
-  .brand-wrap { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .brand-logo {
-    width: 38px; height: 38px; border-radius: 50%;
-    border: 1.5px solid var(--gold); object-fit: cover; flex-shrink: 0;
-    box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
-  }
-  .brand-title {
-    font-size: 13px; font-weight: bold; letter-spacing: 0.6px;
-    color: var(--gold-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .brand-sub {
-    font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase;
-  }
-  .top-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-  .btn-gold {
-    background: linear-gradient(135deg, #b88c1e, #f2d472, #a87b12);
-    color: #1c0508; border: none; border-radius: 20px;
-    padding: 6px 11px; font-size: 11px; font-weight: bold;
-    cursor: pointer; font-family: inherit; letter-spacing: 0.4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
-  }
-  .btn-outline {
-    background: rgba(212, 175, 55, 0.12);
-    color: var(--gold-bright);
-    border: 1px solid var(--card-border);
-    border-radius: 20px; padding: 6px 10px; font-size: 11px;
-    cursor: pointer; font-family: inherit;
-  }
-  /* Storage Lock Banner */
-  .storage-status-bar {
-    margin: 10px 14px 0;
-    padding: 8px 12px;
-    border-radius: 12px;
-    background: rgba(15, 81, 50, 0.25);
-    border: 1px solid rgba(25, 135, 84, 0.55);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    font-size: 11px;
-  }
-  .storage-badge { color: #75e6a8; font-weight: bold; }
-  .storage-detail { color: var(--text-muted); font-size: 10px; }
-  /* Commercial Billboard Stage */
-  .billboard-card {
-    margin: 12px 14px;
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand img { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--gold); object-fit: cover; }
+  .brand h1 { font-size: 13px; color: var(--gold-light); letter-spacing: 0.6px; }
+  .brand p { font-size: 10px; color: var(--muted); }
+  .header-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  main { max-width: 680px; margin: 0 auto; padding: 14px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  }
+  .section-title { font-size: 15px; color: var(--gold-light); margin-bottom: 10px; letter-spacing: 0.8px; text-transform: uppercase; }
+  .pass-card {
+    background: linear-gradient(145deg, #3c0815, #1b0309);
     border: 1.5px solid var(--gold);
-    background: #120205;
+    border-radius: 18px;
+    padding: 18px;
+    position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.65);
   }
-  .billboard-header {
-    padding: 8px 12px;
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.2), rgba(15, 81, 50, 0.25));
-    border-bottom: 1px solid var(--card-border);
-    display: flex; align-items: center; justify-content: space-between; gap: 6px;
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: bold;
+    background: rgba(15,92,69,0.45);
+    border: 1px solid #2ecc71;
+    color: #9ff7c4;
   }
-  .billboard-label { font-size: 11px; font-weight: bold; color: var(--gold-bright); letter-spacing: 1px; }
-  .stage-viewport {
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(212,175,55,0.18);
+    gap: 10px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row h3 { font-size: 14px; color: var(--gold-light); }
+  .row p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .tab-view { display: none; }
+  .tab-view.active { display: block; }
+  nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 40;
+    background: rgba(20, 2, 7, 0.96);
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 4px;
+  }
+  nav button {
+    background: none; border: none; color: var(--muted);
+    font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer;
+  }
+  nav button.active { color: var(--gold-light); font-weight: bold; }
+
+  /* Video Stage & Offline Folder */
+  .stage-box {
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
-    background: radial-gradient(circle, #380710, #0e0104);
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .stage-viewport video, .stage-viewport img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transform: translateZ(0);
-  }
-  .ken-burns { animation: kenBurns 8s ease-in-out infinite alternate; }
-  @keyframes kenBurns {
-    0% { transform: scale(1) translate(0, 0); }
-    100% { transform: scale(1.08) translate(-1%, -1%); }
-  }
-  .stage-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 55%, rgba(15,2,5,0.88) 100%);
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 12px 14px; pointer-events: none;
-  }
-  .stage-tag {
-    display: inline-block; width: fit-content;
-    background: rgba(212, 175, 55, 0.9); color: #1b0307;
-    font-size: 9px; font-weight: bold; padding: 2px 8px; border-radius: 10px;
-    letter-spacing: 1px; margin-bottom: 4px; text-transform: uppercase;
-  }
-  .stage-title { font-size: 15px; font-weight: bold; color: var(--gold-bright); text-shadow: 0 2px 6px #000; }
-  .stage-sub { font-size: 11px; color: var(--text-main); opacity: 0.9; }
-  .billboard-controls {
-    padding: 8px 10px;
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px;
-    background: rgba(26, 4, 9, 0.95);
-    border-top: 1px solid var(--card-border);
-  }
-  .ctrl-group { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
-  .ctrl-btn {
-    background: rgba(212, 175, 55, 0.14); border: 1px solid var(--card-border);
-    color: var(--gold-bright); border-radius: 8px; padding: 5px 8px;
-    font-size: 11px; cursor: pointer; font-family: inherit;
-  }
-  .ctrl-btn.active { background: var(--gold); color: #1a0307; font-weight: bold; }
-  /* Sections & Tabs */
-  .section { display: none; padding: 8px 14px; }
-  .section.active { display: block; }
-  .sec-head {
-    display: flex; align-items: center; justify-content: space-between;
-    margin: 8px 0 12px; border-bottom: 1px solid var(--card-border); padding-bottom: 6px;
-  }
-  .sec-head h2 { margin: 0; font-size: 15px; color: var(--gold-bright); letter-spacing: 1px; text-transform: uppercase; }
-  /* 13 Department Grid */
-  .dept-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 14px;
-  }
-  .dept-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    background: #0d0104;
+    border: 1.5px solid var(--gold);
     border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-    display: flex; flex-direction: column;
+    margin-bottom: 10px;
   }
-  .dept-media {
-    position: relative; width: 100%; height: 145px;
-    background: linear-gradient(135deg, #2d060e, #0d3b26);
+  .stage-box video, .stage-box img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  .controls-bar {
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between;
+    margin-top: 8px;
+  }
+  .scrubber { width: 100%; accent-color: var(--gold); margin: 6px 0; }
+  .folder-pills { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+  .pill {
+    padding: 5px 11px; border-radius: 999px; font-size: 11px;
+    border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--muted); cursor: pointer;
+  }
+  .pill.active { background: var(--gold); color: #1a0409; font-weight: bold; }
+
+  /* 13-Second Splash Intro */
+  #splashOverlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: radial-gradient(circle at center, #4b0918 0%, #140206 85%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px; text-align: center;
+    transition: opacity 0.9s ease;
+  }
+  #splashCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .splash-content { position: relative; z-index: 2; max-width: 440px; width: 100%; }
+  .splash-media {
+    width: 100%; max-height: 280px; object-fit: cover;
+    border-radius: 18px; border: 2px solid var(--gold);
+    box-shadow: 0 0 36px rgba(212,175,55,0.45);
+    animation: gentleFloat 4s ease-in-out infinite;
+  }
+  @keyframes gentleFloat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+  .progress-wrap {
+    width: 100%; height: 5px; background: rgba(255,255,255,0.12);
+    border-radius: 999px; overflow: hidden; margin: 14px 0 8px;
+  }
+  #splashBar { width: 0%; height: 100%; background: linear-gradient(90deg, #b88a1e, #f7e29c); }
+
+  /* 8-Second Delayed Full-Screen Fade-In / Fade-Out Sparkle Interlude */
+  #interludeOverlay {
+    position: fixed; inset: 0; z-index: 95;
+    background: #140206;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.4s ease-in-out;
+    align-items: center; justify-content: center;
     overflow: hidden;
   }
-  .dept-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .dept-num {
-    position: absolute; top: 8px; left: 8px;
-    background: rgba(20, 3, 6, 0.85); border: 1px solid var(--gold);
-    color: var(--gold-bright); font-size: 10px; font-weight: bold;
-    padding: 3px 8px; border-radius: 10px;
+  #interludeOverlay.visible { display: flex; }
+  #interludeOverlay.faded-in { opacity: 1; }
+  #interludeMedia {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    animation: interludeZoom 6.5s ease-in-out forwards;
   }
-  .swap-photo-btn {
-    position: absolute; bottom: 8px; right: 8px;
-    background: rgba(20, 3, 6, 0.88); border: 1px solid var(--gold);
-    color: var(--gold-bright); font-size: 10px; padding: 4px 8px;
-    border-radius: 10px; cursor: pointer;
+  @keyframes interludeZoom {
+    0% { transform: scale(1.0); }
+    100% { transform: scale(1.08); }
   }
-  .dept-body { padding: 12px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-  .dept-title { font-size: 15px; font-weight: bold; color: var(--gold-bright); margin: 0 0 4px; }
-  .dept-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; margin: 0 0 10px; }
-  .dept-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-  /* Sidebars (MP3 Vault & Commercial Billboard Vault) */
-  .drawer-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.72);
-    z-index: 80; display: none;
+  #interludeCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+  .interlude-skip {
+    position: absolute; bottom: 26px; right: 20px; z-index: 3;
+    background: rgba(20, 2, 7, 0.72); color: var(--gold-light);
+    border: 1px solid var(--gold); border-radius: 999px;
+    padding: 7px 14px; font-size: 11px; cursor: pointer;
   }
-  .drawer-backdrop.open { display: block; }
-  .side-drawer {
-    position: fixed; top: 0; bottom: 0; width: min(370px, 92vw);
-    background: linear-gradient(180deg, #24040a, #120205);
-    border-left: 1.5px solid var(--gold);
-    z-index: 90; padding: 14px; overflow-y: auto;
-    transition: transform 0.28s ease;
-    right: 0; transform: translateX(105%);
+
+  /* 4-Digit Padlock */
+  #padlockOverlay {
+    position: fixed; inset: 0; z-index: 90;
+    background: radial-gradient(circle at top, #3c0713, #120105 85%);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px;
   }
-  body.emerald-theme .side-drawer {
-    background: linear-gradient(180deg, #07291b, #03140d);
+  #padlockOverlay.open { display: flex; }
+  .pin-dots { display: flex; gap: 14px; margin: 16px 0; }
+  .pin-dot {
+    width: 15px; height: 15px; border-radius: 50%;
+    border: 1.5px solid var(--gold); background: transparent;
   }
-  .side-drawer.open { transform: translateX(0); }
-  .drawer-head {
-    display: flex; align-items: center; justify-content: space-between;
-    border-bottom: 1px solid var(--card-border); padding-bottom: 10px; margin-bottom: 12px;
+  .pin-dot.filled { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .keypad {
+    display: grid; grid-template-columns: repeat(3, 68px); gap: 12px; margin-top: 8px;
   }
-  .drawer-head h3 { margin: 0; font-size: 15px; color: var(--gold-bright); }
-  .vault-box {
-    background: rgba(212, 175, 55, 0.08);
-    border: 1px solid var(--card-border);
-    border-radius: 12px; padding: 10px; margin-bottom: 12px;
+  .key-btn {
+    height: 58px; border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    color: var(--gold-light); font-size: 20px; cursor: pointer;
   }
-  .vault-list { display: flex; flex-direction: column; gap: 8px; }
-  .vault-item {
-    background: rgba(0,0,0,0.35); border: 1px solid var(--card-border);
-    border-radius: 10px; padding: 8px 10px;
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  }
-  .vault-item-info { min-width: 0; flex: 1; }
-  .vault-item-title {
-    font-size: 12px; font-weight: bold; color: var(--gold-bright);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-  .vault-item-meta { font-size: 10px; color: var(--text-muted); }
-  /* Persistent Bottom Mini Player & Nav */
-  .mini-player {
-    position: fixed; left: 0; right: 0; bottom: 56px; z-index: 50;
-    background: linear-gradient(90deg, #1b0307, #33060f);
-    border-top: 1px solid var(--gold);
-    padding: 7px 12px;
-    display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  }
-  body.emerald-theme .mini-player {
-    background: linear-gradient(90deg, #041d13, #0a3825);
-  }
-  .disc-thumb {
-    width: 34px; height: 34px; border-radius: 50%;
-    border: 1.5px solid var(--gold); object-fit: cover;
-  }
-  .disc-thumb.spinning { animation: spin 7s linear infinite; }
-  @keyframes spin { 100% { transform: rotate(360deg); } }
-  .bottom-nav {
-    position: fixed; left: 0; right: 0; bottom: 0; height: 56px; z-index: 60;
-    background: #140205; border-top: 1px solid var(--card-border);
-    display: grid; grid-template-columns: repeat(4, 1fr);
-  }
-  body.emerald-theme .bottom-nav { background: #03150e; }
-  .nav-btn {
-    background: none; border: none; color: var(--text-muted);
-    font-family: inherit; font-size: 10px; cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
-  }
-  .nav-btn.active { color: var(--gold-bright); font-weight: bold; }
-  /* Modal */
-  .modal-back {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 100;
-    display: none; align-items: center; justify-content: center; padding: 16px;
-  }
-  .modal-back.open { display: flex; }
-  .modal-card {
-    background: #23040a; border: 1.5px solid var(--gold); border-radius: 16px;
-    max-width: 460px; width: 100%; padding: 16px; max-height: 88vh; overflow-y: auto;
-  }
-  input[type="text"], select {
-    width: 100%; padding: 8px 10px; border-radius: 8px;
-    border: 1px solid var(--card-border); background: rgba(0,0,0,0.45);
-    color: var(--text-main); font-family: inherit; font-size: 12px; margin-bottom: 8px;
-  }
-  .vip-card {
-    background: linear-gradient(135deg, #2d060e, #590d1c 50%, #1d0308);
-    border: 2px solid var(--gold); border-radius: 16px; padding: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
-  }
-  body.emerald-theme .vip-card {
-    background: linear-gradient(135deg, #062619, #0e4f34 50%, #03160e);
+  .key-btn:active { background: var(--gold); color: #180308; }
+  .toast {
+    position: fixed; top: 68px; left: 50%; transform: translateX(-50%);
+    background: #140206; border: 1px solid var(--gold); color: var(--gold-light);
+    padding: 8px 16px; border-radius: 999px; font-size: 12px; z-index: 120;
+    display: none;
   }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="brand-wrap">
-    <img src="master-icon.png" alt="MMCC Crest" class="brand-logo" onerror="this.style.display='none'" />
-    <div>
-      <div class="brand-title">Mevunai Moment™ Country Club, Inc ®</div>
-      <div class="brand-sub">13 Sovereign Departments • M'M™</div>
+<div id="toast" class="toast"></div>
+
+<!-- 13-SECOND MAIN SPLASH INTRO -->
+<div id="splashOverlay">
+  <canvas id="splashCanvas"></canvas>
+  <div class="splash-content">
+    <img id="splashImg" class="splash-media" src="./intro-banner.png" alt="Mevunai Moment Crown" />
+    <video id="splashVid" class="splash-media" style="display:none;" playsinline muted></video>
+    <h2 style="color:var(--gold-light); font-size:17px; margin-top:14px; letter-spacing:1.2px;">MEVUNAI MOMENT™ COUNTRY CLUB, INC. ®</h2>
+    <p id="splashTimerText" style="color:var(--muted); font-size:12px; margin-top:4px;">Sovereign RA 109 Portal • 13.0s</p>
+    <div class="progress-wrap"><div id="splashBar"></div></div>
+    <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+      <button class="ghost-btn" onclick="playGoldChime()">🔊 Gold Chime</button>
+      <label class="ghost-btn" style="cursor:pointer;">
+        🎬 Custom MP4 Intro
+        <input type="file" accept="video/*" style="display:none;" onchange="uploadCustomMedia(event, 'customIntro')" />
+      </label>
+      <button class="gold-btn" onclick="finishIntro()">Enter Portal →</button>
     </div>
   </div>
-  <div class="top-actions">
-    <button class="btn-outline" onclick="openDrawer('billboard')">📺 Billboard</button>
-    <button class="btn-gold" onclick="openDrawer('mp3')">🎵 MP3 Vault</button>
-    <button class="btn-outline" onclick="toggleTheme()">💎</button>
+</div>
+
+<!-- 8-SECOND DELAYED FULL-SCREEN FADE-IN / FADE-OUT SPARKLE INTERLUDE -->
+<div id="interludeOverlay">
+  <img id="interludeMedia" src="./crown-interlude.png" alt="M'M Country Club Crown" />
+  <video id="interludeVideo" style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" playsinline muted></video>
+  <canvas id="interludeCanvas"></canvas>
+  <button class="interlude-skip" onclick="hideInterlude()">Skip ✨</button>
+</div>
+
+<!-- 4-DIGIT SOVEREIGN VAULT PADLOCK -->
+<div id="padlockOverlay">
+  <img src="./emblem.png" style="width:74px; height:74px; border-radius:50%; border:2px solid var(--gold); margin-bottom:10px;" alt="Crest" />
+  <h2 style="color:var(--gold-light); font-size:16px; letter-spacing:1px;">SOVEREIGN VAULT PADLOCK</h2>
+  <p id="pinPrompt" style="color:var(--muted); font-size:12px; margin-top:4px;">Enter 4-Digit PIN (Default: 1325)</p>
+  <div class="pin-dots">
+    <div class="pin-dot" id="dot0"></div>
+    <div class="pin-dot" id="dot1"></div>
+    <div class="pin-dot" id="dot2"></div>
+    <div class="pin-dot" id="dot3"></div>
+  </div>
+  <div class="keypad">
+    <button class="key-btn" onclick="pressKey('1')">1</button>
+    <button class="key-btn" onclick="pressKey('2')">2</button>
+    <button class="key-btn" onclick="pressKey('3')">3</button>
+    <button class="key-btn" onclick="pressKey('4')">4</button>
+    <button class="key-btn" onclick="pressKey('5')">5</button>
+    <button class="key-btn" onclick="pressKey('6')">6</button>
+    <button class="key-btn" onclick="pressKey('7')">7</button>
+    <button class="key-btn" onclick="pressKey('8')">8</button>
+    <button class="key-btn" onclick="pressKey('9')">9</button>
+    <button class="key-btn" style="font-size:12px;" onclick="clearPin()">CLR</button>
+    <button class="key-btn" onclick="pressKey('0')">0</button>
+    <button class="key-btn" style="font-size:12px;" onclick="backspacePin()">⌫</button>
+  </div>
+</div>
+
+<header>
+  <div class="brand">
+    <img src="./emblem.png" alt="Logo" />
+    <div>
+      <h1>Mevunai Moment™</h1>
+      <p>Country Club, Inc. ® • RA 109</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="ghost-btn" onclick="replayIntro()">▶ 13s Intro</button>
+    <button class="ghost-btn" onclick="triggerInterlude()">✨ Interlude</button>
+    <button class="ghost-btn" onclick="toggleTheme()">Emerald / Silk</button>
+    <button class="ghost-btn" onclick="lockVault()">🔒 Lock</button>
   </div>
 </header>
 
-<!-- Permanent Storage Lock Status Bar -->
-<div class="storage-status-bar">
-  <div>
-    <div class="storage-badge" id="persistStatus">🔒 Checking Permanent Storage Lock...</div>
-    <div class="storage-detail" id="storageQuotaText">All uploaded videos, MP3s & photos save directly to IndexedDB offline storage.</div>
-  </div>
-  <button class="ctrl-btn" onclick="requestPermanentLock(true)">Verify Lock</button>
-</div>
+<main>
+  <!-- TAB 1: PASS -->
+  <section id="tab-pass" class="tab-view active">
+    <div class="pass-card">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div>
+          <p style="font-size:10px; color:var(--gold); letter-spacing:1.2px;">FOUNDING SOVEREIGN MEMBER</p>
+          <h2 style="font-size:19px; color:var(--gold-light); margin:4px 0;">ID: MMCC-RA109-001</h2>
+          <p style="font-size:11px; color:var(--muted);">ALL-ACCESS • VALID THROUGH 2027</p>
+        </div>
+        <span class="badge">● ACTIVE</span>
+      </div>
+      <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="ghost-btn" onclick="startPinChange()">🔑 Change 4-Digit PIN</button>
+        <label class="ghost-btn" style="cursor:pointer;">
+          🎬 Replace Interlude Media
+          <input type="file" accept="image/*,video/*" style="display:none;" onchange="uploadCustomMedia(event, 'customInterlude')" />
+        </label>
+        <button class="ghost-btn" onclick="resetCustomMedia()">↺ Reset Media</button>
+      </div>
+    </div>
 
-<!-- Main Screen Photo & Video Commercial Billboard -->
-<section class="billboard-card">
-  <div class="billboard-header">
-    <span class="billboard-label">✦ COMMERCIAL BILLBOARD SHOWCASE</span>
-    <div class="ctrl-group">
-      <button class="btn-gold" onclick="document.getElementById('quickBillboardUpload').click()">＋ Add Photo / Video</button>
-      <input type="file" id="quickBillboardUpload" accept="video/*,image/*" multiple hidden onchange="handleBillboardFiles(this.files)" />
+    <div class="card" style="margin-top:14px;">
+      <div class="section-title">Sovereign Privileges</div>
+      <div class="row">
+        <div>
+          <h3>Emerald Sanctuary Spa</h3>
+          <p>Thermal bathhouse & private massage suite</p>
+        </div>
+        <button class="gold-btn" onclick="showToast('Checked in at Emerald Sanctuary Spa')">Check In</button>
+      </div>
+      <div class="row">
+        <div>
+          <h3>RA 109 Private Lounge</h3>
+          <p>Priority velvet booth & sommelier service</p>
+        </div>
+        <button class="gold-btn" onclick="showToast('RA 109 Lounge host notified')">Notify</button>
+      </div>
     </div>
-  </div>
-  <div class="stage-viewport" id="stageViewport">
-    <canvas id="defaultMotionCanvas" style="width:100%;height:100%;display:block;"></canvas>
-    <video id="billboardVideo" playsinline webkit-playsinline muted style="display:none;"></video>
-    <img id="billboardImage" class="ken-burns" alt="Commercial Slide" style="display:none;" />
-    <div class="stage-overlay">
-      <span class="stage-tag" id="stageBadge">SOVEREIGN BROADCAST</span>
-      <div class="stage-title" id="stageTitle">Mevunai Moment™ Country Club, Inc ®</div>
-      <div class="stage-sub" id="stageSub">13 Sovereign Departments • Permanent Offline Media Vault Active</div>
-    </div>
-  </div>
-  <div class="billboard-controls">
-    <div class="ctrl-group">
-      <button class="ctrl-btn" onclick="prevSlide()">⏮ Prev</button>
-      <button class="ctrl-btn" id="btnStagePlay" onclick="toggleStagePlay()">⏸ Pause</button>
-      <button class="ctrl-btn" onclick="nextSlide()">⏭ Next</button>
-      <button class="ctrl-btn" id="btnStageMute" onclick="toggleStageMute()">🔇 Muted</button>
-    </div>
-    <div class="ctrl-group">
-      <button class="ctrl-btn active" id="btnStageLoop" onclick="toggleStageLoop()">🔁 Loop</button>
-      <button class="ctrl-btn active" id="btnStageAuto" onclick="toggleStageAuto()">⏭ Auto</button>
-      <button class="ctrl-btn" onclick="openDrawer('billboard')">☰ Vault (<span id="billboardCount">0</span>)</button>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- TAB 1: 13 SOVEREIGN DEPARTMENTS -->
-<main id="tab-depts" class="section active">
-  <div class="sec-head">
-    <h2>13 Sovereign Departments</h2>
-    <span style="font-size:11px;color:var(--gold-bright);">All-Access Portal</span>
-  </div>
-  <div class="dept-grid" id="deptGrid"></div>
+  <!-- TAB 2: BOOK -->
+  <section id="tab-book" class="tab-view">
+    <div class="card">
+      <div class="section-title">Book Tee Time or Court</div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:11px; color:var(--muted);">Preferred Time Slot:</label>
+        <select id="slotSelect" style="width:100%; margin-top:4px; padding:8px; border-radius:10px; background:#180308; color:var(--gold-light); border:1px solid var(--border);">
+          <option>09:30 AM — Morning Sovereign Tee</option>
+          <option>01:00 PM — Afternoon Pavilion</option>
+          <option>05:30 PM — Sunset Floodlit Session</option>
+        </select>
+      </div>
+      <div class="row">
+        <div><h3>Championship Golf — 18 Holes</h3><p>Private caddie & gold-trim cart</p></div>
+        <button class="gold-btn" onclick="showToast('Championship Golf reserved')">Reserve</button>
+      </div>
+      <div class="row">
+        <div><h3>Royal Clay Tennis — Court 1</h3><p>Championship red clay & ball service</p></div>
+        <button class="gold-btn" onclick="showToast('Court 1 reserved')">Reserve</button>
+      </div>
+      <div class="row">
+        <div><h3>Emerald Padel Pavilion</h3><p>Panoramic glass court & lounge</p></div>
+        <button class="gold-btn" onclick="showToast('Emerald Padel reserved')">Reserve</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: DINING -->
+  <section id="tab-dining" class="tab-view">
+    <div class="card">
+      <div class="section-title">The Crimson Silk Dining Room</div>
+      <div class="row">
+        <div><h3>Gold-Leaf Wagyu Ribeye — $95</h3><p>24K edible gold leaf, black truffle jus</p></div>
+        <button class="gold-btn" onclick="showToast('Wagyu Ribeye sent to kitchen')">Order</button>
+      </div>
+      <div class="row">
+        <div><h3>Emerald Reserve Martini — $24</h3><p>Botanical reserve gin, chartreuse mist</p></div>
+        <button class="gold-btn" onclick="showToast('Emerald Reserve Martini ordered')">Order</button>
+      </div>
+      <div class="row">
+        <div><h3>Saffron & Pistachio Baklava — $19</h3><p>Warm honey blossom syrup & gold dust</p></div>
+        <button class="gold-btn" onclick="showToast('Baklava dessert ordered')">Order</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: EVENTS & SMOOTH OFFLINE VIDEO VAULT -->
+  <section id="tab-events" class="tab-view">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+        <div class="section-title" style="margin:0;">Event Stage & Offline Video Vault</div>
+        <label class="gold-btn" style="cursor:pointer;">
+          ＋ Save Videos / Photos Offline
+          <input type="file" accept="video/*,image/*,.mp4,.mov,.webm,.m4v,.mkv" multiple style="display:none;" onchange="saveToVault(event)" />
+        </label>
+      </div>
+
+      <div class="stage-box">
+        <img id="stageImage" src="./crown-interlude.png" alt="Stage Preview" />
+        <video id="stageVideo" style="display:none;" playsinline webkit-playsinline preload="metadata"></video>
+      </div>
+
+      <input type="range" id="videoScrubber" class="scrubber" min="0" max="100" value="0" oninput="seekVideo(this.value)" />
+      <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--muted);">
+        <span id="timeNow">0:00</span>
+        <span id="nowPlayingTitle">M’M ™ countryclub ® — Crown Showcase</span>
+        <span id="timeTotal">0:00</span>
+      </div>
+
+      <div class="controls-bar">
+        <div style="display:flex; gap:5px; flex-wrap:wrap;">
+          <button class="ghost-btn" onclick="prevVaultItem()">⏮ Prev</button>
+          <button class="gold-btn" id="playPauseBtn" onclick="togglePlayPause()">▶ Play</button>
+          <button class="ghost-btn" onclick="nextVaultItem()">⏭ Next</button>
+          <button class="ghost-btn" id="muteBtn" onclick="toggleMute()">🔊 Sound</button>
+        </div>
+        <div style="display:flex; gap:5px; flex-wrap:wrap;">
+          <button class="ghost-btn" id="loopBtn" onclick="toggleLoop()">🔁 Loop: ON</button>
+          <button class="ghost-btn" onclick="cycleSpeed()" id="speedBtn">⚡ 1.0x</button>
+          <button class="ghost-btn" onclick="goFullscreen()">⛶ Fullscreen</button>
+        </div>
+      </div>
+
+      <div class="folder-pills">
+        <button class="pill active" onclick="filterFolder('All', this)">All Saved</button>
+        <button class="pill" onclick="filterFolder('Galas', this)">Galas</button>
+        <button class="pill" onclick="filterFolder('Club Reels', this)">Club Reels</button>
+        <button class="pill" onclick="filterFolder('RA 109 Vault', this)">RA 109 Vault</button>
+      </div>
+
+      <div id="vaultList"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Exclusive Gatherings</div>
+      <div class="row">
+        <div><h3>RA 109 Annual Gala — Dec 18</h3><p>Black tie & 24K gold masquerade</p></div>
+        <button class="gold-btn" onclick="showToast('RSVP confirmed for RA 109 Gala')">RSVP</button>
+      </div>
+      <div class="row">
+        <div><h3>Midnight Emerald Cigar & Jazz — Dec 24</h3><p>Private terrace & live quartet</p></div>
+        <button class="gold-btn" onclick="showToast('RSVP confirmed for Cigar & Jazz')">RSVP</button>
+      </div>
+    </div>
+  </section>
 </main>
 
-<!-- TAB 2: VALET & JETS -->
-<section id="tab-valet" class="section">
-  <div class="sec-head">
-    <h2>Master Concierge & Valet</h2>
-    <button class="btn-gold" onclick="openModal('valetModal')">＋ Register Car / Jet</button>
-  </div>
-  <div class="dept-grid" id="fleetGrid"></div>
-</section>
-
-<!-- TAB 3: ART & COUTURE -->
-<section id="tab-gallery" class="section">
-  <div class="sec-head">
-    <h2>Art & Couture Exhibition</h2>
-    <a href="https://mm-el.vercel.app" target="_blank" class="btn-gold" style="text-decoration:none;">Flagship App ↗</a>
-  </div>
-  <div class="dept-grid" id="galleryGrid"></div>
-</section>
-
-<!-- TAB 4: VIP PASS -->
-<section id="tab-vip" class="section">
-  <div class="sec-head">
-    <h2>Sovereign VIP Credentials</h2>
-  </div>
-  <div class="vip-card">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
-      <img src="master-icon.png" alt="Crest" style="width:54px;height:54px;border-radius:50%;border:1.5px solid var(--gold);object-fit:cover;" onerror="this.style.display='none'" />
-      <div>
-        <div style="font-size:11px;color:var(--gold);letter-spacing:1.2px;">FOUNDING SOVEREIGN KEY</div>
-        <div style="font-size:17px;font-weight:bold;color:var(--gold-bright);">Mevunai Moment™ Country Club, Inc ®</div>
-        <div style="font-size:11px;color:var(--text-muted);">CALLSIGN: RA 109 • ALL 13 DEPARTMENTS</div>
-      </div>
-    </div>
-    <div style="font-size:12px;color:var(--text-main);border-top:1px solid var(--card-border);padding-top:10px;display:flex;justify-content:space-between;">
-      <span>STATUS: <strong style="color:#75e6a8;">● PERMANENT VAULT ACTIVE</strong></span>
-      <span>VALID: <strong>2026–2028</strong></span>
-    </div>
-  </div>
-</section>
-
-<!-- Persistent Bottom Mini Audio Player -->
-<div class="mini-player">
-  <div style="display:flex;align-items:center;gap:9px;min-width:0;flex:1;">
-    <img id="miniDiscImg" src="master-icon.png" class="disc-thumb" alt="Disc" onerror="this.style.display='none'" />
-    <div style="min-width:0;">
-      <div id="miniTrackTitle" style="font-size:12px;font-weight:bold;color:var(--gold-bright);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">MMEL Sovereign Lounge</div>
-      <div id="miniTrackSub" style="font-size:10px;color:var(--text-muted);">Tap Play or Open MP3 Vault</div>
-    </div>
-  </div>
-  <div class="ctrl-group">
-    <button class="ctrl-btn" onclick="prevAudio()">⏮</button>
-    <button class="btn-gold" id="btnAudioPlay" onclick="toggleAudioPlay()">▶ Play</button>
-    <button class="ctrl-btn" onclick="nextAudio()">⏭</button>
-    <button class="ctrl-btn" onclick="openDrawer('mp3')">☰</button>
-  </div>
-</div>
-
-<!-- Bottom Navigation -->
-<nav class="bottom-nav">
-  <button class="nav-btn active" onclick="switchTab('depts', this)">🏛️<span>13 Depts</span></button>
-  <button class="nav-btn" onclick="switchTab('valet', this)">🚘<span>Valet & Jets</span></button>
-  <button class="nav-btn" onclick="switchTab('gallery', this)">🎨<span>Art & Couture</span></button>
-  <button class="nav-btn" onclick="switchTab('vip', this)">👑<span>VIP Pass</span></button>
+<nav>
+  <button class="active" onclick="switchTab('pass', this)">👑<span>PASS</span></button>
+  <button onclick="switchTab('book', this)">⛳<span>BOOK</span></button>
+  <button onclick="switchTab('dining', this)">🍷<span>DINING</span></button>
+  <button onclick="switchTab('events', this)">📺<span>EVENTS</span></button>
 </nav>
 
-<!-- Drawer Backdrop -->
-<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawers()"></div>
-
-<!-- SLIDE-OUT MP3 VAULT SIDEBAR -->
-<aside class="side-drawer" id="drawer-mp3">
-  <div class="drawer-head">
-    <h3>🎵 MMEL Permanent MP3 Vault</h3>
-    <button class="ctrl-btn" onclick="closeDrawers()">✕</button>
-  </div>
-  <div class="vault-box">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-      <img id="vaultCoverPreview" src="master-icon.png" style="width:48px;height:48px;border-radius:50%;border:1.5px solid var(--gold);object-fit:cover;" onerror="this.style.display='none'" />
-      <div style="flex:1;">
-        <div style="font-size:12px;font-weight:bold;color:var(--gold-bright);">Vault Disc Cover Art</div>
-        <div style="font-size:10px;color:var(--text-muted);">Saved permanently offline</div>
-      </div>
-      <button class="ctrl-btn" onclick="document.getElementById('discPhotoInput').click()">📷 Swap</button>
-      <input type="file" id="discPhotoInput" accept="image/*" hidden onchange="saveDiscCover(this.files[0])" />
-    </div>
-    <button class="btn-gold" style="width:100%;" onclick="document.getElementById('mp3FileInput').click()">＋ Store MP3 / Audio Files Permanently</button>
-    <input type="file" id="mp3FileInput" accept="audio/*,.mp3,.wav,.m4a" multiple hidden onchange="handleMp3Files(this.files)" />
-  </div>
-  <div style="font-size:11px;color:var(--gold-bright);margin-bottom:6px;letter-spacing:0.8px;">SAVED OFFLINE TRACKS (<span id="mp3Count">0</span>)</div>
-  <div class="vault-list" id="mp3VaultList"></div>
-</aside>
-
-<!-- SLIDE-OUT COMMERCIAL BILLBOARD VAULT SIDEBAR -->
-<aside class="side-drawer" id="drawer-billboard">
-  <div class="drawer-head">
-    <h3>📺 Commercial Billboard Vault</h3>
-    <button class="ctrl-btn" onclick="closeDrawers()">✕</button>
-  </div>
-  <div class="vault-box">
-    <div style="font-size:11px;color:var(--text-muted);margin-bottom:8px;">
-      Upload promotional videos (.mp4/.mov) or photos (.jpg/.png). All media is locked into IndexedDB so it stays saved every time you open the app.
-    </div>
-    <input type="text" id="commercialHeadline" placeholder="Optional Headline (e.g. 1325 Sovereign Drop)" />
-    <button class="btn-gold" style="width:100%;" onclick="document.getElementById('drawerBillboardInput').click()">＋ Upload & Lock Photos / Videos</button>
-    <input type="file" id="drawerBillboardInput" accept="video/*,image/*" multiple hidden onchange="handleBillboardFiles(this.files)" />
-  </div>
-  <div style="font-size:11px;color:var(--gold-bright);margin-bottom:6px;letter-spacing:0.8px;">LOCKED BILLBOARD MEDIA (<span id="drawerBillboardCount">0</span>)</div>
-  <div class="vault-list" id="billboardVaultList"></div>
-</aside>
-
-<!-- Modal for Valet / Department Details -->
-<div class="modal-back" id="modalBack" onclick="if(event.target===this)closeModal()">
-  <div class="modal-card" id="modalContent"></div>
-</div>
-
-<audio id="audioEngine"></audio>
-
 <script>
-// 1. PERMANENT STORAGE LOCK (navigator.storage.persist + IndexedDB)
-const DB_NAME = 'MMCC_Permanent_Sovereign_Vault_v27';
-const DB_VERSION = 1;
-let db = null;
+  let db = null;
+  let vaultItems = [];
+  let currentFolder = 'All';
+  let currentIndex = -1;
+  let isLooping = true;
+  let playbackSpeeds = [1.0, 1.25, 1.5, 2.0, 0.75];
+  let speedIdx = 0;
+  let rafId = null;
+  let interludeTimeout = null;
+  let interludeEndTimeout = null;
+  let activeBlobUrl = null;
 
-async function requestPermanentLock(showAlert) {
-  const statusEl = document.getElementById('persistStatus');
-  const quotaEl = document.getElementById('storageQuotaText');
-  try {
-    let persisted = false;
-    if (navigator.storage && navigator.storage.persist) {
-      persisted = await navigator.storage.persisted();
-      if (!persisted) {
-        persisted = await navigator.storage.persist();
-      }
-    }
-    if (navigator.storage && navigator.storage.estimate) {
-      const est = await navigator.storage.estimate();
-      const usedMB = ((est.usage || 0) / (1024 * 1024)).toFixed(1);
-      const quotaGB = ((est.quota || 0) / (1024 * 1024 * 1024)).toFixed(1);
-      quotaEl.textContent = `Offline Vault Usage: ${usedMB} MB used of ${quotaGB} GB • Reload-Safe IndexedDB`;
-    }
-    statusEl.textContent = persisted
-      ? '🔒 Permanent Storage Lock: ACTIVE (Files Protected)'
-      : '🛡️ Offline IndexedDB Vault: ACTIVE (Files Saved Locally)';
-    if (showAlert) {
-      alert(persisted
-        ? 'Permanent Storage Lock is ACTIVE. Your browser has marked all saved videos, MP3s, and photos as persistent.'
-        : 'Offline IndexedDB Vault is ACTIVE. Your uploaded files are stored locally as binary Blobs and will remain available when you reopen the app.');
-    }
-  } catch (e) {
-    statusEl.textContent = '🛡️ Offline IndexedDB Vault: ACTIVE';
-  }
-}
-
-function initDB() {
-  return new Promise((resolve, reject) => {
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = (e) => {
-      const database = e.target.result;
-      if (!database.objectStoreNames.contains('billboard')) {
-        database.createObjectStore('billboard', { keyPath: 'id', autoIncrement: true });
-      }
-      if (!database.objectStoreNames.contains('mp3s')) {
-        database.createObjectStore('mp3s', { keyPath: 'id', autoIncrement: true });
-      }
-      if (!database.objectStoreNames.contains('customPhotos')) {
-        database.createObjectStore('customPhotos', { keyPath: 'key' });
-      }
-      if (!database.objectStoreNames.contains('fleet')) {
-        database.createObjectStore('fleet', { keyPath: 'id', autoIncrement: true });
-      }
-    };
-    req.onsuccess = (e) => {
-      db = e.target.result;
-      resolve(db);
-    };
-    req.onerror = (e) => reject(e);
-  });
-}
-
-function dbGetAll(storeName) {
-  return new Promise((resolve) => {
-    if (!db) return resolve([]);
-    const tx = db.transaction(storeName, 'readonly');
-    const req = tx.objectStore(storeName).getAll();
-    req.onsuccess = () => resolve(req.result || []);
-    req.onerror = () => resolve([]);
-  });
-}
-
-function dbPut(storeName, item) {
-  return new Promise((resolve) => {
-    const tx = db.transaction(storeName, 'readwrite');
-    const req = tx.objectStore(storeName).put(item);
-    req.onsuccess = () => resolve(req.result);
-  });
-}
-
-function dbDelete(storeName, key) {
-  return new Promise((resolve) => {
-    const tx = db.transaction(storeName, 'readwrite');
-    const req = tx.objectStore(storeName).delete(key);
-    req.onsuccess = () => resolve();
-  });
-}
-
-// 2. DATA DEFINITIONS
-const DEPARTMENTS = [
-  { id: 'dept-1', num: 'DEPT 01', title: "MM'EL Radio & MMTV", desc: '24/7 Sovereign broadcast booth, private lounges & live club transmissions.', img: 'master-icon.png', action: "openDrawer('mp3')", btn: 'Open Sound Vault' },
-  { id: 'dept-2', num: 'DEPT 02', title: 'Flagship Couture & Atelier', desc: '1325 bespoke tailoring, emerald velvet outerwear & horology.', img: 'art-ra109.png', link: 'https://mm-el.vercel.app', btn: 'Open Live App ↗' },
-  { id: 'dept-3', num: 'DEPT 03', title: 'Private Aviation & Marina', desc: 'Gulfstream G700 tarmac dispatch & 180ft superyacht berths.', img: 'master-icon.png', action: "switchTab('valet')", btn: 'Inspect Hangar' },
-  { id: 'dept-4', num: 'DEPT 04', title: 'Royal Equestrian Stables', desc: 'Championship Arabian thoroughbreds, private dressage & polo grounds.', img: 'art-constellation.png', btn: 'Reserve Ride' },
-  { id: 'dept-5', num: 'DEPT 05', title: 'Cigar & Spirits Lounge', desc: 'Rare vintage humidors, crystal decanters & midnight velvet salons.', img: 'art-medallion.png', btn: 'Reserve Table' },
-  { id: 'dept-6', num: 'DEPT 06', title: 'Spa & Thermal Bathhouse', desc: "Pharaoh's Gold Hammam, mineral plunge pools & private wellness.", img: 'master-icon.png', btn: 'Book Thermal Suite' },
-  { id: 'dept-7', num: 'DEPT 07', title: 'Fine Dining & Velvet Lounge', desc: "Obsidian chef's table, gold-leaf tasting menus & sommelier cellar.", img: 'art-ra109.png', btn: 'View Menu' },
-  { id: 'dept-8', num: 'DEPT 08', title: 'Golf Simulator & Padel Club', desc: 'TrackMan championship bays & panoramic glass padel courts.', img: 'art-blueprint.png', btn: 'Book Tee Time' },
-  { id: 'dept-9', num: 'DEPT 09', title: 'Private Cinema & Screening', desc: 'Crimson velvet screening theater with first-run private reels.', img: 'master-icon.png', btn: 'Private Screening' },
-  { id: 'dept-10', num: 'DEPT 10', title: 'Barber & Grooming Salon', desc: 'Bespoke hot-towel straight-razor grooming & royal styling.', img: 'art-medallion.png', btn: 'Book Chair' },
-  { id: 'dept-11', num: 'DEPT 11', title: 'Kinetic Performance Gym', desc: 'Black-and-gold strength foundry, combat ring & recovery lab.', img: 'art-constellation.png', btn: 'Book Trainer' },
-  { id: 'dept-12', num: 'DEPT 12', title: 'Medical & Longevity Centre', desc: 'Executive diagnostics, cellular longevity & private physicians.', img: 'art-blueprint.png', btn: 'Consult Specialist' },
-  { id: 'dept-13', num: 'DEPT 13', title: "Founder's Sovereign Circle", desc: 'RA 109 executive boardroom, sacred blueprints & sovereign governance.', img: 'art-3d-character.png', btn: 'Enter Inner Circle' }
-];
-
-const DEFAULT_FLEET = [
-  { id: 'f1', name: 'Gulfstream G700 Sovereign', tag: 'TAIL: N1325MM • TARMAC READY', type: 'Private Jet', img: 'master-icon.png' },
-  { id: 'f2', name: 'Maybach S680 Haute Voiture', tag: 'PLATE: MM-001 • CHAUFFEUR STAGED', type: 'Luxury Car', img: 'art-medallion.png' },
-  { id: 'f3', name: 'MMCC 1325 Emerald & Gold Superbike', tag: 'BAY 01 • TRACK TUNED', type: 'Superbike', img: 'art-ra109.png' }
-];
-
-const ART_GALLERY = [
-  { id: 'g1', title: 'RA 109 Sacred Pyramid Crest', desc: '24K brushed gold & emerald gemstone emblem on crimson silk.', img: 'art-ra109.png' },
-  { id: 'g2', title: 'Sovereign Constellation Network', desc: 'Bezel-set emerald nodes & gold circuit architecture.', img: 'art-constellation.png' },
-  { id: 'g3', title: '12-Medallion Eye of Horus Blueprint', desc: 'Architectural gold foil schematic for Mevunai Moment™.', img: 'art-blueprint.png' },
-  { id: 'g4', title: '3D Sovereign Founder Character', desc: 'Bespoke crimson silk & emerald lapel 3D figure.', img: 'art-3d-character.png' },
-  { id: 'g5', title: 'RA 109 Circular Medallion', desc: 'Official sovereign seal of Mevunai Moment™ Country Club, Inc ®.', img: 'art-medallion.png' }
-];
-
-let customPhotoMap = {};
-let billboardSlides = [];
-let currentSlideIndex = -1;
-let stagePlaying = true;
-let stageMuted = true;
-let stageLoop = true;
-let stageAuto = true;
-let photoTimer = null;
-let activeSlideBlobUrl = null;
-
-let mp3Tracks = [];
-let currentTrackIndex = -1;
-let activeAudioBlobUrl = null;
-
-// 3. RENDER DEPARTMENTS, FLEET & GALLERY
-async function loadCustomPhotos() {
-  const rows = await dbGetAll('customPhotos');
-  customPhotoMap = {};
-  for (const r of rows) {
-    if (r.blob) {
-      customPhotoMap[r.key] = URL.createObjectURL(r.blob);
-    }
-  }
-  if (customPhotoMap['discCover']) {
-    document.getElementById('miniDiscImg').src = customPhotoMap['discCover'];
-    document.getElementById('vaultCoverPreview').src = customPhotoMap['discCover'];
-  }
-}
-
-async function saveCustomPhoto(key, file) {
-  if (!file) return;
-  await dbPut('customPhotos', { key, blob: file });
-  await loadCustomPhotos();
-  renderAllCards();
-  requestPermanentLock(false);
-}
-
-function saveDiscCover(file) {
-  saveCustomPhoto('discCover', file);
-}
-
-function renderAllCards() {
-  const deptGrid = document.getElementById('deptGrid');
-  deptGrid.innerHTML = DEPARTMENTS.map((d) => {
-    const src = customPhotoMap[d.id] || d.img;
-    const actionBtn = d.link
-      ? `<a href="${d.link}" target="_blank" class="btn-gold" style="text-decoration:none;">${d.btn}</a>`
-      : `<button class="btn-gold" onclick="${d.action || `openDeptModal('${d.id}')`}">${d.btn}</button>`;
-    return `
-      <article class="dept-card">
-        <div class="dept-media">
-          <img src="${src}" alt="${d.title}" onerror="this.src='master-icon.png'" />
-          <span class="dept-num">${d.num}</span>
-          <label class="swap-photo-btn">📷 Swap Photo
-            <input type="file" accept="image/*" hidden onchange="saveCustomPhoto('${d.id}', this.files[0])" />
-          </label>
-        </div>
-        <div class="dept-body">
-          <div>
-            <h3 class="dept-title">${d.title}</h3>
-            <p class="dept-desc">${d.desc}</p>
-          </div>
-          <div class="dept-actions">
-            ${actionBtn}
-            <button class="btn-outline" onclick="openDeptModal('${d.id}')">Details</button>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
-
-  renderFleet();
-
-  const galleryGrid = document.getElementById('galleryGrid');
-  galleryGrid.innerHTML = ART_GALLERY.map((g) => {
-    const src = customPhotoMap[g.id] || g.img;
-    return `
-      <article class="dept-card">
-        <div class="dept-media" style="height:190px;">
-          <img src="${src}" alt="${g.title}" onerror="this.src='master-icon.png'" />
-          <label class="swap-photo-btn">📷 Swap Art
-            <input type="file" accept="image/*" hidden onchange="saveCustomPhoto('${g.id}', this.files[0])" />
-          </label>
-        </div>
-        <div class="dept-body">
-          <div>
-            <h3 class="dept-title">${g.title}</h3>
-            <p class="dept-desc">${g.desc}</p>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
-}
-
-async function renderFleet() {
-  const savedFleet = await dbGetAll('fleet');
-  const all = [
-    ...savedFleet.map((f) => ({
-      id: 'user-' + f.id,
-      rawId: f.id,
-      name: f.name,
-      tag: f.tag,
-      img: f.blob ? URL.createObjectURL(f.blob) : 'master-icon.png',
-      isUser: true
-    })),
-    ...DEFAULT_FLEET
-  ];
-  document.getElementById('fleetGrid').innerHTML = all.map((v) => {
-    const src = customPhotoMap[v.id] || v.img;
-    return `
-      <article class="dept-card">
-        <div class="dept-media">
-          <img src="${src}" alt="${v.name}" onerror="this.src='master-icon.png'" />
-          <span class="dept-num">${v.tag}</span>
-          <label class="swap-photo-btn">📷 Swap Photo
-            <input type="file" accept="image/*" hidden onchange="saveCustomPhoto('${v.id}', this.files[0])" />
-          </label>
-        </div>
-        <div class="dept-body">
-          <h3 class="dept-title">${v.name}</h3>
-          <div class="dept-actions">
-            <button class="btn-gold" onclick="alert('Dispatch confirmed for ${v.name}. Valet & Tarmac team notified.')">🚘 Summon Now</button>
-            ${v.isUser ? `<button class="btn-outline" onclick="deleteFleet(${v.rawId})">Remove</button>` : ''}
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
-}
-
-async function deleteFleet(id) {
-  await dbDelete('fleet', id);
-  renderFleet();
-}
-
-// 4. COMMERCIAL BILLBOARD VAULT (Permanent IndexedDB Blob Storage)
-async function refreshBillboardVault() {
-  billboardSlides = await dbGetAll('billboard');
-  document.getElementById('billboardCount').textContent = billboardSlides.length;
-  document.getElementById('drawerBillboardCount').textContent = billboardSlides.length;
-
-  const list = document.getElementById('billboardVaultList');
-  if (!billboardSlides.length) {
-    list.innerHTML = `<div style="font-size:11px;color:var(--text-muted);padding:8px;">No locked commercials yet. Tap "+ Upload & Lock Photos / Videos" above—everything stays saved permanently across reloads.</div>`;
-    showDefaultCanvas();
-    return;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.style.display = 'none'; }, 2600);
   }
 
-  list.innerHTML = billboardSlides.map((s, idx) => `
-    <div class="vault-item">
-      <div class="vault-item-info" onclick="playSlide(${idx})" style="cursor:pointer;">
-        <div class="vault-item-title">${s.kind === 'video' ? '🎬' : '🖼️'} ${s.title}</div>
-        <div class="vault-item-meta">${s.headline || 'Sovereign Broadcast'} • ${(s.size / (1024*1024)).toFixed(2)} MB • 🔒 Locked</div>
-      </div>
-      <div class="ctrl-group">
-        <button class="ctrl-btn" onclick="playSlide(${idx})">▶</button>
-        <button class="ctrl-btn" onclick="deleteBillboardItem(${s.id})">🗑️</button>
-      </div>
-    </div>
-  `).join('');
-
-  if (currentSlideIndex < 0 || currentSlideIndex >= billboardSlides.length) {
-    playSlide(0);
+  function toggleTheme() {
+    document.body.classList.toggle('emerald-theme');
+    showToast(document.body.classList.contains('emerald-theme') ? 'Emerald Velvet Theme Active' : 'Royal Crimson Silk Active');
   }
-}
 
-async function handleBillboardFiles(fileList) {
-  if (!fileList || !fileList.length) return;
-  const headlineInput = document.getElementById('commercialHeadline');
-  const headline = headlineInput ? headlineInput.value.trim() : '';
-  for (const file of fileList) {
-    const kind = file.type.startsWith('video/') ? 'video' : 'image';
-    await dbPut('billboard', {
-      title: file.name,
-      headline: headline || 'Mevunai Moment™ Exclusive',
-      kind,
-      mime: file.type,
-      size: file.size,
-      blob: file,
-      createdAt: Date.now()
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  }
+
+  // IndexedDB Setup
+  function initDB() {
+    return new Promise((resolve) => {
+      const req = indexedDB.open('MMCC_RA109_Vault_V8', 1);
+      req.onupgradeneeded = (e) => {
+        const d = e.target.result;
+        if (!d.objectStoreNames.contains('videos')) d.createObjectStore('videos', { keyPath: 'id', autoIncrement: true });
+        if (!d.objectStoreNames.contains('settings')) d.createObjectStore('settings', { keyPath: 'key' });
+      };
+      req.onsuccess = (e) => {
+        db = e.target.result;
+        resolve(db);
+      };
+      req.onerror = () => resolve(null);
     });
   }
-  if (headlineInput) headlineInput.value = '';
-  await requestPermanentLock(false);
-  await refreshBillboardVault();
-  playSlide(billboardSlides.length - 1);
-}
 
-async function deleteBillboardItem(id) {
-  await dbDelete('billboard', id);
-  currentSlideIndex = -1;
-  await refreshBillboardVault();
-}
-
-function showDefaultCanvas() {
-  clearTimeout(photoTimer);
-  const vid = document.getElementById('billboardVideo');
-  const img = document.getElementById('billboardImage');
-  const cvs = document.getElementById('defaultMotionCanvas');
-  vid.pause(); vid.style.display = 'none';
-  img.style.display = 'none';
-  cvs.style.display = 'block';
-  document.getElementById('stageBadge').textContent = 'SOVEREIGN BROADCAST';
-  document.getElementById('stageTitle').textContent = 'Mevunai Moment™ Country Club, Inc ®';
-  document.getElementById('stageSub').textContent = '13 Sovereign Departments • Permanent Offline Media Vault Active';
-}
-
-function playSlide(idx) {
-  if (!billboardSlides.length) return showDefaultCanvas();
-  clearTimeout(photoTimer);
-  currentSlideIndex = (idx + billboardSlides.length) % billboardSlides.length;
-  const item = billboardSlides[currentSlideIndex];
-
-  const vid = document.getElementById('billboardVideo');
-  const img = document.getElementById('billboardImage');
-  const cvs = document.getElementById('defaultMotionCanvas');
-  cvs.style.display = 'none';
-
-  if (activeSlideBlobUrl) {
-    URL.revokeObjectURL(activeSlideBlobUrl);
-    activeSlideBlobUrl = null;
+  function getSetting(key) {
+    return new Promise((resolve) => {
+      if (!db) return resolve(null);
+      const tx = db.transaction('settings', 'readonly');
+      const req = tx.objectStore('settings').get(key);
+      req.onsuccess = () => resolve(req.result ? req.result.value : null);
+      req.onerror = () => resolve(null);
+    });
   }
-  activeSlideBlobUrl = URL.createObjectURL(item.blob);
 
-  document.getElementById('stageBadge').textContent = item.kind === 'video' ? 'LOCKED VIDEO REEL' : 'LOCKED PHOTO SHOWCASE';
-  document.getElementById('stageTitle').textContent = item.headline || item.title;
-  document.getElementById('stageSub').textContent = `${item.title} (${currentSlideIndex + 1} of ${billboardSlides.length})`;
+  function setSetting(key, value) {
+    if (!db) return;
+    const tx = db.transaction('settings', 'readwrite');
+    tx.objectStore('settings').put({ key, value });
+  }
 
-  if (item.kind === 'video') {
-    img.style.display = 'none';
-    vid.style.display = 'block';
-    vid.src = activeSlideBlobUrl;
-    vid.muted = stageMuted;
-    vid.loop = stageLoop && billboardSlides.length === 1;
-    vid.onended = () => {
-      if (stageAuto && billboardSlides.length > 1) nextSlide();
-      else if (stageLoop) { vid.currentTime = 0; vid.play(); }
+  // Sparkle Particle Renderer
+  function startSparkles(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return () => {};
+    const ctx = canvas.getContext('2d');
+    let running = true;
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
     };
-    if (stagePlaying) {
-      vid.play().catch(() => {
+    resize();
+    window.addEventListener('resize', resize);
+    const particles = Array.from({ length: 75 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: 1.5 + Math.random() * 3.2,
+      vy: 0.4 + Math.random() * 1.1,
+      phase: Math.random() * Math.PI * 2,
+      gold: Math.random() > 0.25
+    }));
+    function draw() {
+      if (!running) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.y -= p.vy;
+        p.phase += 0.06;
+        if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+        const alpha = 0.35 + 0.65 * Math.abs(Math.sin(p.phase));
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.fillStyle = p.gold ? `rgba(246, 226, 153, ${alpha})` : `rgba(46, 204, 113, ${alpha})`;
+        ctx.beginPath();
+        ctx.moveTo(0, -p.r * 2);
+        ctx.lineTo(p.r * 0.6, -p.r * 0.6);
+        ctx.lineTo(p.r * 2, 0);
+        ctx.lineTo(p.r * 0.6, p.r * 0.6);
+        ctx.lineTo(0, p.r * 2);
+        ctx.lineTo(-p.r * 0.6, p.r * 0.6);
+        ctx.lineTo(-p.r * 2, 0);
+        ctx.lineTo(-p.r * 0.6, -p.r * 0.6);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      });
+      requestAnimationFrame(draw);
+    }
+    draw();
+    return () => { running = false; window.removeEventListener('resize', resize); };
+  }
+
+  // Gold Chime Audio
+  function playGoldChime() {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      const ac = new AC();
+      [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+        const osc = ac.createOscillator();
+        const gain = ac.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.001, ac.currentTime + i * 0.14);
+        gain.gain.exponentialRampToValueAtTime(0.08, ac.currentTime + i * 0.14 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + i * 0.14 + 1.4);
+        osc.connect(gain);
+        gain.connect(ac.destination);
+        osc.start(ac.currentTime + i * 0.14);
+        osc.stop(ac.currentTime + i * 0.14 + 1.5);
+      });
+    } catch (e) {}
+  }
+
+  // 13-Second Splash Intro Logic
+  let splashInterval = null;
+  let stopSplashSparkles = null;
+  async function runSplashIntro() {
+    const overlay = document.getElementById('splashOverlay');
+    const bar = document.getElementById('splashBar');
+    const txt = document.getElementById('splashTimerText');
+    const img = document.getElementById('splashImg');
+    const vid = document.getElementById('splashVid');
+
+    overlay.style.display = 'flex';
+    overlay.style.opacity = '1';
+    if (stopSplashSparkles) stopSplashSparkles();
+    stopSplashSparkles = startSparkles('splashCanvas');
+
+    const customIntro = await getSetting('customIntro');
+    if (customIntro && customIntro.blob) {
+      img.style.display = 'none';
+      vid.style.display = 'block';
+      vid.src = URL.createObjectURL(customIntro.blob);
+      vid.play().catch(() => {});
+    } else {
+      vid.pause();
+      vid.style.display = 'none';
+      img.style.display = 'block';
+    }
+
+    const totalMs = 13000;
+    const start = Date.now();
+    clearInterval(splashInterval);
+    splashInterval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const pct = Math.min(100, (elapsed / totalMs) * 100);
+      const rem = Math.max(0, (totalMs - elapsed) / 1000).toFixed(1);
+      bar.style.width = pct + '%';
+      txt.textContent = `Sovereign RA 109 Portal • ${rem}s`;
+      if (elapsed >= totalMs) {
+        finishIntro();
+      }
+    }, 80);
+  }
+
+  function finishIntro() {
+    clearInterval(splashInterval);
+    const overlay = document.getElementById('splashOverlay');
+    const vid = document.getElementById('splashVid');
+    vid.pause();
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      if (stopSplashSparkles) stopSplashSparkles();
+      scheduleEightSecondInterlude();
+    }, 850);
+  }
+
+  function replayIntro() {
+    clearTimeout(interludeTimeout);
+    runSplashIntro();
+  }
+
+  // 8-Second Delayed Full-Screen Fade-In / Fade-Out Sparkle Interlude
+  let stopInterludeSparkles = null;
+  function scheduleEightSecondInterlude() {
+    clearTimeout(interludeTimeout);
+    interludeTimeout = setTimeout(() => {
+      triggerInterlude();
+    }, 8000);
+  }
+
+  async function triggerInterlude() {
+    clearTimeout(interludeTimeout);
+    clearTimeout(interludeEndTimeout);
+    const overlay = document.getElementById('interludeOverlay');
+    const img = document.getElementById('interludeMedia');
+    const vid = document.getElementById('interludeVideo');
+
+    const customInterlude = await getSetting('customInterlude');
+    if (customInterlude && customInterlude.blob) {
+      const url = URL.createObjectURL(customInterlude.blob);
+      if (customInterlude.type && customInterlude.type.startsWith('video/')) {
+        img.style.display = 'none';
+        vid.style.display = 'block';
+        vid.src = url;
+        vid.play().catch(() => {});
+      } else {
+        vid.style.display = 'none';
+        img.style.display = 'block';
+        img.src = url;
+      }
+    } else {
+      vid.style.display = 'none';
+      img.style.display = 'block';
+      img.src = './crown-interlude.png';
+    }
+
+    overlay.classList.add('visible');
+    if (stopInterludeSparkles) stopInterludeSparkles();
+    stopInterludeSparkles = startSparkles('interludeCanvas');
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add('faded-in');
+      });
+    });
+
+    interludeEndTimeout = setTimeout(() => {
+      hideInterlude();
+    }, 5200);
+  }
+
+  function hideInterlude() {
+    clearTimeout(interludeEndTimeout);
+    const overlay = document.getElementById('interludeOverlay');
+    const vid = document.getElementById('interludeVideo');
+    overlay.classList.remove('faded-in');
+    setTimeout(() => {
+      overlay.classList.remove('visible');
+      vid.pause();
+      if (stopInterludeSparkles) stopInterludeSparkles();
+    }, 1400);
+  }
+
+  async function uploadCustomMedia(e, key) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setSetting(key, { blob: file, type: file.type, name: file.name });
+    showToast(`Saved ${file.name}`);
+    if (key === 'customIntro') replayIntro();
+    if (key === 'customInterlude') triggerInterlude();
+  }
+
+  function resetCustomMedia() {
+    if (!db) return;
+    const tx = db.transaction('settings', 'readwrite');
+    tx.objectStore('settings').delete('customIntro');
+    tx.objectStore('settings').delete('customInterlude');
+    showToast('Default Crown & Pyramid media restored');
+  }
+
+  // 4-Digit Sovereign Vault Padlock
+  let enteredPin = '';
+  let pinMode = 'unlock'; // 'unlock' | 'new' | 'confirm'
+  let tempNewPin = '';
+
+  function getSavedPin() {
+    return localStorage.getItem('mmcc_ra109_pin') || '1325';
+  }
+
+  function updatePinDots() {
+    for (let i = 0; i < 4; i++) {
+      document.getElementById('dot' + i).classList.toggle('filled', i < enteredPin.length);
+    }
+  }
+
+  function pressKey(d) {
+    if (enteredPin.length >= 4) return;
+    enteredPin += d;
+    updatePinDots();
+    if (enteredPin.length === 4) {
+      setTimeout(handlePinComplete, 180);
+    }
+  }
+
+  function backspacePin() {
+    enteredPin = enteredPin.slice(0, -1);
+    updatePinDots();
+  }
+
+  function clearPin() {
+    enteredPin = '';
+    updatePinDots();
+  }
+
+  function handlePinComplete() {
+    const promptEl = document.getElementById('pinPrompt');
+    if (pinMode === 'unlock') {
+      if (enteredPin === getSavedPin()) {
+        document.getElementById('padlockOverlay').classList.remove('open');
+        clearPin();
+        showToast('Sovereign Vault Unlocked');
+      } else {
+        promptEl.textContent = 'Incorrect PIN — Try Again';
+        clearPin();
+      }
+    } else if (pinMode === 'new') {
+      tempNewPin = enteredPin;
+      pinMode = 'confirm';
+      promptEl.textContent = 'Re-enter New 4-Digit PIN to Confirm';
+      clearPin();
+    } else if (pinMode === 'confirm') {
+      if (enteredPin === tempNewPin) {
+        localStorage.setItem('mmcc_ra109_pin', enteredPin);
+        pinMode = 'unlock';
+        document.getElementById('padlockOverlay').classList.remove('open');
+        clearPin();
+        showToast('New 4-Digit Vault PIN Saved');
+      } else {
+        pinMode = 'new';
+        promptEl.textContent = 'PINs did not match — Enter New PIN';
+        clearPin();
+      }
+    }
+  }
+
+  function lockVault() {
+    pinMode = 'unlock';
+    document.getElementById('pinPrompt').textContent = 'Enter 4-Digit Vault PIN';
+    clearPin();
+    document.getElementById('padlockOverlay').classList.add('open');
+  }
+
+  function startPinChange() {
+    pinMode = 'new';
+    document.getElementById('pinPrompt').textContent = 'Enter New 4-Digit Vault PIN';
+    clearPin();
+    document.getElementById('padlockOverlay').classList.add('open');
+  }
+
+  // Smooth Universal Video Player & Offline Folder
+  function loadVault() {
+    if (!db) return;
+    const tx = db.transaction('videos', 'readonly');
+    const req = tx.objectStore('videos').getAll();
+    req.onsuccess = () => {
+      vaultItems = req.result || [];
+      renderVault();
+    };
+  }
+
+  function saveToVault(e) {
+    const files = Array.from(e.target.files || []);
+    if (!files.length || !db) return;
+    const tx = db.transaction('videos', 'readwrite');
+    const store = tx.objectStore('videos');
+    files.forEach(file => {
+      store.add({
+        name: file.name,
+        type: file.type || 'video/mp4',
+        folder: currentFolder === 'All' ? 'RA 109 Vault' : currentFolder,
+        blob: file
+      });
+    });
+    tx.oncomplete = () => {
+      showToast(`Saved ${files.length} item(s) offline`);
+      loadVault();
+    };
+  }
+
+  function filterFolder(folder, btn) {
+    currentFolder = folder;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderVault();
+  }
+
+  function renderVault() {
+    const list = document.getElementById('vaultList');
+    const filtered = currentFolder === 'All' ? vaultItems : vaultItems.filter(v => v.folder === currentFolder);
+    if (!filtered.length) {
+      list.innerHTML = `<p style="font-size:12px; color:var(--muted); padding:10px 0;">No offline videos in "${currentFolder}" yet. Tap <b>＋ Save Videos / Photos Offline</b> above.</p>`;
+      return;
+    }
+    list.innerHTML = filtered.map((item) => {
+      const realIdx = vaultItems.findIndex(x => x.id === item.id);
+      return `
+        <div class="row">
+          <div style="min-width:0; flex:1;">
+            <h3 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.name}</h3>
+            <p>Folder: ${item.folder}</p>
+          </div>
+          <div style="display:flex; gap:5px; flex-wrap:wrap;">
+            <button class="gold-btn" onclick="playVaultItem(${realIdx})">▶ Play</button>
+            <button class="ghost-btn" onclick="cycleItemFolder(${item.id})">📁</button>
+            <button class="ghost-btn" onclick="setAsIntroFromVault(${realIdx})">★ Intro</button>
+            <button class="ghost-btn" onclick="deleteVaultItem(${item.id})">✕</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function playVaultItem(idx) {
+    const item = vaultItems[idx];
+    if (!item) return;
+    currentIndex = idx;
+    const vid = document.getElementById('stageVideo');
+    const img = document.getElementById('stageImage');
+    const title = document.getElementById('nowPlayingTitle');
+
+    cancelAnimationFrame(rafId);
+    vid.pause();
+    if (activeBlobUrl) {
+      URL.revokeObjectURL(activeBlobUrl);
+      activeBlobUrl = null;
+    }
+
+    activeBlobUrl = URL.createObjectURL(item.blob);
+    title.textContent = item.name;
+
+    if (item.type.startsWith('image/')) {
+      vid.style.display = 'none';
+      img.style.display = 'block';
+      img.src = activeBlobUrl;
+      document.getElementById('playPauseBtn').textContent = '⏸ Viewing';
+    } else {
+      img.style.display = 'none';
+      vid.style.display = 'block';
+      vid.src = activeBlobUrl;
+      vid.loop = isLooping;
+      vid.playbackRate = playbackSpeeds[speedIdx];
+      vid.play().then(() => {
+        document.getElementById('playPauseBtn').textContent = '⏸ Pause';
+      }).catch(() => {
         vid.muted = true;
-        stageMuted = true;
-        document.getElementById('btnStageMute').textContent = '🔇 Muted';
+        document.getElementById('muteBtn').textContent = '🔇 Muted';
         vid.play().catch(() => {});
       });
-    }
-  } else {
-    vid.pause(); vid.style.display = 'none';
-    img.style.display = 'block';
-    img.src = activeSlideBlobUrl;
-    if (stagePlaying && stageAuto && billboardSlides.length > 1) {
-      photoTimer = setTimeout(() => nextSlide(), 6000);
+      startScrubberLoop();
     }
   }
-}
 
-function nextSlide() {
-  if (billboardSlides.length) playSlide(currentSlideIndex + 1);
-}
-function prevSlide() {
-  if (billboardSlides.length) playSlide(currentSlideIndex - 1);
-}
-function toggleStagePlay() {
-  stagePlaying = !stagePlaying;
-  document.getElementById('btnStagePlay').textContent = stagePlaying ? '⏸ Pause' : '▶ Play';
-  const vid = document.getElementById('billboardVideo');
-  if (vid.style.display === 'block') {
-    stagePlaying ? vid.play() : vid.pause();
-  } else if (billboardSlides.length) {
-    playSlide(currentSlideIndex);
-  }
-}
-function toggleStageMute() {
-  stageMuted = !stageMuted;
-  const vid = document.getElementById('billboardVideo');
-  vid.muted = stageMuted;
-  document.getElementById('btnStageMute').textContent = stageMuted ? '🔇 Muted' : '🔊 Sound';
-}
-function toggleStageLoop() {
-  stageLoop = !stageLoop;
-  document.getElementById('btnStageLoop').classList.toggle('active', stageLoop);
-}
-function toggleStageAuto() {
-  stageAuto = !stageAuto;
-  document.getElementById('btnStageAuto').classList.toggle('active', stageAuto);
-}
-
-// 5. MP3 VAULT (Permanent IndexedDB Blob Storage)
-async function refreshMp3Vault() {
-  mp3Tracks = await dbGetAll('mp3s');
-  document.getElementById('mp3Count').textContent = mp3Tracks.length;
-  const list = document.getElementById('mp3VaultList');
-  if (!mp3Tracks.length) {
-    list.innerHTML = `<div style="font-size:11px;color:var(--text-muted);padding:8px;">No MP3 files locked yet. Tap "+ Store MP3 / Audio Files Permanently" above—they stay saved even after closing the app.</div>`;
-    return;
-  }
-  list.innerHTML = mp3Tracks.map((t, idx) => `
-    <div class="vault-item">
-      <div class="vault-item-info" onclick="playMp3(${idx})" style="cursor:pointer;">
-        <div class="vault-item-title">🎵 ${t.title}</div>
-        <div class="vault-item-meta">${(t.size / (1024*1024)).toFixed(2)} MB • 🔒 Locked Offline</div>
-      </div>
-      <div class="ctrl-group">
-        <button class="ctrl-btn" onclick="playMp3(${idx})">▶</button>
-        <button class="ctrl-btn" onclick="deleteMp3(${t.id})">🗑️</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-async function handleMp3Files(fileList) {
-  if (!fileList || !fileList.length) return;
-  for (const file of fileList) {
-    await dbPut('mp3s', {
-      title: file.name,
-      size: file.size,
-      blob: file,
-      createdAt: Date.now()
-    });
-  }
-  await requestPermanentLock(false);
-  await refreshMp3Vault();
-  playMp3(mp3Tracks.length - 1);
-}
-
-async function deleteMp3(id) {
-  await dbDelete('mp3s', id);
-  await refreshMp3Vault();
-}
-
-function playMp3(idx) {
-  if (!mp3Tracks.length) return;
-  currentTrackIndex = (idx + mp3Tracks.length) % mp3Tracks.length;
-  const track = mp3Tracks[currentTrackIndex];
-  const audio = document.getElementById('audioEngine');
-  if (activeAudioBlobUrl) URL.revokeObjectURL(activeAudioBlobUrl);
-  activeAudioBlobUrl = URL.createObjectURL(track.blob);
-  audio.src = activeAudioBlobUrl;
-  audio.play();
-  document.getElementById('miniTrackTitle').textContent = track.title;
-  document.getElementById('miniTrackSub').textContent = `Locked Offline Track ${currentTrackIndex + 1} of ${mp3Tracks.length}`;
-  document.getElementById('btnAudioPlay').textContent = '⏸ Pause';
-  document.getElementById('miniDiscImg').classList.add('spinning');
-}
-
-function toggleAudioPlay() {
-  const audio = document.getElementById('audioEngine');
-  if (!audio.src && mp3Tracks.length) return playMp3(0);
-  if (!audio.src) return openDrawer('mp3');
-  if (audio.paused) {
-    audio.play();
-    document.getElementById('btnAudioPlay').textContent = '⏸ Pause';
-    document.getElementById('miniDiscImg').classList.add('spinning');
-  } else {
-    audio.pause();
-    document.getElementById('btnAudioPlay').textContent = '▶ Play';
-    document.getElementById('miniDiscImg').classList.remove('spinning');
-  }
-}
-function nextAudio() { if (mp3Tracks.length) playMp3(currentTrackIndex + 1); }
-function prevAudio() { if (mp3Tracks.length) playMp3(currentTrackIndex - 1); }
-
-document.getElementById('audioEngine').addEventListener('ended', () => {
-  if (mp3Tracks.length) nextAudio();
-});
-
-// 6. UI NAVIGATION, DRAWERS & MODALS
-function switchTab(tabName, btn) {
-  document.querySelectorAll('.section').forEach((s) => s.classList.remove('active'));
-  document.getElementById('tab-' + tabName).classList.add('active');
-  document.querySelectorAll('.nav-btn').forEach((b) => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-}
-
-function openDrawer(which) {
-  closeDrawers();
-  document.getElementById('drawerBackdrop').classList.add('open');
-  document.getElementById('drawer-' + which).classList.add('open');
-}
-function closeDrawers() {
-  document.getElementById('drawerBackdrop').classList.remove('open');
-  document.querySelectorAll('.side-drawer').forEach((d) => d.classList.remove('open'));
-}
-
-function toggleTheme() {
-  document.body.classList.toggle('emerald-theme');
-}
-
-function openDeptModal(id) {
-  const d = DEPARTMENTS.find((x) => x.id === id);
-  if (!d) return;
-  document.getElementById('modalContent').innerHTML = `
-    <h3 style="margin-top:0;color:var(--gold-bright);">${d.num} • ${d.title}</h3>
-    <p style="font-size:13px;color:var(--text-muted);">${d.desc}</p>
-    <input type="text" id="conciergeNote" placeholder="Special suite or concierge request..." />
-    <div style="display:flex;gap:8px;">
-      <button class="btn-gold" style="flex:1;" onclick="alert('Concierge request dispatched to ${d.title}.');closeModal();">Dispatch Request</button>
-      <button class="btn-outline" onclick="closeModal()">Close</button>
-    </div>
-  `;
-  document.getElementById('modalBack').classList.add('open');
-}
-
-function openModal(type) {
-  if (type === 'valetModal') {
-    document.getElementById('modalContent').innerHTML = `
-      <h3 style="margin-top:0;color:var(--gold-bright);">Register Vehicle or Private Jet</h3>
-      <input type="text" id="regVehName" placeholder="Model (e.g. Rolls-Royce Spectre / G700)" />
-      <input type="text" id="regVehTag" placeholder="Tail Number or License Plate (e.g. N109MM)" />
-      <input type="file" id="regVehFile" accept="image/*" style="margin-bottom:10px;color:var(--text-muted);font-size:12px;" />
-      <div style="display:flex;gap:8px;">
-        <button class="btn-gold" style="flex:1;" onclick="saveNewFleet()">Lock into Hangar</button>
-        <button class="btn-outline" onclick="closeModal()">Cancel</button>
-      </div>
-    `;
-    document.getElementById('modalBack').classList.add('open');
-  }
-}
-
-async function saveNewFleet() {
-  const name = document.getElementById('regVehName').value.trim() || 'Sovereign Asset';
-  const tag = document.getElementById('regVehTag').value.trim() || 'REGISTERED • READY';
-  const file = document.getElementById('regVehFile').files[0] || null;
-  await dbPut('fleet', { name, tag, blob: file });
-  await requestPermanentLock(false);
-  closeModal();
-  renderFleet();
-}
-
-function closeModal() {
-  document.getElementById('modalBack').classList.remove('open');
-}
-
-// 7. ANIMATED GOLD PYRAMID DEFAULT CANVAS
-function startDefaultCanvas() {
-  const cvs = document.getElementById('defaultMotionCanvas');
-  const ctx = cvs.getContext('2d');
-  let t = 0;
-  function frame() {
-    if (cvs.style.display !== 'none') {
-      const w = cvs.width = cvs.offsetWidth || 640;
-      const h = cvs.height = cvs.offsetHeight || 360;
-      ctx.clearRect(0, 0, w, h);
-      const grad = ctx.createRadialGradient(w/2, h/2, 10, w/2, h/2, w*0.65);
-      grad.addColorStop(0, '#5a0c1b');
-      grad.addColorStop(1, '#140205');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, w, h);
-
-      t += 0.02;
-      for (let i = 0; i < 28; i++) {
-        const px = ((i * 97 + t * 22) % w);
-        const py = ((i * 53 - t * 18 + h * 10) % h);
-        ctx.fillStyle = i % 3 === 0 ? 'rgba(25,135,84,0.65)' : 'rgba(247,223,139,0.75)';
-        ctx.beginPath();
-        ctx.arc(px, py, (i % 3) + 1.2, 0, Math.PI * 2);
-        ctx.fill();
+  function startScrubberLoop() {
+    const vid = document.getElementById('stageVideo');
+    const scrub = document.getElementById('videoScrubber');
+    const nowEl = document.getElementById('timeNow');
+    const totEl = document.getElementById('timeTotal');
+    function step() {
+      if (vid.duration && !isNaN(vid.duration)) {
+        scrub.value = (vid.currentTime / vid.duration) * 100;
+        nowEl.textContent = fmtTime(vid.currentTime);
+        totEl.textContent = fmtTime(vid.duration);
       }
-      ctx.strokeStyle = 'rgba(212,175,55,0.65)';
-      ctx.lineWidth = 2;
-      const pulse = Math.sin(t * 1.5) * 6;
-      ctx.beginPath();
-      ctx.moveTo(w/2, h*0.22 - pulse);
-      ctx.lineTo(w/2 + 65 + pulse, h*0.66 + pulse);
-      ctx.lineTo(w/2 - 65 - pulse, h*0.66 + pulse);
-      ctx.closePath();
-      ctx.stroke();
+      rafId = requestAnimationFrame(step);
     }
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(step);
   }
-  requestAnimationFrame(frame);
-}
 
-// BOOT
-(async function boot() {
-  await initDB();
-  await requestPermanentLock(false);
-  await loadCustomPhotos();
-  renderAllCards();
-  await refreshBillboardVault();
-  await refreshMp3Vault();
-  startDefaultCanvas();
-})();
+  function fmtTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function seekVideo(val) {
+    const vid = document.getElementById('stageVideo');
+    if (vid.duration) vid.currentTime = (val / 100) * vid.duration;
+  }
+
+  function togglePlayPause() {
+    const vid = document.getElementById('stageVideo');
+    if (vid.style.display === 'none') {
+      if (vaultItems.length) playVaultItem(0);
+      return;
+    }
+    if (vid.paused) {
+      vid.play();
+      document.getElementById('playPauseBtn').textContent = '⏸ Pause';
+    } else {
+      vid.pause();
+      document.getElementById('playPauseBtn').textContent = '▶ Play';
+    }
+  }
+
+  function toggleMute() {
+    const vid = document.getElementById('stageVideo');
+    vid.muted = !vid.muted;
+    document.getElementById('muteBtn').textContent = vid.muted ? '🔇 Muted' : '🔊 Sound';
+  }
+
+  function toggleLoop() {
+    isLooping = !isLooping;
+    document.getElementById('stageVideo').loop = isLooping;
+    document.getElementById('loopBtn').textContent = isLooping ? '🔁 Loop: ON' : '🔁 Loop: OFF';
+  }
+
+  function cycleSpeed() {
+    speedIdx = (speedIdx + 1) % playbackSpeeds.length;
+    const sp = playbackSpeeds[speedIdx];
+    document.getElementById('stageVideo').playbackRate = sp;
+    document.getElementById('speedBtn').textContent = `⚡ ${sp}x`;
+  }
+
+  function prevVaultItem() {
+    if (!vaultItems.length) return;
+    const next = (currentIndex - 1 + vaultItems.length) % vaultItems.length;
+    playVaultItem(next);
+  }
+
+  function nextVaultItem() {
+    if (!vaultItems.length) return;
+    const next = (currentIndex + 1) % vaultItems.length;
+    playVaultItem(next);
+  }
+
+  function goFullscreen() {
+    const box = document.querySelector('.stage-box');
+    if (box.requestFullscreen) box.requestFullscreen();
+  }
+
+  function cycleItemFolder(id) {
+    const folders = ['Galas', 'Club Reels', 'RA 109 Vault'];
+    const tx = db.transaction('videos', 'readwrite');
+    const store = tx.objectStore('videos');
+    const req = store.get(id);
+    req.onsuccess = () => {
+      const item = req.result;
+      if (!item) return;
+      const nextF = folders[(folders.indexOf(item.folder) + 1) % folders.length];
+      item.folder = nextF;
+      store.put(item);
+      tx.oncomplete = () => {
+        showToast(`Moved to ${nextF}`);
+        loadVault();
+      };
+    };
+  }
+
+  function setAsIntroFromVault(idx) {
+    const item = vaultItems[idx];
+    if (!item || !item.type.startsWith('video/')) {
+      showToast('Select a video file to set as App Intro');
+      return;
+    }
+    setSetting('customIntro', { blob: item.blob, type: item.type, name: item.name });
+    showToast(`Set "${item.name}" as 13s App Intro`);
+  }
+
+  function deleteVaultItem(id) {
+    const tx = db.transaction('videos', 'readwrite');
+    tx.objectStore('videos').delete(id);
+    tx.oncomplete = () => {
+      showToast('Removed from offline vault');
+      loadVault();
+    };
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    await initDB();
+    loadVault();
+    runSplashIntro();
+  });
 </script>
 </body>
 </html>

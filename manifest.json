@@ -1,13 +1,13 @@
 {
-  "name": "Mevunai Moment™ Country Club, Inc ®",
-  "short_name": "MMCC 13-Depts",
+  "name": "Mevunai Moment™ Country Club, Inc. ® — RA 109 Portal",
+  "short_name": "MMCC RA 109",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#1e0308",
-  "theme_color": "#3a0710",
+  "background_color": "#1a0409",
+  "theme_color": "#4a0816",
   "icons": [
     {
-      "src": "master-icon.png",
+      "src": "./emblem.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

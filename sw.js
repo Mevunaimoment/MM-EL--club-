@@ -1,10 +1,17 @@
-const CACHE_NAME = 'mmcc-13-depts-permanent-lock-v27';
-const CORE_ASSETS = ['./', './index.html', './manifest.json'];
+const CACHE_NAME = 'mmcc-ra109-sparkle-interlude-v8-fixed';
+const ASSETS = [
+  './',
+  './index.html',
+  './manifest.json',
+  './emblem.png',
+  './intro-banner.png',
+  './crown-interlude.png'
+];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS)).catch(() => {})
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).catch(() => {})
   );
 });
 
@@ -21,8 +28,8 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request)
       .then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy)).catch(() => {});
+        const clone = res.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone)).catch(() => {});
         return res;
       })
       .catch(() => caches.match(event.request))
