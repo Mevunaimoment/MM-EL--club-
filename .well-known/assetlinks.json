@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.vercel.mmelclub1000.twa",
+        "sha256_cert_fingerprints": ["DD:63:A7:0E:7F:4D:48:46:3A:ED:E1:39:92:1F:65:98:3E:C2:4B:0D:9C:AF:5B:5C:1B:22:FF:52:A2:16:5E:F8"]
+      }
+    }]
