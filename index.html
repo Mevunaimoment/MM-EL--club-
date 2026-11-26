@@ -1,1256 +1,1062 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#2b0610" />
-  <title>Mevunai Moment™ Country Club, Inc. ® — RA 109 Portal</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" href="emblem.png" />
-  <link rel="apple-touch-icon" href="emblem.png" />
-  <style>
-    :root {
-      --bg-deep: #1a0309;
-      --bg-card: rgba(45, 8, 19, 0.88);
-      --bg-card-solid: #2d0813;
-      --gold: #e5c158;
-      --gold-bright: #f7df8b;
-      --gold-dim: rgba(229, 193, 88, 0.32);
-      --emerald: #10b981;
-      --emerald-deep: #064e3b;
-      --text-main: #fdf6e7;
-      --text-muted: #d6c3a5;
-    }
-    body.emerald-theme {
-      --bg-deep: #041d15;
-      --bg-card: rgba(7, 46, 34, 0.9);
-      --bg-card-solid: #072e22;
-    }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: radial-gradient(circle at 50% 0%, #460b1c 0%, var(--bg-deep) 72%);
-      color: var(--text-main);
-      min-height: 100vh;
-      padding-bottom: 86px;
-      overflow-x: hidden;
-    }
-    body.emerald-theme {
-      background: radial-gradient(circle at 50% 0%, #0d4a36 0%, var(--bg-deep) 72%);
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Mevunai Moment™ Country Club, Inc. ® — RA 109</title>
+<link rel="manifest" href="./manifest.json" />
+<link rel="icon" type="image/png" href="./emblem.png" />
+<meta name="theme-color" content="#4a0816" />
+<style>
+  :root {
+    --bg: #180308;
+    --bg2: #2d0610;
+    --card: rgba(42, 8, 17, 0.92);
+    --gold: #d4af37;
+    --gold-light: #f6e299;
+    --emerald: #0f5c45;
+    --text: #fdf6e7;
+    --muted: #cbb799;
+    --border: rgba(212, 175, 55, 0.45);
+  }
+  body.emerald-theme {
+    --bg: #041711;
+    --bg2: #0a2e22;
+    --card: rgba(9, 41, 31, 0.92);
+    --border: rgba(212, 175, 55, 0.55);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: Georgia, 'Times New Roman', serif; }
+  body {
+    background: radial-gradient(circle at top, var(--bg2), var(--bg) 75%);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 84px;
+    overflow-x: hidden;
+  }
+  .gold-btn {
+    background: linear-gradient(135deg, #b88a1e, #f2d479, #b88a1e);
+    color: #1c050a;
+    border: none;
+    border-radius: 999px;
+    padding: 9px 16px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(212,175,55,0.3);
+  }
+  .ghost-btn {
+    background: rgba(255,255,255,0.06);
+    color: var(--gold-light);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(24, 3, 8, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand img { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--gold); object-fit: cover; }
+  .brand h1 { font-size: 13px; color: var(--gold-light); letter-spacing: 0.6px; }
+  .brand p { font-size: 10px; color: var(--muted); }
+  .header-actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+  main { max-width: 680px; margin: 0 auto; padding: 14px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  }
+  .section-title { font-size: 15px; color: var(--gold-light); margin-bottom: 10px; letter-spacing: 0.8px; text-transform: uppercase; }
+  .pass-card {
+    background: linear-gradient(145deg, #3c0815, #1b0309);
+    border: 1.5px solid var(--gold);
+    border-radius: 18px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: bold;
+    background: rgba(15,92,69,0.45);
+    border: 1px solid #2ecc71;
+    color: #9ff7c4;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
+    border-bottom: 1px solid rgba(212,175,55,0.18);
+    gap: 10px;
+  }
+  .row:last-child { border-bottom: none; }
+  .row h3 { font-size: 14px; color: var(--gold-light); }
+  .row p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .tab-view { display: none; }
+  .tab-view.active { display: block; }
+  nav {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 40;
+    background: rgba(20, 2, 7, 0.96);
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 8px 4px;
+  }
+  nav button {
+    background: none; border: none; color: var(--muted);
+    font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer;
+  }
+  nav button.active { color: var(--gold-light); font-weight: bold; }
 
-    /* 13-Second Crown & Pyramid Sparkle Splash Intro */
-    #splash-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: radial-gradient(circle at 50% 42%, #4a0b1d 0%, #160207 82%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      text-align: center;
-      transition: opacity 0.65s ease, visibility 0.65s ease;
-    }
-    #splash-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    #sparkle-canvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-    #custom-intro-video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-      z-index: 1;
-    }
-    .splash-content {
-      position: relative;
-      z-index: 2;
-      max-width: 560px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .crown-banner-frame {
-      width: 100%;
-      border-radius: 18px;
-      border: 2px solid var(--gold);
-      overflow: hidden;
-      box-shadow: 0 0 42px rgba(229, 193, 88, 0.45), 0 18px 40px rgba(0, 0, 0, 0.75);
-      animation: crownFloat 3.6s ease-in-out infinite alternate;
-      background: #23040c;
-    }
-    .crown-banner-frame img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-    }
-    @keyframes crownFloat {
-      0% { transform: scale(1) translateY(0px); box-shadow: 0 0 32px rgba(229, 193, 88, 0.35); }
-      100% { transform: scale(1.025) translateY(-4px); box-shadow: 0 0 58px rgba(229, 193, 88, 0.68); }
-    }
-    .intro-timer-row {
-      width: 100%;
-      margin-top: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      letter-spacing: 1.5px;
-      color: var(--gold-bright);
-      text-transform: uppercase;
-    }
-    .intro-bar-track {
-      width: 100%;
-      height: 5px;
-      background: rgba(255, 255, 255, 0.14);
-      border-radius: 99px;
-      overflow: hidden;
-      margin-top: 8px;
-    }
-    .intro-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--gold), var(--emerald), var(--gold-bright));
-      transition: width 0.1s linear;
-    }
-    .intro-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 18px;
-    }
+  /* Video Stage & Offline Folder */
+  .stage-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #0d0104;
+    border: 1.5px solid var(--gold);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  .stage-box video, .stage-box img {
+    width: 100%; height: 100%; object-fit: contain; display: block;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  .controls-bar {
+    display: flex; flex-wrap: wrap; gap: 6px; align-items: center; justify-content: space-between;
+    margin-top: 8px;
+  }
+  .scrubber { width: 100%; accent-color: var(--gold); margin: 6px 0; }
+  .folder-pills { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+  .pill {
+    padding: 5px 11px; border-radius: 999px; font-size: 11px;
+    border: 1px solid var(--border); background: rgba(255,255,255,0.04); color: var(--muted); cursor: pointer;
+  }
+  .pill.active { background: var(--gold); color: #1a0409; font-weight: bold; }
 
-    /* Buttons & Badges */
-    .btn-gold {
-      background: linear-gradient(135deg, #f3d478 0%, #c89b2c 100%);
-      color: #1f060c;
-      border: none;
-      border-radius: 999px;
-      padding: 10px 18px;
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 0.7px;
-      cursor: pointer;
-      text-transform: uppercase;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-    }
-    .btn-gold:active { transform: scale(0.97); }
-    .btn-outline {
-      background: rgba(20, 4, 9, 0.72);
-      color: var(--gold-bright);
-      border: 1px solid var(--gold);
-      border-radius: 999px;
-      padding: 9px 15px;
-      font-weight: 600;
-      font-size: 12px;
-      cursor: pointer;
-    }
-    .btn-outline:active { transform: scale(0.97); }
+  /* 13-Second Splash Intro */
+  #splashOverlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: radial-gradient(circle at center, #4b0918 0%, #140206 85%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px; text-align: center;
+    transition: opacity 0.9s ease;
+  }
+  #splashCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .splash-content { position: relative; z-index: 2; max-width: 440px; width: 100%; }
+  .splash-media {
+    width: 100%; max-height: 280px; object-fit: cover;
+    border-radius: 18px; border: 2px solid var(--gold);
+    box-shadow: 0 0 36px rgba(212,175,55,0.45);
+    animation: gentleFloat 4s ease-in-out infinite;
+  }
+  @keyframes gentleFloat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+  .progress-wrap {
+    width: 100%; height: 5px; background: rgba(255,255,255,0.12);
+    border-radius: 999px; overflow: hidden; margin: 14px 0 8px;
+  }
+  #splashBar { width: 0%; height: 100%; background: linear-gradient(90deg, #b88a1e, #f7e29c); }
 
-    /* Header */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      background: rgba(26, 3, 9, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--gold-dim);
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    body.emerald-theme header { background: rgba(4, 29, 21, 0.92); }
-    .brand-left { display: flex; align-items: center; gap: 10px; }
-    .brand-left img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 1.5px solid var(--gold);
-      object-fit: cover;
-    }
-    .brand-title {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--gold-bright);
-      letter-spacing: 0.6px;
-    }
-    .brand-sub {
-      font-size: 10px;
-      color: var(--text-muted);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-    .header-pills { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
-    .pill-mini {
-      background: rgba(229, 193, 88, 0.14);
-      border: 1px solid var(--gold-dim);
-      color: var(--gold-bright);
-      border-radius: 999px;
-      padding: 6px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-    }
+  /* 8-Second Delayed Full-Screen Fade-In / Fade-Out Sparkle Interlude */
+  #interludeOverlay {
+    position: fixed; inset: 0; z-index: 95;
+    background: #140206;
+    display: none;
+    opacity: 0;
+    transition: opacity 1.4s ease-in-out;
+    align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  #interludeOverlay.visible { display: flex; }
+  #interludeOverlay.faded-in { opacity: 1; }
+  #interludeMedia {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    animation: interludeZoom 6.5s ease-in-out forwards;
+  }
+  @keyframes interludeZoom {
+    0% { transform: scale(1.0); }
+    100% { transform: scale(1.08); }
+  }
+  #interludeCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+  .interlude-skip {
+    position: absolute; bottom: 26px; right: 20px; z-index: 3;
+    background: rgba(20, 2, 7, 0.72); color: var(--gold-light);
+    border: 1px solid var(--gold); border-radius: 999px;
+    padding: 7px 14px; font-size: 11px; cursor: pointer;
+  }
 
-    /* Main Container */
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 16px;
-    }
-    .tab-section { display: none; }
-    .tab-section.active { display: block; animation: fadeIn 0.25s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
-
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--gold-dim);
-      border-radius: 18px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
-    }
-    .section-kicker {
-      font-size: 10px;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 4px;
-      font-weight: 700;
-    }
-    h2 {
-      margin: 0 0 10px 0;
-      font-size: 18px;
-      color: var(--gold-bright);
-    }
-
-    /* VIP Pass Banner */
-    .vip-hero {
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1.5px solid var(--gold);
-      margin-bottom: 14px;
-      position: relative;
-    }
-    .vip-hero img {
-      width: 100%;
-      display: block;
-      max-height: 220px;
-      object-fit: cover;
-    }
-    .vip-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-top: 10px;
-      border-top: 1px solid var(--gold-dim);
-      font-size: 12px;
-    }
-    .status-active {
-      color: #34d399;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-    }
-
-    /* List rows */
-    .item-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(229, 193, 88, 0.16);
-    }
-    .item-row:last-child { border-bottom: none; padding-bottom: 0; }
-    .item-title { font-weight: 700; font-size: 14px; color: var(--text-main); }
-    .item-desc { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-
-    /* Events Stage Screen & Smooth Player */
-    .stage-monitor {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #0d0205;
-      border-radius: 14px;
-      border: 1.5px solid var(--gold);
-      overflow: hidden;
-      margin-bottom: 10px;
-    }
-    .stage-monitor video,
-    .stage-monitor img.stage-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-      transform: translateZ(0);
-    }
-    .stage-default-banner {
-      width: 100%;
-      height: 100%;
-      position: relative;
-    }
-    .stage-default-banner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .stage-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(18, 3, 7, 0.84);
-      border: 1px solid var(--gold);
-      color: var(--gold-bright);
-      font-size: 10px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      letter-spacing: 1px;
-      z-index: 3;
-    }
-    .scrubber-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--gold-bright);
-      margin-bottom: 10px;
-    }
-    .scrubber-row input[type="range"] {
-      flex: 1;
-      accent-color: var(--gold);
-    }
-    .deck-controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 12px;
-    }
-    .folder-tabs {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 6px;
-      margin-bottom: 10px;
-    }
-    .folder-chip {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--gold-dim);
-      color: var(--text-muted);
-      border-radius: 999px;
-      padding: 6px 12px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-    .folder-chip.active {
-      background: var(--gold);
-      color: #1f060c;
-      border-color: var(--gold);
-    }
-
-    /* 4-Digit Sovereign Padlock Modal */
-    #padlock-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 8888;
-      background: rgba(16, 2, 6, 0.96);
-      backdrop-filter: blur(14px);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      text-align: center;
-    }
-    #padlock-overlay.open { display: flex; }
-    .pin-dots {
-      display: flex;
-      gap: 14px;
-      margin: 16px 0 20px;
-    }
-    .pin-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 2px solid var(--gold);
-      background: transparent;
-    }
-    .pin-dot.filled { background: var(--gold-bright); box-shadow: 0 0 12px var(--gold); }
-    .keypad {
-      display: grid;
-      grid-template-columns: repeat(3, 72px);
-      gap: 12px;
-    }
-    .key-btn {
-      height: 62px;
-      border-radius: 16px;
-      border: 1px solid var(--gold-dim);
-      background: rgba(45, 8, 19, 0.85);
-      color: var(--gold-bright);
-      font-size: 20px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .key-btn:active { background: var(--gold); color: #1f060c; }
-
-    /* Bottom Navigation */
-    nav.bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 50;
-      background: rgba(22, 3, 8, 0.96);
-      border-top: 1px solid var(--gold-dim);
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      padding: 8px 4px;
-    }
-    body.emerald-theme nav.bottom-nav { background: rgba(4, 24, 17, 0.96); }
-    .nav-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 700;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      cursor: pointer;
-    }
-    .nav-btn.active { color: var(--gold-bright); }
-    .nav-icon { font-size: 17px; }
-
-    /* Toast */
-    #toast {
-      position: fixed;
-      bottom: 78px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #1f060c;
-      border: 1px solid var(--gold);
-      color: var(--gold-bright);
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 600;
-      z-index: 9500;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
-    #toast.show { opacity: 1; }
-  </style>
+  /* 4-Digit Padlock */
+  #padlockOverlay {
+    position: fixed; inset: 0; z-index: 90;
+    background: radial-gradient(circle at top, #3c0713, #120105 85%);
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  #padlockOverlay.open { display: flex; }
+  .pin-dots { display: flex; gap: 14px; margin: 16px 0; }
+  .pin-dot {
+    width: 15px; height: 15px; border-radius: 50%;
+    border: 1.5px solid var(--gold); background: transparent;
+  }
+  .pin-dot.filled { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+  .keypad {
+    display: grid; grid-template-columns: repeat(3, 68px); gap: 12px; margin-top: 8px;
+  }
+  .key-btn {
+    height: 58px; border-radius: 50%;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.05);
+    color: var(--gold-light); font-size: 20px; cursor: pointer;
+  }
+  .key-btn:active { background: var(--gold); color: #180308; }
+  .toast {
+    position: fixed; top: 68px; left: 50%; transform: translateX(-50%);
+    background: #140206; border: 1px solid var(--gold); color: var(--gold-light);
+    padding: 8px 16px; border-radius: 999px; font-size: 12px; z-index: 120;
+    display: none;
+  }
+</style>
 </head>
 <body>
 
-  <!-- 13-SECOND CROWN & PYRAMID SPARKLE SPLASH INTRO -->
-  <div id="splash-screen">
-    <canvas id="sparkle-canvas"></canvas>
-    <video id="custom-intro-video" playsinline muted></video>
-    <div class="splash-content">
-      <div class="crown-banner-frame" id="default-crown-stage">
-        <img src="intro-banner.png" alt="Mevunai Moment Country Club, Inc. Crown Crest" />
+<div id="toast" class="toast"></div>
+
+<!-- 13-SECOND MAIN SPLASH INTRO -->
+<div id="splashOverlay">
+  <canvas id="splashCanvas"></canvas>
+  <div class="splash-content">
+    <img id="splashImg" class="splash-media" src="./intro-banner.png" alt="Mevunai Moment Crown" />
+    <video id="splashVid" class="splash-media" style="display:none;" playsinline muted></video>
+    <h2 style="color:var(--gold-light); font-size:17px; margin-top:14px; letter-spacing:1.2px;">MEVUNAI MOMENT™ COUNTRY CLUB, INC. ®</h2>
+    <p id="splashTimerText" style="color:var(--muted); font-size:12px; margin-top:4px;">Sovereign RA 109 Portal • 13.0s</p>
+    <div class="progress-wrap"><div id="splashBar"></div></div>
+    <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:10px;">
+      <button class="ghost-btn" onclick="playGoldChime()">🔊 Gold Chime</button>
+      <label class="ghost-btn" style="cursor:pointer;">
+        🎬 Custom MP4 Intro
+        <input type="file" accept="video/*" style="display:none;" onchange="uploadCustomMedia(event, 'customIntro')" />
+      </label>
+      <button class="gold-btn" onclick="finishIntro()">Enter Portal →</button>
+    </div>
+  </div>
+</div>
+
+<!-- 8-SECOND DELAYED FULL-SCREEN FADE-IN / FADE-OUT SPARKLE INTERLUDE -->
+<div id="interludeOverlay">
+  <img id="interludeMedia" src="./crown-interlude.png" alt="M'M Country Club Crown" />
+  <video id="interludeVideo" style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" playsinline muted></video>
+  <canvas id="interludeCanvas"></canvas>
+  <button class="interlude-skip" onclick="hideInterlude()">Skip ✨</button>
+</div>
+
+<!-- 4-DIGIT SOVEREIGN VAULT PADLOCK -->
+<div id="padlockOverlay">
+  <img src="./emblem.png" style="width:74px; height:74px; border-radius:50%; border:2px solid var(--gold); margin-bottom:10px;" alt="Crest" />
+  <h2 style="color:var(--gold-light); font-size:16px; letter-spacing:1px;">SOVEREIGN VAULT PADLOCK</h2>
+  <p id="pinPrompt" style="color:var(--muted); font-size:12px; margin-top:4px;">Enter 4-Digit PIN (Default: 1325)</p>
+  <div class="pin-dots">
+    <div class="pin-dot" id="dot0"></div>
+    <div class="pin-dot" id="dot1"></div>
+    <div class="pin-dot" id="dot2"></div>
+    <div class="pin-dot" id="dot3"></div>
+  </div>
+  <div class="keypad">
+    <button class="key-btn" onclick="pressKey('1')">1</button>
+    <button class="key-btn" onclick="pressKey('2')">2</button>
+    <button class="key-btn" onclick="pressKey('3')">3</button>
+    <button class="key-btn" onclick="pressKey('4')">4</button>
+    <button class="key-btn" onclick="pressKey('5')">5</button>
+    <button class="key-btn" onclick="pressKey('6')">6</button>
+    <button class="key-btn" onclick="pressKey('7')">7</button>
+    <button class="key-btn" onclick="pressKey('8')">8</button>
+    <button class="key-btn" onclick="pressKey('9')">9</button>
+    <button class="key-btn" style="font-size:12px;" onclick="clearPin()">CLR</button>
+    <button class="key-btn" onclick="pressKey('0')">0</button>
+    <button class="key-btn" style="font-size:12px;" onclick="backspacePin()">⌫</button>
+  </div>
+</div>
+
+<header>
+  <div class="brand">
+    <img src="./emblem.png" alt="Logo" />
+    <div>
+      <h1>Mevunai Moment™</h1>
+      <p>Country Club, Inc. ® • RA 109</p>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="ghost-btn" onclick="replayIntro()">▶ 13s Intro</button>
+    <button class="ghost-btn" onclick="triggerInterlude()">✨ Interlude</button>
+    <button class="ghost-btn" onclick="toggleTheme()">Emerald / Silk</button>
+    <button class="ghost-btn" onclick="lockVault()">🔒 Lock</button>
+  </div>
+</header>
+
+<main>
+  <!-- TAB 1: PASS -->
+  <section id="tab-pass" class="tab-view active">
+    <div class="pass-card">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <div>
+          <p style="font-size:10px; color:var(--gold); letter-spacing:1.2px;">FOUNDING SOVEREIGN MEMBER</p>
+          <h2 style="font-size:19px; color:var(--gold-light); margin:4px 0;">ID: MMCC-RA109-001</h2>
+          <p style="font-size:11px; color:var(--muted);">ALL-ACCESS • VALID THROUGH 2027</p>
+        </div>
+        <span class="badge">● ACTIVE</span>
       </div>
-      <div class="intro-timer-row">
-        <span>✦ SOVEREIGN PORTAL INITIALIZING</span>
-        <span id="intro-countdown">13.0s</span>
-      </div>
-      <div class="intro-bar-track">
-        <div class="intro-bar-fill" id="intro-bar-fill"></div>
-      </div>
-      <div class="intro-actions">
-        <button class="btn-outline" onclick="playSparkleChime()">🔊 Gold Chime</button>
-        <label class="btn-outline" style="cursor:pointer;">
-          🎬 Add My Own Video
-          <input type="file" id="splash-video-input" accept="video/*" style="display:none" />
+      <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="ghost-btn" onclick="startPinChange()">🔑 Change 4-Digit PIN</button>
+        <label class="ghost-btn" style="cursor:pointer;">
+          🎬 Replace Interlude Media
+          <input type="file" accept="image/*,video/*" style="display:none;" onchange="uploadCustomMedia(event, 'customInterlude')" />
         </label>
-        <button class="btn-gold" onclick="finishIntro()">Enter Portal ↗</button>
+        <button class="ghost-btn" onclick="resetCustomMedia()">↺ Reset Media</button>
       </div>
     </div>
-  </div>
 
-  <!-- 4-DIGIT SOVEREIGN VAULT PADLOCK -->
-  <div id="padlock-overlay">
-    <img src="emblem.png" alt="Crown Crest" style="width:74px;height:74px;border-radius:50%;border:2px solid var(--gold);object-fit:cover;margin-bottom:10px;" />
-    <div class="section-kicker">SOVEREIGN VAULT SECURITY</div>
-    <h2 id="padlock-title" style="margin-bottom:4px;">Enter 4-Digit Access PIN</h2>
-    <div id="padlock-sub" style="font-size:12px;color:var(--text-muted);">Default Founding PIN: 1325</div>
-    <div class="pin-dots" id="pin-dots">
-      <div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div><div class="pin-dot"></div>
-    </div>
-    <div class="keypad">
-      <button class="key-btn" onclick="pressPin('1')">1</button>
-      <button class="key-btn" onclick="pressPin('2')">2</button>
-      <button class="key-btn" onclick="pressPin('3')">3</button>
-      <button class="key-btn" onclick="pressPin('4')">4</button>
-      <button class="key-btn" onclick="pressPin('5')">5</button>
-      <button class="key-btn" onclick="pressPin('6')">6</button>
-      <button class="key-btn" onclick="pressPin('7')">7</button>
-      <button class="key-btn" onclick="pressPin('8')">8</button>
-      <button class="key-btn" onclick="pressPin('9')">9</button>
-      <button class="key-btn" onclick="clearPin()">⌫</button>
-      <button class="key-btn" onclick="pressPin('0')">0</button>
-      <button class="key-btn" onclick="closePadlockIfSetting()" style="font-size:13px;">ESC</button>
-    </div>
-  </div>
-
-  <!-- HEADER -->
-  <header>
-    <div class="brand-left">
-      <img src="emblem.png" alt="Mevunai Moment Crown" />
-      <div>
-        <div class="brand-title">MEVUNAI MOMENT™</div>
-        <div class="brand-sub">Country Club, Inc. ® • RA 109</div>
+    <div class="card" style="margin-top:14px;">
+      <div class="section-title">Sovereign Privileges</div>
+      <div class="row">
+        <div>
+          <h3>Emerald Sanctuary Spa</h3>
+          <p>Thermal bathhouse & private massage suite</p>
+        </div>
+        <button class="gold-btn" onclick="showToast('Checked in at Emerald Sanctuary Spa')">Check In</button>
+      </div>
+      <div class="row">
+        <div>
+          <h3>RA 109 Private Lounge</h3>
+          <p>Priority velvet booth & sommelier service</p>
+        </div>
+        <button class="gold-btn" onclick="showToast('RA 109 Lounge host notified')">Notify</button>
       </div>
     </div>
-    <div class="header-pills">
-      <button class="pill-mini" onclick="startIntro()">▶ 13s Intro</button>
-      <button class="pill-mini" onclick="toggleTheme()">🌿 Theme</button>
-      <button class="pill-mini" onclick="openPadlock('unlock')">🔒 Lock</button>
+  </section>
+
+  <!-- TAB 2: BOOK -->
+  <section id="tab-book" class="tab-view">
+    <div class="card">
+      <div class="section-title">Book Tee Time or Court</div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:11px; color:var(--muted);">Preferred Time Slot:</label>
+        <select id="slotSelect" style="width:100%; margin-top:4px; padding:8px; border-radius:10px; background:#180308; color:var(--gold-light); border:1px solid var(--border);">
+          <option>09:30 AM — Morning Sovereign Tee</option>
+          <option>01:00 PM — Afternoon Pavilion</option>
+          <option>05:30 PM — Sunset Floodlit Session</option>
+        </select>
+      </div>
+      <div class="row">
+        <div><h3>Championship Golf — 18 Holes</h3><p>Private caddie & gold-trim cart</p></div>
+        <button class="gold-btn" onclick="showToast('Championship Golf reserved')">Reserve</button>
+      </div>
+      <div class="row">
+        <div><h3>Royal Clay Tennis — Court 1</h3><p>Championship red clay & ball service</p></div>
+        <button class="gold-btn" onclick="showToast('Court 1 reserved')">Reserve</button>
+      </div>
+      <div class="row">
+        <div><h3>Emerald Padel Pavilion</h3><p>Panoramic glass court & lounge</p></div>
+        <button class="gold-btn" onclick="showToast('Emerald Padel reserved')">Reserve</button>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <!-- TAB 1: PASS & PRIVILEGES -->
-    <section id="tab-pass" class="tab-section active">
-      <div class="card">
-        <div class="section-kicker">FOUNDING SOVEREIGN CREDENTIAL</div>
-        <h2>All-Access Member Pass</h2>
-        <div class="vip-hero">
-          <img src="intro-banner.png" alt="Mevunai Moment Country Club Crown Banner" />
+  <!-- TAB 3: DINING -->
+  <section id="tab-dining" class="tab-view">
+    <div class="card">
+      <div class="section-title">The Crimson Silk Dining Room</div>
+      <div class="row">
+        <div><h3>Gold-Leaf Wagyu Ribeye — $95</h3><p>24K edible gold leaf, black truffle jus</p></div>
+        <button class="gold-btn" onclick="showToast('Wagyu Ribeye sent to kitchen')">Order</button>
+      </div>
+      <div class="row">
+        <div><h3>Emerald Reserve Martini — $24</h3><p>Botanical reserve gin, chartreuse mist</p></div>
+        <button class="gold-btn" onclick="showToast('Emerald Reserve Martini ordered')">Order</button>
+      </div>
+      <div class="row">
+        <div><h3>Saffron & Pistachio Baklava — $19</h3><p>Warm honey blossom syrup & gold dust</p></div>
+        <button class="gold-btn" onclick="showToast('Baklava dessert ordered')">Order</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: EVENTS & SMOOTH OFFLINE VIDEO VAULT -->
+  <section id="tab-events" class="tab-view">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:6px;">
+        <div class="section-title" style="margin:0;">Event Stage & Offline Video Vault</div>
+        <label class="gold-btn" style="cursor:pointer;">
+          ＋ Save Videos / Photos Offline
+          <input type="file" accept="video/*,image/*,.mp4,.mov,.webm,.m4v,.mkv" multiple style="display:none;" onchange="saveToVault(event)" />
+        </label>
+      </div>
+
+      <div class="stage-box">
+        <img id="stageImage" src="./crown-interlude.png" alt="Stage Preview" />
+        <video id="stageVideo" style="display:none;" playsinline webkit-playsinline preload="metadata"></video>
+      </div>
+
+      <input type="range" id="videoScrubber" class="scrubber" min="0" max="100" value="0" oninput="seekVideo(this.value)" />
+      <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--muted);">
+        <span id="timeNow">0:00</span>
+        <span id="nowPlayingTitle">M’M ™ countryclub ® — Crown Showcase</span>
+        <span id="timeTotal">0:00</span>
+      </div>
+
+      <div class="controls-bar">
+        <div style="display:flex; gap:5px; flex-wrap:wrap;">
+          <button class="ghost-btn" onclick="prevVaultItem()">⏮ Prev</button>
+          <button class="gold-btn" id="playPauseBtn" onclick="togglePlayPause()">▶ Play</button>
+          <button class="ghost-btn" onclick="nextVaultItem()">⏭ Next</button>
+          <button class="ghost-btn" id="muteBtn" onclick="toggleMute()">🔊 Sound</button>
         </div>
-        <div class="vip-meta">
-          <div>
-            <div style="font-weight:800;color:var(--gold-bright);">ID: MMCC-RA109-001 • ALL-ACCESS</div>
-            <div style="color:var(--text-muted);font-size:11px;">Valid Through 2027 • Mevunai Moment™ Country Club, Inc. ®</div>
-          </div>
-          <span class="status-active">● ACTIVE</span>
-        </div>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;">
-          <button class="btn-outline" onclick="openPadlock('set')">🔑 Change 4-Digit PIN</button>
-          <label class="btn-outline" style="cursor:pointer;">
-            🎬 Custom Intro Video
-            <input type="file" id="pass-intro-input" accept="video/*" style="display:none" />
-          </label>
-          <button class="btn-outline" onclick="resetCustomIntro()">↺ Default Crown Intro</button>
+        <div style="display:flex; gap:5px; flex-wrap:wrap;">
+          <button class="ghost-btn" id="loopBtn" onclick="toggleLoop()">🔁 Loop: ON</button>
+          <button class="ghost-btn" onclick="cycleSpeed()" id="speedBtn">⚡ 1.0x</button>
+          <button class="ghost-btn" onclick="goFullscreen()">⛶ Fullscreen</button>
         </div>
       </div>
 
-      <div class="card">
-        <div class="section-kicker">INSTANT SUITE ACCESS</div>
-        <h2>Member Privileges</h2>
-        <div class="item-row">
-          <div>
-            <div class="item-title">Emerald Sanctuary Spa & Thermal Suite</div>
-            <div class="item-desc">Private hammam, mineral plunge & gold-leaf massage</div>
-          </div>
-          <button class="btn-gold" onclick="showToast('Checked in at Emerald Sanctuary Spa')">Check In</button>
-        </div>
-        <div class="item-row">
-          <div>
-            <div class="item-title">RA 109 Private Penthouse Lounge</div>
-            <div class="item-desc">Dedicated butler, humidor & rooftop helipad arrival</div>
-          </div>
-          <button class="btn-gold" onclick="showToast('Private Butler Notified — RA 109 Lounge')">Notify</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 2: BOOKING -->
-    <section id="tab-book" class="tab-section">
-      <div class="card">
-        <div class="section-kicker">CHAMPIONSHIP GROUNDS</div>
-        <h2>Book Tee Time or Court</h2>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
-          <button class="folder-chip active" onclick="selectSlot(this,'08:30 AM')">08:30 AM</button>
-          <button class="folder-chip" onclick="selectSlot(this,'11:00 AM')">11:00 AM</button>
-          <button class="folder-chip" onclick="selectSlot(this,'03:30 PM')">03:30 PM</button>
-          <button class="folder-chip" onclick="selectSlot(this,'06:00 PM')">06:00 PM</button>
-        </div>
-        <div class="item-row">
-          <div>
-            <div class="item-title">Championship Golf — 18 Holes</div>
-            <div class="item-desc">Caddie & gold-trimmed cart included</div>
-          </div>
-          <button class="btn-gold" onclick="reserveGround('Championship Golf')">Reserve</button>
-        </div>
-        <div class="item-row">
-          <div>
-            <div class="item-title">Royal Clay Tennis — Court 1</div>
-            <div class="item-desc">Private shaded pavilion & ball machine</div>
-          </div>
-          <button class="btn-gold" onclick="reserveGround('Royal Clay Tennis')">Reserve</button>
-        </div>
-        <div class="item-row">
-          <div>
-            <div class="item-title">Emerald Padel Pavilion</div>
-            <div class="item-desc">Panoramic glass court & chilled towels</div>
-          </div>
-          <button class="btn-gold" onclick="reserveGround('Emerald Padel')">Reserve</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 3: DINING -->
-    <section id="tab-dining" class="tab-section">
-      <div class="card">
-        <div class="section-kicker">PRIVATE CULINARY SALON</div>
-        <h2>The Crimson Silk Dining Room</h2>
-        <div class="item-row">
-          <div>
-            <div class="item-title">24K Gold-Leaf Wagyu Ribeye — $95</div>
-            <div class="item-desc">A5 Miyazaki cut, black truffle jus & smoked salt</div>
-          </div>
-          <button class="btn-gold" onclick="showToast('Ordered: Gold-Leaf Wagyu Ribeye')">Order</button>
-        </div>
-        <div class="item-row">
-          <div>
-            <div class="item-title">Emerald Reserve Martini — $24</div>
-            <div class="item-desc">Botanical gin, dry vermouth & gold-dusted olive</div>
-          </div>
-          <button class="btn-gold" onclick="showToast('Ordered: Emerald Reserve Martini')">Order</button>
-        </div>
-        <div class="item-row">
-          <div>
-            <div class="item-title">Saffron & Pistachio Baklava — $19</div>
-            <div class="item-desc">Layered honey pastry with Damascus rose cream</div>
-          </div>
-          <button class="btn-gold" onclick="showToast('Ordered: Saffron & Pistachio Baklava')">Order</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 4: EVENTS & SMOOTH OFFLINE VIDEO VAULT -->
-    <section id="tab-events" class="tab-section">
-      <div class="card">
-        <div class="section-kicker">LIVE STAGE & OFFLINE MEDIA VAULT</div>
-        <h2>Events Cinema & Video Folder</h2>
-
-        <div class="stage-monitor" id="stage-monitor">
-          <span class="stage-badge" id="stage-badge">✦ CROWN CREST STAGE</span>
-          <div class="stage-default-banner" id="stage-default-banner">
-            <img src="intro-banner.png" alt="Mevunai Moment Crown Stage" />
-          </div>
-          <video id="stage-video" playsinline preload="metadata"></video>
-          <img id="stage-photo" class="stage-img" alt="Saved Flyer" />
-        </div>
-
-        <div class="scrubber-row">
-          <span id="time-cur">0:00</span>
-          <input type="range" id="seek-bar" min="0" max="100" value="0" step="0.1" />
-          <span id="time-dur">0:00</span>
-        </div>
-
-        <div class="deck-controls">
-          <button class="pill-mini" onclick="prevMedia()">⏮ Prev</button>
-          <button class="btn-gold" id="play-pause-btn" onclick="togglePlayPause()">▶ Play</button>
-          <button class="pill-mini" onclick="nextMedia()">⏭ Next</button>
-          <button class="pill-mini" id="mute-btn" onclick="toggleMute()">🔊 Sound</button>
-          <button class="pill-mini" id="loop-btn" onclick="toggleLoop()">🔁 Loop: ON</button>
-          <button class="pill-mini" id="speed-btn" onclick="cycleSpeed()">⚡ 1.0x</button>
-          <button class="pill-mini" onclick="goFullscreen()">⛶ Full</button>
-        </div>
-
-        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
-          <label class="btn-gold" style="cursor:pointer;">
-            ＋ Save Videos / Flyers Offline
-            <input type="file" id="vault-upload-input" accept="video/*,image/*,.mp4,.mov,.webm,.m4v,.mkv" multiple style="display:none" />
-          </label>
-          <select id="upload-folder-select" class="pill-mini" style="background:var(--bg-card-solid);">
-            <option value="Galas">Folder: Galas</option>
-            <option value="Club Reels">Folder: Club Reels</option>
-            <option value="RA 109 Vault">Folder: RA 109 Vault</option>
-          </select>
-        </div>
-
-        <div class="folder-tabs" id="folder-tabs">
-          <button class="folder-chip active" onclick="filterFolder(this,'All')">All Saved</button>
-          <button class="folder-chip" onclick="filterFolder(this,'Galas')">Galas</button>
-          <button class="folder-chip" onclick="filterFolder(this,'Club Reels')">Club Reels</button>
-          <button class="folder-chip" onclick="filterFolder(this,'RA 109 Vault')">RA 109 Vault</button>
-        </div>
-
-        <div id="vault-list"></div>
+      <div class="folder-pills">
+        <button class="pill active" onclick="filterFolder('All', this)">All Saved</button>
+        <button class="pill" onclick="filterFolder('Galas', this)">Galas</button>
+        <button class="pill" onclick="filterFolder('Club Reels', this)">Club Reels</button>
+        <button class="pill" onclick="filterFolder('RA 109 Vault', this)">RA 109 Vault</button>
       </div>
 
-      <div class="card">
-        <div class="section-kicker">SOVEREIGN CALENDAR</div>
-        <h2>Exclusive Gatherings</h2>
-        <div class="item-row">
-          <div>
-            <div class="item-title">RA 109 Annual Crown Gala • Dec 18</div>
-            <div class="item-desc">Black-tie atrium reception & live symphony</div>
-          </div>
-          <button class="btn-gold" onclick="showToast('RSVP Confirmed: RA 109 Annual Crown Gala')">RSVP</button>
-        </div>
-        <div class="item-row">
-          <div>
-            <div class="item-title">Midnight Emerald Cigar & Jazz • Dec 24</div>
-            <div class="item-desc">Rooftop terrace tasting & private quartet</div>
-          </div>
-          <button class="btn-gold" onclick="showToast('RSVP Confirmed: Midnight Emerald Cigar & Jazz')">RSVP</button>
-        </div>
+      <div id="vaultList"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Exclusive Gatherings</div>
+      <div class="row">
+        <div><h3>RA 109 Annual Gala — Dec 18</h3><p>Black tie & 24K gold masquerade</p></div>
+        <button class="gold-btn" onclick="showToast('RSVP confirmed for RA 109 Gala')">RSVP</button>
       </div>
-    </section>
-  </main>
+      <div class="row">
+        <div><h3>Midnight Emerald Cigar & Jazz — Dec 24</h3><p>Private terrace & live quartet</p></div>
+        <button class="gold-btn" onclick="showToast('RSVP confirmed for Cigar & Jazz')">RSVP</button>
+      </div>
+    </div>
+  </section>
+</main>
 
-  <nav class="bottom-nav">
-    <button class="nav-btn active" onclick="switchTab('pass', this)"><span class="nav-icon">👑</span>PASS</button>
-    <button class="nav-btn" onclick="switchTab('book', this)"><span class="nav-icon">⛳</span>BOOK</button>
-    <button class="nav-btn" onclick="switchTab('dining', this)"><span class="nav-icon">🥂</span>DINING</button>
-    <button class="nav-btn" onclick="switchTab('events', this)"><span class="nav-icon">🎬</span>EVENTS</button>
-  </nav>
+<nav>
+  <button class="active" onclick="switchTab('pass', this)">👑<span>PASS</span></button>
+  <button onclick="switchTab('book', this)">⛳<span>BOOK</span></button>
+  <button onclick="switchTab('dining', this)">🍷<span>DINING</span></button>
+  <button onclick="switchTab('events', this)">📺<span>EVENTS</span></button>
+</nav>
 
-  <div id="toast"></div>
+<script>
+  let db = null;
+  let vaultItems = [];
+  let currentFolder = 'All';
+  let currentIndex = -1;
+  let isLooping = true;
+  let playbackSpeeds = [1.0, 1.25, 1.5, 2.0, 0.75];
+  let speedIdx = 0;
+  let rafId = null;
+  let interludeTimeout = null;
+  let interludeEndTimeout = null;
+  let activeBlobUrl = null;
 
-  <script>
-    // IndexedDB setup for offline videos & custom intro
-    const DB_NAME = "MMCC_RA109_Crown_Vault";
-    const STORE_NAME = "media_items";
-    let db = null;
-    let savedMedia = [];
-    let activeFolder = "All";
-    let currentMediaIndex = -1;
-    let currentBlobUrl = null;
-    let introBlobUrl = null;
-    let loopEnabled = true;
-    const speeds = [1.0, 1.25, 1.5, 2.0, 0.75];
-    let speedIdx = 0;
-    let selectedSlot = "08:30 AM";
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.display = 'block';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.style.display = 'none'; }, 2600);
+  }
 
-    function openDB() {
-      return new Promise((resolve) => {
-        const req = indexedDB.open(DB_NAME, 1);
-        req.onupgradeneeded = (e) => {
-          const d = e.target.result;
-          if (!d.objectStoreNames.contains(STORE_NAME)) {
-            d.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
-          }
-        };
-        req.onsuccess = (e) => { db = e.target.result; resolve(db); };
-        req.onerror = () => resolve(null);
-      });
-    }
+  function toggleTheme() {
+    document.body.classList.toggle('emerald-theme');
+    showToast(document.body.classList.contains('emerald-theme') ? 'Emerald Velvet Theme Active' : 'Royal Crimson Silk Active');
+  }
 
-    function getAllMedia() {
-      return new Promise((resolve) => {
-        if (!db) return resolve([]);
-        const tx = db.transaction(STORE_NAME, "readonly");
-        const req = tx.objectStore(STORE_NAME).getAll();
-        req.onsuccess = () => resolve(req.result || []);
-        req.onerror = () => resolve([]);
-      });
-    }
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-view').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  }
 
-    function addMediaItem(item) {
-      return new Promise((resolve) => {
-        if (!db) return resolve(null);
-        const tx = db.transaction(STORE_NAME, "readwrite");
-        const req = tx.objectStore(STORE_NAME).add(item);
-        req.onsuccess = () => resolve(req.result);
-        req.onerror = () => resolve(null);
-      });
-    }
+  // IndexedDB Setup
+  function initDB() {
+    return new Promise((resolve) => {
+      const req = indexedDB.open('MMCC_RA109_Vault_V8', 1);
+      req.onupgradeneeded = (e) => {
+        const d = e.target.result;
+        if (!d.objectStoreNames.contains('videos')) d.createObjectStore('videos', { keyPath: 'id', autoIncrement: true });
+        if (!d.objectStoreNames.contains('settings')) d.createObjectStore('settings', { keyPath: 'key' });
+      };
+      req.onsuccess = (e) => {
+        db = e.target.result;
+        resolve(db);
+      };
+      req.onerror = () => resolve(null);
+    });
+  }
 
-    function deleteMediaItem(id) {
-      return new Promise((resolve) => {
-        if (!db) return resolve();
-        const tx = db.transaction(STORE_NAME, "readwrite");
-        tx.objectStore(STORE_NAME).delete(id);
-        tx.oncomplete = () => resolve();
-      });
-    }
+  function getSetting(key) {
+    return new Promise((resolve) => {
+      if (!db) return resolve(null);
+      const tx = db.transaction('settings', 'readonly');
+      const req = tx.objectStore('settings').get(key);
+      req.onsuccess = () => resolve(req.result ? req.result.value : null);
+      req.onerror = () => resolve(null);
+    });
+  }
 
-    // Sparkle Canvas Animation for 13-Second Crown Intro
-    const canvas = document.getElementById("sparkle-canvas");
-    const ctx = canvas.getContext("2d");
-    let sparkles = [];
-    let animFrameId = null;
+  function setSetting(key, value) {
+    if (!db) return;
+    const tx = db.transaction('settings', 'readwrite');
+    tx.objectStore('settings').put({ key, value });
+  }
 
-    function resizeCanvas() {
+  // Sparkle Particle Renderer
+  function startSparkles(canvasId) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return () => {};
+    const ctx = canvas.getContext('2d');
+    let running = true;
+    const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-    }
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
-
-    function initSparkles() {
-      sparkles = [];
-      for (let i = 0; i < 85; i++) {
-        sparkles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          r: 1.5 + Math.random() * 3.5,
-          vy: -0.35 - Math.random() * 0.85,
-          phase: Math.random() * Math.PI * 2,
-          color: Math.random() > 0.25 ? "#f7df8b" : "#34d399"
-        });
-      }
-    }
-
-    function drawSparkles() {
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    const particles = Array.from({ length: 75 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: 1.5 + Math.random() * 3.2,
+      vy: 0.4 + Math.random() * 1.1,
+      phase: Math.random() * Math.PI * 2,
+      gold: Math.random() > 0.25
+    }));
+    function draw() {
+      if (!running) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      sparkles.forEach((s) => {
-        s.y += s.vy;
-        s.phase += 0.06;
-        if (s.y < -10) { s.y = canvas.height + 10; s.x = Math.random() * canvas.width; }
-        const alpha = 0.35 + 0.65 * Math.abs(Math.sin(s.phase));
+      particles.forEach(p => {
+        p.y -= p.vy;
+        p.phase += 0.06;
+        if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+        const alpha = 0.35 + 0.65 * Math.abs(Math.sin(p.phase));
         ctx.save();
-        ctx.globalAlpha = alpha;
-        ctx.fillStyle = s.color;
-        ctx.translate(s.x, s.y);
+        ctx.translate(p.x, p.y);
+        ctx.fillStyle = p.gold ? `rgba(246, 226, 153, ${alpha})` : `rgba(46, 204, 113, ${alpha})`;
         ctx.beginPath();
-        ctx.moveTo(0, -s.r * 2.2);
-        ctx.lineTo(s.r * 0.6, -s.r * 0.6);
-        ctx.lineTo(s.r * 2.2, 0);
-        ctx.lineTo(s.r * 0.6, s.r * 0.6);
-        ctx.lineTo(0, s.r * 2.2);
-        ctx.lineTo(-s.r * 0.6, s.r * 0.6);
-        ctx.lineTo(-s.r * 2.2, 0);
-        ctx.lineTo(-s.r * 0.6, -s.r * 0.6);
+        ctx.moveTo(0, -p.r * 2);
+        ctx.lineTo(p.r * 0.6, -p.r * 0.6);
+        ctx.lineTo(p.r * 2, 0);
+        ctx.lineTo(p.r * 0.6, p.r * 0.6);
+        ctx.lineTo(0, p.r * 2);
+        ctx.lineTo(-p.r * 0.6, p.r * 0.6);
+        ctx.lineTo(-p.r * 2, 0);
+        ctx.lineTo(-p.r * 0.6, -p.r * 0.6);
         ctx.closePath();
         ctx.fill();
         ctx.restore();
       });
-      animFrameId = requestAnimationFrame(drawSparkles);
+      requestAnimationFrame(draw);
     }
+    draw();
+    return () => { running = false; window.removeEventListener('resize', resize); };
+  }
 
-    function playSparkleChime() {
-      try {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        const ac = new AudioCtx();
-        const notes = [523.25, 659.25, 783.99, 1046.5];
-        notes.forEach((freq, idx) => {
-          const osc = ac.createOscillator();
-          const gain = ac.createGain();
-          osc.type = "sine";
-          osc.frequency.value = freq;
-          gain.gain.setValueAtTime(0.001, ac.currentTime + idx * 0.16);
-          gain.gain.exponentialRampToValueAtTime(0.08, ac.currentTime + idx * 0.16 + 0.05);
-          gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + idx * 0.16 + 1.1);
-          osc.connect(gain);
-          gain.connect(ac.destination);
-          osc.start(ac.currentTime + idx * 0.16);
-          osc.stop(ac.currentTime + idx * 0.16 + 1.15);
-        });
-      } catch (e) {}
-    }
-
-    // 13-Second Intro Controller
-    let introTimer = null;
-    const INTRO_DURATION = 13000;
-
-    async function startIntro() {
-      const splash = document.getElementById("splash-screen");
-      const customVid = document.getElementById("custom-intro-video");
-      const defaultStage = document.getElementById("default-crown-stage");
-      const countdownEl = document.getElementById("intro-countdown");
-      const barEl = document.getElementById("intro-bar-fill");
-
-      splash.classList.remove("hidden");
-      initSparkles();
-      if (animFrameId) cancelAnimationFrame(animFrameId);
-      drawSparkles();
-
-      const customId = Number(localStorage.getItem("mmcc_custom_intro_id") || 0);
-      const customItem = savedMedia.find((m) => m.id === customId && m.type.startsWith("video/"));
-
-      if (customItem && customItem.blob) {
-        if (introBlobUrl) URL.revokeObjectURL(introBlobUrl);
-        introBlobUrl = URL.createObjectURL(customItem.blob);
-        customVid.src = introBlobUrl;
-        customVid.style.display = "block";
-        defaultStage.style.opacity = "0.22";
-        customVid.play().catch(() => {});
-      } else {
-        customVid.pause();
-        customVid.style.display = "none";
-        defaultStage.style.opacity = "1";
-      }
-
-      const startTime = performance.now();
-      if (introTimer) clearInterval(introTimer);
-      introTimer = setInterval(() => {
-        const elapsed = performance.now() - startTime;
-        const rem = Math.max(0, (INTRO_DURATION - elapsed) / 1000);
-        countdownEl.textContent = rem.toFixed(1) + "s";
-        barEl.style.width = Math.min(100, (elapsed / INTRO_DURATION) * 100) + "%";
-        if (elapsed >= INTRO_DURATION) finishIntro();
-      }, 80);
-    }
-
-    function finishIntro() {
-      if (introTimer) clearInterval(introTimer);
-      if (animFrameId) cancelAnimationFrame(animFrameId);
-      const customVid = document.getElementById("custom-intro-video");
-      customVid.pause();
-      document.getElementById("splash-screen").classList.add("hidden");
-    }
-
-    async function saveCustomIntroFile(file) {
-      if (!file) return;
-      const id = await addMediaItem({
-        name: file.name,
-        type: file.type || "video/mp4",
-        folder: "RA 109 Vault",
-        blob: file,
-        createdAt: Date.now()
+  // Gold Chime Audio
+  function playGoldChime() {
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      const ac = new AC();
+      [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+        const osc = ac.createOscillator();
+        const gain = ac.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.001, ac.currentTime + i * 0.14);
+        gain.gain.exponentialRampToValueAtTime(0.08, ac.currentTime + i * 0.14 + 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + i * 0.14 + 1.4);
+        osc.connect(gain);
+        gain.connect(ac.destination);
+        osc.start(ac.currentTime + i * 0.14);
+        osc.stop(ac.currentTime + i * 0.14 + 1.5);
       });
-      if (id) {
-        localStorage.setItem("mmcc_custom_intro_id", String(id));
-        savedMedia = await getAllMedia();
-        renderVaultList();
-        showToast("Custom Intro Video Saved!");
-        startIntro();
+    } catch (e) {}
+  }
+
+  // 13-Second Splash Intro Logic
+  let splashInterval = null;
+  let stopSplashSparkles = null;
+  async function runSplashIntro() {
+    const overlay = document.getElementById('splashOverlay');
+    const bar = document.getElementById('splashBar');
+    const txt = document.getElementById('splashTimerText');
+    const img = document.getElementById('splashImg');
+    const vid = document.getElementById('splashVid');
+
+    overlay.style.display = 'flex';
+    overlay.style.opacity = '1';
+    if (stopSplashSparkles) stopSplashSparkles();
+    stopSplashSparkles = startSparkles('splashCanvas');
+
+    const customIntro = await getSetting('customIntro');
+    if (customIntro && customIntro.blob) {
+      img.style.display = 'none';
+      vid.style.display = 'block';
+      vid.src = URL.createObjectURL(customIntro.blob);
+      vid.play().catch(() => {});
+    } else {
+      vid.pause();
+      vid.style.display = 'none';
+      img.style.display = 'block';
+    }
+
+    const totalMs = 13000;
+    const start = Date.now();
+    clearInterval(splashInterval);
+    splashInterval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const pct = Math.min(100, (elapsed / totalMs) * 100);
+      const rem = Math.max(0, (totalMs - elapsed) / 1000).toFixed(1);
+      bar.style.width = pct + '%';
+      txt.textContent = `Sovereign RA 109 Portal • ${rem}s`;
+      if (elapsed >= totalMs) {
+        finishIntro();
       }
-    }
+    }, 80);
+  }
 
-    function resetCustomIntro() {
-      localStorage.removeItem("mmcc_custom_intro_id");
-      showToast("Restored 24K Crown & Pyramid Intro");
-    }
+  function finishIntro() {
+    clearInterval(splashInterval);
+    const overlay = document.getElementById('splashOverlay');
+    const vid = document.getElementById('splashVid');
+    vid.pause();
+    overlay.style.opacity = '0';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      if (stopSplashSparkles) stopSplashSparkles();
+      scheduleEightSecondInterlude();
+    }, 850);
+  }
 
-    document.getElementById("splash-video-input").addEventListener("change", (e) => {
-      if (e.target.files && e.target.files[0]) saveCustomIntroFile(e.target.files[0]);
-    });
-    document.getElementById("pass-intro-input").addEventListener("change", (e) => {
-      if (e.target.files && e.target.files[0]) saveCustomIntroFile(e.target.files[0]);
-    });
+  function replayIntro() {
+    clearTimeout(interludeTimeout);
+    runSplashIntro();
+  }
 
-    // 4-Digit Sovereign Padlock
-    let pinBuffer = "";
-    let pinMode = "unlock";
-    let tempNewPin = "";
+  // 8-Second Delayed Full-Screen Fade-In / Fade-Out Sparkle Interlude
+  let stopInterludeSparkles = null;
+  function scheduleEightSecondInterlude() {
+    clearTimeout(interludeTimeout);
+    interludeTimeout = setTimeout(() => {
+      triggerInterlude();
+    }, 8000);
+  }
 
-    function openPadlock(mode) {
-      pinMode = mode;
-      pinBuffer = "";
-      tempNewPin = "";
-      updatePinDots();
-      document.getElementById("padlock-title").textContent = mode === "set" ? "Enter New 4-Digit PIN" : "Enter 4-Digit Access PIN";
-      document.getElementById("padlock-sub").textContent = mode === "set" ? "Choose a private 4-digit code" : "Sovereign Vault Locked";
-      document.getElementById("padlock-overlay").classList.add("open");
-    }
+  async function triggerInterlude() {
+    clearTimeout(interludeTimeout);
+    clearTimeout(interludeEndTimeout);
+    const overlay = document.getElementById('interludeOverlay');
+    const img = document.getElementById('interludeMedia');
+    const vid = document.getElementById('interludeVideo');
 
-    function closePadlockIfSetting() {
-      if (pinMode === "set") {
-        document.getElementById("padlock-overlay").classList.remove("open");
+    const customInterlude = await getSetting('customInterlude');
+    if (customInterlude && customInterlude.blob) {
+      const url = URL.createObjectURL(customInterlude.blob);
+      if (customInterlude.type && customInterlude.type.startsWith('video/')) {
+        img.style.display = 'none';
+        vid.style.display = 'block';
+        vid.src = url;
+        vid.play().catch(() => {});
       } else {
-        showToast("Enter your 4-digit PIN to unlock");
+        vid.style.display = 'none';
+        img.style.display = 'block';
+        img.src = url;
       }
+    } else {
+      vid.style.display = 'none';
+      img.style.display = 'block';
+      img.src = './crown-interlude.png';
     }
 
-    function updatePinDots() {
-      const dots = document.querySelectorAll("#pin-dots .pin-dot");
-      dots.forEach((d, i) => d.classList.toggle("filled", i < pinBuffer.length));
-    }
+    overlay.classList.add('visible');
+    if (stopInterludeSparkles) stopInterludeSparkles();
+    stopInterludeSparkles = startSparkles('interludeCanvas');
 
-    function clearPin() {
-      pinBuffer = pinBuffer.slice(0, -1);
-      updatePinDots();
-    }
-
-    function pressPin(digit) {
-      if (pinBuffer.length >= 4) return;
-      pinBuffer += digit;
-      updatePinDots();
-      if (pinBuffer.length === 4) {
-        setTimeout(() => handleCompletePin(), 120);
-      }
-    }
-
-    function handleCompletePin() {
-      const savedPin = localStorage.getItem("mmcc_vault_pin") || "1325";
-      if (pinMode === "unlock") {
-        if (pinBuffer === savedPin) {
-          document.getElementById("padlock-overlay").classList.remove("open");
-          showToast("Sovereign Vault Unlocked");
-        } else {
-          showToast("Incorrect PIN — Try Again");
-          pinBuffer = "";
-          updatePinDots();
-        }
-      } else if (pinMode === "set") {
-        tempNewPin = pinBuffer;
-        pinBuffer = "";
-        pinMode = "confirm";
-        updatePinDots();
-        document.getElementById("padlock-title").textContent = "Confirm New 4-Digit PIN";
-      } else if (pinMode === "confirm") {
-        if (pinBuffer === tempNewPin) {
-          localStorage.setItem("mmcc_vault_pin", pinBuffer);
-          document.getElementById("padlock-overlay").classList.remove("open");
-          showToast("New 4-Digit PIN Saved!");
-        } else {
-          showToast("PINs did not match — Try Again");
-          openPadlock("set");
-        }
-      }
-    }
-
-    // Smooth Hardware-Accelerated Stage Video Player & Offline Folder
-    const stageVideo = document.getElementById("stage-video");
-    const stagePhoto = document.getElementById("stage-photo");
-    const stageDefault = document.getElementById("stage-default-banner");
-    const seekBar = document.getElementById("seek-bar");
-    const timeCur = document.getElementById("time-cur");
-    const timeDur = document.getElementById("time-dur");
-
-    function formatSec(sec) {
-      if (!isFinite(sec) || sec < 0) return "0:00";
-      const m = Math.floor(sec / 60);
-      const s = Math.floor(sec % 60);
-      return m + ":" + (s < 10 ? "0" : "") + s;
-    }
-
-    function syncTimelineLoop() {
-      if (!stageVideo.paused && isFinite(stageVideo.duration) && stageVideo.duration > 0) {
-        seekBar.value = (stageVideo.currentTime / stageVideo.duration) * 100;
-        timeCur.textContent = formatSec(stageVideo.currentTime);
-        timeDur.textContent = formatSec(stageVideo.duration);
-      }
-      requestAnimationFrame(syncTimelineLoop);
-    }
-    requestAnimationFrame(syncTimelineLoop);
-
-    seekBar.addEventListener("input", () => {
-      if (isFinite(stageVideo.duration) && stageVideo.duration > 0) {
-        stageVideo.currentTime = (seekBar.value / 100) * stageVideo.duration;
-      }
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add('faded-in');
+      });
     });
 
-    stageVideo.addEventListener("ended", () => {
-      if (loopEnabled) {
-        stageVideo.currentTime = 0;
-        stageVideo.play().catch(() => {});
+    interludeEndTimeout = setTimeout(() => {
+      hideInterlude();
+    }, 5200);
+  }
+
+  function hideInterlude() {
+    clearTimeout(interludeEndTimeout);
+    const overlay = document.getElementById('interludeOverlay');
+    const vid = document.getElementById('interludeVideo');
+    overlay.classList.remove('faded-in');
+    setTimeout(() => {
+      overlay.classList.remove('visible');
+      vid.pause();
+      if (stopInterludeSparkles) stopInterludeSparkles();
+    }, 1400);
+  }
+
+  async function uploadCustomMedia(e, key) {
+    const file = e.target.files[0];
+    if (!file) return;
+    setSetting(key, { blob: file, type: file.type, name: file.name });
+    showToast(`Saved ${file.name}`);
+    if (key === 'customIntro') replayIntro();
+    if (key === 'customInterlude') triggerInterlude();
+  }
+
+  function resetCustomMedia() {
+    if (!db) return;
+    const tx = db.transaction('settings', 'readwrite');
+    tx.objectStore('settings').delete('customIntro');
+    tx.objectStore('settings').delete('customInterlude');
+    showToast('Default Crown & Pyramid media restored');
+  }
+
+  // 4-Digit Sovereign Vault Padlock
+  let enteredPin = '';
+  let pinMode = 'unlock'; // 'unlock' | 'new' | 'confirm'
+  let tempNewPin = '';
+
+  function getSavedPin() {
+    return localStorage.getItem('mmcc_ra109_pin') || '1325';
+  }
+
+  function updatePinDots() {
+    for (let i = 0; i < 4; i++) {
+      document.getElementById('dot' + i).classList.toggle('filled', i < enteredPin.length);
+    }
+  }
+
+  function pressKey(d) {
+    if (enteredPin.length >= 4) return;
+    enteredPin += d;
+    updatePinDots();
+    if (enteredPin.length === 4) {
+      setTimeout(handlePinComplete, 180);
+    }
+  }
+
+  function backspacePin() {
+    enteredPin = enteredPin.slice(0, -1);
+    updatePinDots();
+  }
+
+  function clearPin() {
+    enteredPin = '';
+    updatePinDots();
+  }
+
+  function handlePinComplete() {
+    const promptEl = document.getElementById('pinPrompt');
+    if (pinMode === 'unlock') {
+      if (enteredPin === getSavedPin()) {
+        document.getElementById('padlockOverlay').classList.remove('open');
+        clearPin();
+        showToast('Sovereign Vault Unlocked');
       } else {
-        nextMedia();
+        promptEl.textContent = 'Incorrect PIN — Try Again';
+        clearPin();
       }
+    } else if (pinMode === 'new') {
+      tempNewPin = enteredPin;
+      pinMode = 'confirm';
+      promptEl.textContent = 'Re-enter New 4-Digit PIN to Confirm';
+      clearPin();
+    } else if (pinMode === 'confirm') {
+      if (enteredPin === tempNewPin) {
+        localStorage.setItem('mmcc_ra109_pin', enteredPin);
+        pinMode = 'unlock';
+        document.getElementById('padlockOverlay').classList.remove('open');
+        clearPin();
+        showToast('New 4-Digit Vault PIN Saved');
+      } else {
+        pinMode = 'new';
+        promptEl.textContent = 'PINs did not match — Enter New PIN';
+        clearPin();
+      }
+    }
+  }
+
+  function lockVault() {
+    pinMode = 'unlock';
+    document.getElementById('pinPrompt').textContent = 'Enter 4-Digit Vault PIN';
+    clearPin();
+    document.getElementById('padlockOverlay').classList.add('open');
+  }
+
+  function startPinChange() {
+    pinMode = 'new';
+    document.getElementById('pinPrompt').textContent = 'Enter New 4-Digit Vault PIN';
+    clearPin();
+    document.getElementById('padlockOverlay').classList.add('open');
+  }
+
+  // Smooth Universal Video Player & Offline Folder
+  function loadVault() {
+    if (!db) return;
+    const tx = db.transaction('videos', 'readonly');
+    const req = tx.objectStore('videos').getAll();
+    req.onsuccess = () => {
+      vaultItems = req.result || [];
+      renderVault();
+    };
+  }
+
+  function saveToVault(e) {
+    const files = Array.from(e.target.files || []);
+    if (!files.length || !db) return;
+    const tx = db.transaction('videos', 'readwrite');
+    const store = tx.objectStore('videos');
+    files.forEach(file => {
+      store.add({
+        name: file.name,
+        type: file.type || 'video/mp4',
+        folder: currentFolder === 'All' ? 'RA 109 Vault' : currentFolder,
+        blob: file
+      });
     });
+    tx.oncomplete = () => {
+      showToast(`Saved ${files.length} item(s) offline`);
+      loadVault();
+    };
+  }
 
-    function playVaultMedia(index) {
-      if (index < 0 || index >= savedMedia.length) return;
-      currentMediaIndex = index;
-      const item = savedMedia[index];
+  function filterFolder(folder, btn) {
+    currentFolder = folder;
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    renderVault();
+  }
 
-      stageVideo.pause();
-      if (currentBlobUrl) {
-        URL.revokeObjectURL(currentBlobUrl);
-        currentBlobUrl = null;
-      }
-      currentBlobUrl = URL.createObjectURL(item.blob);
-      document.getElementById("stage-badge").textContent = "● " + item.folder.toUpperCase() + " • " + item.name;
-
-      if (item.type.startsWith("image/")) {
-        stageVideo.style.display = "none";
-        stageDefault.style.display = "none";
-        stagePhoto.src = currentBlobUrl;
-        stagePhoto.style.display = "block";
-        document.getElementById("play-pause-btn").textContent = "🖼 Flyer";
-      } else {
-        stagePhoto.style.display = "none";
-        stageDefault.style.display = "none";
-        stageVideo.style.display = "block";
-        stageVideo.src = currentBlobUrl;
-        stageVideo.playbackRate = speeds[speedIdx];
-        stageVideo.load();
-        stageVideo.play().then(() => {
-          document.getElementById("play-pause-btn").textContent = "⏸ Pause";
-        }).catch(() => {
-          stageVideo.muted = true;
-          document.getElementById("mute-btn").textContent = "🔇 Muted";
-          stageVideo.play().catch(() => {});
-        });
-      }
-      renderVaultList();
+  function renderVault() {
+    const list = document.getElementById('vaultList');
+    const filtered = currentFolder === 'All' ? vaultItems : vaultItems.filter(v => v.folder === currentFolder);
+    if (!filtered.length) {
+      list.innerHTML = `<p style="font-size:12px; color:var(--muted); padding:10px 0;">No offline videos in "${currentFolder}" yet. Tap <b>＋ Save Videos / Photos Offline</b> above.</p>`;
+      return;
     }
-
-    function togglePlayPause() {
-      if (stageVideo.style.display === "none") {
-        if (savedMedia.length > 0) playVaultMedia(0);
-        else showToast("Upload a video or flyer below first");
-        return;
-      }
-      if (stageVideo.paused) {
-        stageVideo.play().catch(() => {});
-        document.getElementById("play-pause-btn").textContent = "⏸ Pause";
-      } else {
-        stageVideo.pause();
-        document.getElementById("play-pause-btn").textContent = "▶ Play";
-      }
-    }
-
-    function prevMedia() {
-      if (!savedMedia.length) return;
-      const idx = (currentMediaIndex - 1 + savedMedia.length) % savedMedia.length;
-      playVaultMedia(idx);
-    }
-
-    function nextMedia() {
-      if (!savedMedia.length) return;
-      const idx = (currentMediaIndex + 1) % savedMedia.length;
-      playVaultMedia(idx);
-    }
-
-    function toggleMute() {
-      stageVideo.muted = !stageVideo.muted;
-      document.getElementById("mute-btn").textContent = stageVideo.muted ? "🔇 Muted" : "🔊 Sound";
-    }
-
-    function toggleLoop() {
-      loopEnabled = !loopEnabled;
-      document.getElementById("loop-btn").textContent = loopEnabled ? "🔁 Loop: ON" : "🔁 Loop: OFF";
-    }
-
-    function cycleSpeed() {
-      speedIdx = (speedIdx + 1) % speeds.length;
-      stageVideo.playbackRate = speeds[speedIdx];
-      document.getElementById("speed-btn").textContent = "⚡ " + speeds[speedIdx] + "x";
-    }
-
-    function goFullscreen() {
-      const el = document.getElementById("stage-monitor");
-      if (el.requestFullscreen) el.requestFullscreen();
-      else if (stageVideo.webkitEnterFullscreen) stageVideo.webkitEnterFullscreen();
-    }
-
-    document.getElementById("vault-upload-input").addEventListener("change", async (e) => {
-      const files = Array.from(e.target.files || []);
-      if (!files.length) return;
-      const folder = document.getElementById("upload-folder-select").value;
-      for (const f of files) {
-        await addMediaItem({
-          name: f.name,
-          type: f.type || "video/mp4",
-          folder: folder,
-          blob: f,
-          createdAt: Date.now()
-        });
-      }
-      savedMedia = await getAllMedia();
-      renderVaultList();
-      playVaultMedia(savedMedia.length - 1);
-      showToast("Saved " + files.length + " item(s) offline!");
-      e.target.value = "";
-    });
-
-    function filterFolder(btn, folder) {
-      activeFolder = folder;
-      document.querySelectorAll("#folder-tabs .folder-chip").forEach((c) => c.classList.remove("active"));
-      btn.classList.add("active");
-      renderVaultList();
-    }
-
-    async function setAsIntroFromVault(id) {
-      localStorage.setItem("mmcc_custom_intro_id", String(id));
-      renderVaultList();
-      showToast("Set as 13-Second Launch Intro Video!");
-    }
-
-    async function removeVaultItem(id) {
-      await deleteMediaItem(id);
-      if (String(id) === localStorage.getItem("mmcc_custom_intro_id")) {
-        localStorage.removeItem("mmcc_custom_intro_id");
-      }
-      savedMedia = await getAllMedia();
-      renderVaultList();
-      showToast("Removed from Offline Vault");
-    }
-
-    function renderVaultList() {
-      const container = document.getElementById("vault-list");
-      const introId = localStorage.getItem("mmcc_custom_intro_id");
-      const filtered = savedMedia
-        .map((m, idx) => ({ ...m, idx }))
-        .filter((m) => activeFolder === "All" || m.folder === activeFolder);
-
-      if (!filtered.length) {
-        container.innerHTML = '<div style="font-size:12px;color:var(--text-muted);padding:10px 0;">No offline videos or flyers in this folder yet. Tap <b>＋ Save Videos / Flyers Offline</b> above.</div>';
-        return;
-      }
-
-      container.innerHTML = filtered.map((m) => {
-        const isIntro = String(m.id) === introId;
-        const isVideo = m.type.startsWith("video/");
-        return `
-          <div class="item-row">
-            <div style="min-width:0;flex:1;">
-              <div class="item-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                ${m.idx === currentMediaIndex ? "▶ " : ""}${m.name}
-              </div>
-              <div class="item-desc">${m.folder} • ${isVideo ? "Video" : "Flyer"}${isIntro ? " • ★ Active App Intro" : ""}</div>
-            </div>
-            <div style="display:flex;gap:6px;flex-shrink:0;">
-              <button class="pill-mini" onclick="playVaultMedia(${m.idx})">Play</button>
-              ${isVideo ? `<button class="pill-mini" onclick="setAsIntroFromVault(${m.id})">${isIntro ? "★ Intro" : "☆ Intro"}</button>` : ""}
-              <button class="pill-mini" onclick="removeVaultItem(${m.id})">✕</button>
-            </div>
+    list.innerHTML = filtered.map((item) => {
+      const realIdx = vaultItems.findIndex(x => x.id === item.id);
+      return `
+        <div class="row">
+          <div style="min-width:0; flex:1;">
+            <h3 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${item.name}</h3>
+            <p>Folder: ${item.folder}</p>
           </div>
-        `;
-      }).join("");
+          <div style="display:flex; gap:5px; flex-wrap:wrap;">
+            <button class="gold-btn" onclick="playVaultItem(${realIdx})">▶ Play</button>
+            <button class="ghost-btn" onclick="cycleItemFolder(${item.id})">📁</button>
+            <button class="ghost-btn" onclick="setAsIntroFromVault(${realIdx})">★ Intro</button>
+            <button class="ghost-btn" onclick="deleteVaultItem(${item.id})">✕</button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function playVaultItem(idx) {
+    const item = vaultItems[idx];
+    if (!item) return;
+    currentIndex = idx;
+    const vid = document.getElementById('stageVideo');
+    const img = document.getElementById('stageImage');
+    const title = document.getElementById('nowPlayingTitle');
+
+    cancelAnimationFrame(rafId);
+    vid.pause();
+    if (activeBlobUrl) {
+      URL.revokeObjectURL(activeBlobUrl);
+      activeBlobUrl = null;
     }
 
-    // Navigation, Booking & Theme
-    function switchTab(tabName, btn) {
-      document.querySelectorAll(".tab-section").forEach((s) => s.classList.remove("active"));
-      document.getElementById("tab-" + tabName).classList.add("active");
-      document.querySelectorAll(".nav-btn").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-    }
+    activeBlobUrl = URL.createObjectURL(item.blob);
+    title.textContent = item.name;
 
-    function toggleTheme() {
-      document.body.classList.toggle("emerald-theme");
-      showToast(document.body.classList.contains("emerald-theme") ? "Emerald Velvet Theme Active" : "Royal Crimson Silk Theme Active");
+    if (item.type.startsWith('image/')) {
+      vid.style.display = 'none';
+      img.style.display = 'block';
+      img.src = activeBlobUrl;
+      document.getElementById('playPauseBtn').textContent = '⏸ Viewing';
+    } else {
+      img.style.display = 'none';
+      vid.style.display = 'block';
+      vid.src = activeBlobUrl;
+      vid.loop = isLooping;
+      vid.playbackRate = playbackSpeeds[speedIdx];
+      vid.play().then(() => {
+        document.getElementById('playPauseBtn').textContent = '⏸ Pause';
+      }).catch(() => {
+        vid.muted = true;
+        document.getElementById('muteBtn').textContent = '🔇 Muted';
+        vid.play().catch(() => {});
+      });
+      startScrubberLoop();
     }
+  }
 
-    function selectSlot(btn, slot) {
-      selectedSlot = slot;
-      btn.parentElement.querySelectorAll(".folder-chip").forEach((c) => c.classList.remove("active"));
-      btn.classList.add("active");
+  function startScrubberLoop() {
+    const vid = document.getElementById('stageVideo');
+    const scrub = document.getElementById('videoScrubber');
+    const nowEl = document.getElementById('timeNow');
+    const totEl = document.getElementById('timeTotal');
+    function step() {
+      if (vid.duration && !isNaN(vid.duration)) {
+        scrub.value = (vid.currentTime / vid.duration) * 100;
+        nowEl.textContent = fmtTime(vid.currentTime);
+        totEl.textContent = fmtTime(vid.duration);
+      }
+      rafId = requestAnimationFrame(step);
     }
+    rafId = requestAnimationFrame(step);
+  }
 
-    function reserveGround(name) {
-      showToast("Reserved " + name + " at " + selectedSlot);
+  function fmtTime(sec) {
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function seekVideo(val) {
+    const vid = document.getElementById('stageVideo');
+    if (vid.duration) vid.currentTime = (val / 100) * vid.duration;
+  }
+
+  function togglePlayPause() {
+    const vid = document.getElementById('stageVideo');
+    if (vid.style.display === 'none') {
+      if (vaultItems.length) playVaultItem(0);
+      return;
     }
-
-    function showToast(msg) {
-      const t = document.getElementById("toast");
-      t.textContent = msg;
-      t.classList.add("show");
-      clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+    if (vid.paused) {
+      vid.play();
+      document.getElementById('playPauseBtn').textContent = '⏸ Pause';
+    } else {
+      vid.pause();
+      document.getElementById('playPauseBtn').textContent = '▶ Play';
     }
+  }
 
-    // Init App
-    (async function init() {
-      await openDB();
-      savedMedia = await getAllMedia();
-      renderVaultList();
-      startIntro();
-    })();
-  </script>
+  function toggleMute() {
+    const vid = document.getElementById('stageVideo');
+    vid.muted = !vid.muted;
+    document.getElementById('muteBtn').textContent = vid.muted ? '🔇 Muted' : '🔊 Sound';
+  }
+
+  function toggleLoop() {
+    isLooping = !isLooping;
+    document.getElementById('stageVideo').loop = isLooping;
+    document.getElementById('loopBtn').textContent = isLooping ? '🔁 Loop: ON' : '🔁 Loop: OFF';
+  }
+
+  function cycleSpeed() {
+    speedIdx = (speedIdx + 1) % playbackSpeeds.length;
+    const sp = playbackSpeeds[speedIdx];
+    document.getElementById('stageVideo').playbackRate = sp;
+    document.getElementById('speedBtn').textContent = `⚡ ${sp}x`;
+  }
+
+  function prevVaultItem() {
+    if (!vaultItems.length) return;
+    const next = (currentIndex - 1 + vaultItems.length) % vaultItems.length;
+    playVaultItem(next);
+  }
+
+  function nextVaultItem() {
+    if (!vaultItems.length) return;
+    const next = (currentIndex + 1) % vaultItems.length;
+    playVaultItem(next);
+  }
+
+  function goFullscreen() {
+    const box = document.querySelector('.stage-box');
+    if (box.requestFullscreen) box.requestFullscreen();
+  }
+
+  function cycleItemFolder(id) {
+    const folders = ['Galas', 'Club Reels', 'RA 109 Vault'];
+    const tx = db.transaction('videos', 'readwrite');
+    const store = tx.objectStore('videos');
+    const req = store.get(id);
+    req.onsuccess = () => {
+      const item = req.result;
+      if (!item) return;
+      const nextF = folders[(folders.indexOf(item.folder) + 1) % folders.length];
+      item.folder = nextF;
+      store.put(item);
+      tx.oncomplete = () => {
+        showToast(`Moved to ${nextF}`);
+        loadVault();
+      };
+    };
+  }
+
+  function setAsIntroFromVault(idx) {
+    const item = vaultItems[idx];
+    if (!item || !item.type.startsWith('video/')) {
+      showToast('Select a video file to set as App Intro');
+      return;
+    }
+    setSetting('customIntro', { blob: item.blob, type: item.type, name: item.name });
+    showToast(`Set "${item.name}" as 13s App Intro`);
+  }
+
+  function deleteVaultItem(id) {
+    const tx = db.transaction('videos', 'readwrite');
+    tx.objectStore('videos').delete(id);
+    tx.oncomplete = () => {
+      showToast('Removed from offline vault');
+      loadVault();
+    };
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  }
+
+  window.addEventListener('DOMContentLoaded', async () => {
+    await initDB();
+    loadVault();
+    runSplashIntro();
+  });
+</script>
 </body>
 </html>
