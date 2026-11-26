@@ -1,7 +1,16 @@
-const CACHE_NAME = 'mmcc-ra109-portal-v1-network-first';
+const CACHE_NAME = 'mmcc-ra109-vault-lock-v2-network-first';
+const ASSETS = [
+  './',
+  './index.html',
+  './manifest.json',
+  './emblem.png'
+];
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS).catch(() => {}))
+  );
 });
 
 self.addEventListener('activate', (event) => {
@@ -17,8 +26,8 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         return response;
       })
       .catch(() => caches.match(event.request))

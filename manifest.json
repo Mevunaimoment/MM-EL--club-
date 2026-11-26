@@ -1,10 +1,12 @@
 {
-  "name": "Mevunai Moment™ Country Club, Inc. | RA 109 Portal",
-  "short_name": "RA 109 Portal",
+  "name": "Mevunai Moment™ Country Club, Inc. ® | RA 109 Portal",
+  "short_name": "MMCC RA 109",
+  "description": "Founding Sovereign Member Portal — Mevunai Moment™ Country Club, Inc. ®",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#1a040a",
-  "theme_color": "#2b0711",
+  "background_color": "#1a0308",
+  "theme_color": "#2b050d",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "./emblem.png",
