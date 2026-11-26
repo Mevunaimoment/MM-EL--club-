@@ -1,10 +1,12 @@
 {
-  "name": "Mevunai Moment™ Country Club, Inc. ® — RA 109 Portal",
-  "short_name": "RA 109 Portal",
-  "start_url": "index.html",
+  "name": "Mevunai Moment™ Country Club, Inc. | RA 109 Portal",
+  "short_name": "RA 109 Club",
+  "description": "Mevunai Moment™ Country Club, Inc. ® — RA 109 Founding Sovereign Portal with Offline Video Folder & Stage Controls",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#24030a",
-  "theme_color": "#24030a",
+  "background_color": "#1a0308",
+  "theme_color": "#2b050d",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "emblem.png",
